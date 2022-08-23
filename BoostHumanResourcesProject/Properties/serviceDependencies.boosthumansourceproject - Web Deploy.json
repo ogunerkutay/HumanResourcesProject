@@ -2,7 +2,7 @@
   "dependencies": {
     "mssql1": {
       "secretStore": "AzureAppSettings",
-      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/humanresourceskd-10/databases/BoostHumanResourcesProject_db",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/humanresourceskd-10/databases/HumanResourcesDB",
       "type": "mssql.azure",
       "connectionId": "Server=tcp:humanresourceskd-10.database.windows.net,1433;InitialCatalog=HumanResourcesDB;PersistSecurityInfo=False;UserID=sqladmin;Password={123-abCde};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;ConnectionTimeout=30;"
     }
