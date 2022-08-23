@@ -2,10 +2,11 @@
 
 namespace BoostHumanResourcesProject.Controllers
 {
-    public class UserController1 : Controller
+    public class UserController : Controller
     {
         public IActionResult Index()
         {
+            string asd = "Azure'da Git yapısını kullanıyoruz çok süperiz.";
             return View();
         }
     }
