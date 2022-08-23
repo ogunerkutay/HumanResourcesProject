@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "type": "mssql",
+      "connectionId": "Server=tcp:humanresourceskd-10.database.windows.net,1433;InitialCatalog=HumanResourcesDB;PersistSecurityInfo=False;UserID=sqladmin;Password={123-abCde};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;ConnectionTimeout=30;"
+    }
+  }
+}
