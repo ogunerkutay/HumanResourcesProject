@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace BoostHumanResourcesProject.Migrations
+namespace DataAccessLayer.Migrations
 {
     public partial class init : Migration
     {
