@@ -1,6 +1,8 @@
+using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,6 +29,11 @@ namespace BoostHumanResourcesProject
             services.AddControllersWithViews();
             services.AddDbContext<AppDbContext>(options =>
                options.UseSqlServer(Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING")));
+            services.AddIdentity<AppUser, IdentityRole>(x =>
+            {
+                x.Password.RequireUppercase = false;// büyük harf zorunluluðu false
+                x.Password.RequireNonAlphanumeric = false;
+            }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,6 +53,8 @@ namespace BoostHumanResourcesProject
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
