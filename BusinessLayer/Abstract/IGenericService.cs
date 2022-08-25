@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EntityLayer.Concrete;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,12 +7,14 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Abstract
 {
-    public interface IGenericService<TEntity>
+    public interface IGenericService<T>
     {
-        void TAdd(TEntity entity);
-        void TDelete(TEntity entity);
-        void TUpdate(TEntity entity);
-        List<TEntity> GetAll();
-        TEntity TGetById(int id);
+        void Add(T entity);
+        void Delete(T entity);
+        void Update(T entity);
+        List<T> GetAll();
+        T GetById(int id);
+        List<T> GetListById(int id);
+
     }
 }

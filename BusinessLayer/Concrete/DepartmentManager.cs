@@ -27,22 +27,22 @@ namespace BusinessLayer.Concrete
             return departmentRepository.GetListFilter(x => x.DepartmentID == id);
         }
 
-        public void TAdd(Department entity)
+        public void Add(Department entity)
         {
             departmentRepository.Create(entity);
         }
 
-        public void TDelete(Department entity)
+        public void Delete(Department entity)
         {
             departmentRepository.Delete(entity);
         }
 
-        public Department TGetById(int id)
+        public Department GetById(int id)
         {
             return departmentRepository.GetById(id);
         }
 
-        public void TUpdate(Department entity)
+        public void Update(Department entity)
         {
             departmentRepository.Update(entity);
         }

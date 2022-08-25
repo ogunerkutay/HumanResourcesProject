@@ -9,6 +9,6 @@ namespace BusinessLayer.Abstract
 {
     public interface IDepartmentService:IGenericService<Department>
     {
-        List<Department> GetListById(int id);
+       
     }
 }
