@@ -1,5 +1,8 @@
 using BusinessLayer.Abstract;
-using BusinessLayer.Concrete;
+using BusinessLayer.Services.AppUserService;
+using BusinessLayer.Services.DayOffService;
+using BusinessLayer.Services.DepartmentService;
+using BusinessLayer.Services.EmploymentDetailsService;
 using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
 using EntityLayer.Concrete;
@@ -28,12 +31,15 @@ namespace BoostHumanResourcesProject
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            //DbContext
             services.AddDbContext<AppDbContext>(options =>
                options.UseSqlServer(Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING")));
+
+            //Identity
             services.AddIdentity<AppUser, IdentityRole>(x =>
             {
                 x.Password.RequireUppercase = false;// büyük harf zorunluluðu false
@@ -44,8 +50,23 @@ namespace BoostHumanResourcesProject
                 options.RegisterValidatorsFromAssemblyContaining<Startup>();
             }); //fluent validation kullandýðýmýz için eklendi
 
+            //Repositories
+            services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddTransient<IAppUserRepository, AppUserRepository>();
-            services.AddScoped<IAppUserService, AppUserManager>();
+            services.AddTransient<IDepartmentRepository, DepartmentRepository>();
+            services.AddTransient<IDayOffRepository, DayOffRepository>();
+            services.AddTransient<IEmploymentDetailsRepository, EmploymentDetailsRepository>();
+
+
+            //Services
+            services.AddScoped<IAppUserService, AppUserService>();
+            services.AddScoped<IEmploymentDetailsService, EmploymentDetailsService>();
+            services.AddScoped<IDayOffService, DayOffService>();
+            services.AddScoped<IDepartmentService, DepartmentService>();
+
+
+            //AutoMapper
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

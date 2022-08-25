@@ -12,7 +12,7 @@ namespace EntityLayer.Concrete
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public int TCNO { get; set; }
+        public string TCNO { get; set; }
         public string ImagePath { get; set; }
         public DateTime BirthDate { get; set; }
         public string Address { get; set; }

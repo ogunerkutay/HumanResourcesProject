@@ -1,5 +1,4 @@
-﻿using BusinessLayer.Abstract;
-using DataAccessLayer.Abstract;
+﻿using DataAccessLayer.Abstract;
 using EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
@@ -8,13 +7,13 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessLayer.Concrete
+namespace BusinessLayer.Services.EmploymentDetailsService
 {
-    public class EmploymentDetailsManager : IEmploymentDetailsService
+    public class EmploymentDetailsService : IEmploymentDetailsService
     {
         private readonly IEmploymentDetailsRepository employmentDetailsRepository;
 
-        public EmploymentDetailsManager(IEmploymentDetailsRepository _employmentDetailsRepository)
+        public EmploymentDetailsService(IEmploymentDetailsRepository _employmentDetailsRepository)
         {
             employmentDetailsRepository = _employmentDetailsRepository;
         }
@@ -41,7 +40,7 @@ namespace BusinessLayer.Concrete
 
         public List<EmploymentDetails> GetListById(int id)
         {
-            return employmentDetailsRepository.GetListFilter(x=>x.EmploymentDetailsID==id);
+            return employmentDetailsRepository.GetListFilter(x => x.EmploymentDetailsID == id);
         }
 
         public void Update(EmploymentDetails entity)

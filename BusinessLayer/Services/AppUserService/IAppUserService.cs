@@ -1,4 +1,5 @@
-﻿using EntityLayer.Concrete;
+﻿using BusinessLayer.Services.GenericService;
+using EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Abstract
 {
-    public interface IEmploymentDetailsService:IGenericService<EmploymentDetails>
+    public interface IAppUserService : IGenericService<AppUser>
     {
     }
 }

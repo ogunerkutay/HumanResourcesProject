@@ -1,5 +1,4 @@
-﻿using BusinessLayer.Abstract;
-using DataAccessLayer.Abstract;
+﻿using DataAccessLayer.Abstract;
 using EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
@@ -7,20 +6,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessLayer.Concrete
+namespace BusinessLayer.Services.DepartmentService
 {
-    public class DepartmentManager : IDepartmentService
+    public class DepartmentService : IDepartmentService
     {
         private readonly IDepartmentRepository departmentRepository;
 
-        public DepartmentManager(IDepartmentRepository _departmentRepository)
+        public DepartmentService(IDepartmentRepository _departmentRepository)
         {
             departmentRepository = _departmentRepository;
         }
         public List<Department> GetAll()
         {
             return departmentRepository.GetAll();
-            
+
         }
         public List<Department> GetListById(int id)
         {

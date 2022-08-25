@@ -1,5 +1,4 @@
-﻿using BusinessLayer.Abstract;
-using DataAccessLayer.Abstract;
+﻿using DataAccessLayer.Abstract;
 using EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
@@ -7,13 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessLayer.Concrete
+namespace BusinessLayer.Services.DayOffService
 {
-    public class DayOffManager : IDayOffService
+    public class DayOffService : IDayOffService
     {
         private readonly IDayOffRepository dayOffRepository;
 
-        public DayOffManager(IDayOffRepository _dayOffRepository)
+        public DayOffService(IDayOffRepository _dayOffRepository)
         {
             dayOffRepository = _dayOffRepository;
         }

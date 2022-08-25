@@ -7,13 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessLayer.Concrete
+namespace BusinessLayer.Services.AppUserService
 {
-    public class AppUserManager : IAppUserService
+    public class AppUserService : IAppUserService
     {
         private readonly IAppUserRepository appUserRepository;
 
-        public AppUserManager(IAppUserRepository _appUserRepository)
+        public AppUserService(IAppUserRepository _appUserRepository)
         {
             appUserRepository = _appUserRepository;
         }
@@ -30,7 +30,7 @@ namespace BusinessLayer.Concrete
 
         public List<AppUser> GetAll()
         {
-            return appUserRepository.GetAll();  
+            return appUserRepository.GetAll();
         }
 
         public AppUser GetById(int id)
