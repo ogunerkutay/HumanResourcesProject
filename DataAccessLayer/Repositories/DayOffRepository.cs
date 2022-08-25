@@ -12,6 +12,8 @@ namespace DataAccessLayer.Concrete
     {
         public DayOffRepository(AppDbContext _appDbContext) : base(_appDbContext)
         {
+
         }
+
     }
 }

@@ -15,11 +15,11 @@ namespace BusinessLayer.Validation
             RuleFor(x => x.FirstName).NotEmpty().WithMessage("İsim boş geçilemez");
             RuleFor(x => x.LastName).NotEmpty().WithMessage("Soyisim boş geçilemez");
             RuleFor(x => x.TCNO).NotEmpty().Length(11).WithMessage("TC No boş geçilemez")
-            .Matches(@"^\\d + $").WithMessage("Sadece sayı girişi yapılmalıdır."); ; // tc 11 hane olmalı kısmı yapılcak ve hepsi rakam olacak
-            RuleFor(x => x.Email).NotEmpty().WithMessage("Email boş geçilemez");
-            RuleFor(x => x.LastName).NotEmpty().WithMessage("Soyisim boş geçilemez");
-            RuleFor(x => x.LastName).NotEmpty().WithMessage("Soyisim boş geçilemez");
-            RuleFor(x => x.LastName).NotEmpty().WithMessage("Soyisim boş geçilemez");
+            .Matches(@"^\\d + $").WithMessage("Sadece sayı girişi yapılmalıdır."); // tc 11 hane olmalı kısmı yapılcak ve hepsi rakam olacak
+            RuleFor(x => x.Email).NotEmpty().WithMessage("Email boş geçilemez")
+                .EmailAddress().WithMessage("Geçerli mail adresi yazınız");
+            
+           
            
             
         }

@@ -13,5 +13,7 @@ namespace DataAccessLayer.Concrete
         public AppUserRepository(AppDbContext _appDbContext) : base(_appDbContext)
         {
         }
+
+
     }
 }
