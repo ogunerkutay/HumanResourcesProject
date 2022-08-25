@@ -18,7 +18,7 @@ namespace BoostHumanResourcesProject.Controllers
 
         public IActionResult Index()
         {
-            string asd = "Azure'da Git yapısını kullanıyoruz çok süperiz.";
+            appUserService.GetById(1);
             return View();
         }
     }
