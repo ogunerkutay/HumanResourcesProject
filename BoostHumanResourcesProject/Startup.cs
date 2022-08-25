@@ -1,4 +1,5 @@
 using EntityLayer.Concrete;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -34,6 +35,10 @@ namespace BoostHumanResourcesProject
                 x.Password.RequireUppercase = false;// büyük harf zorunluluðu false
                 x.Password.RequireNonAlphanumeric = false;
             }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+            services.AddControllersWithViews().AddFluentValidation(options =>
+            {
+                options.RegisterValidatorsFromAssemblyContaining<Startup>();
+            }); //fluent validation kullandýðýmýz için eklendi
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
