@@ -11,7 +11,7 @@ namespace DataAccessLayer.Abstract
     {
         T GetById(int id);
         List<T> GetAll();
-        List<T> GetAll(Expression<Func<T, bool>> filter);
+        List<T> GetListFilter(Expression<Func<T, bool>> filter);
 
         void Create(T entity);
         void Update(T entity); 
