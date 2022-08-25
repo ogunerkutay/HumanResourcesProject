@@ -1,3 +1,7 @@
+using BusinessLayer.Abstract;
+using BusinessLayer.Concrete;
+using DataAccessLayer.Abstract;
+using DataAccessLayer.Concrete;
 using EntityLayer.Concrete;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
@@ -39,6 +43,9 @@ namespace BoostHumanResourcesProject
             {
                 options.RegisterValidatorsFromAssemblyContaining<Startup>();
             }); //fluent validation kullandýðýmýz için eklendi
+
+            services.AddTransient<IAppUserRepository, AppUserRepository>();
+            services.AddScoped<IAppUserService, AppUserManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
