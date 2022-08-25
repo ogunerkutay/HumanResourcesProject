@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Concrete
 {
-    public class EmploymentDetailsRepository : GenericRepository<EmploymentDetails>, IEmploymentDetails
+    public class EmploymentDetailsRepository : GenericRepository<EmploymentDetails>, IEmploymentDetailsRepository
     {
         public EmploymentDetailsRepository(AppDbContext _appDbContext) : base(_appDbContext)
         {
