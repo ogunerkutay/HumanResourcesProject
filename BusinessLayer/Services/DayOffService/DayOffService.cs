@@ -1,8 +1,10 @@
 ﻿using DataAccessLayer.Abstract;
 using EntityLayer.Concrete;
+using Microsoft.EntityFrameworkCore.Query;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,34 +19,44 @@ namespace BusinessLayer.Services.DayOffService
             dayOffRepository = _dayOffRepository;
         }
 
-        public void Add(DayOff entity)
+        public Task<bool> Any(Expression<Func<DayOff, bool>> expression)
         {
-            dayOffRepository.Create(entity);
+            throw new NotImplementedException();
         }
 
-        public void Delete(DayOff entity)
+        public Task Create(DayOff entity)
         {
-            dayOffRepository.Delete(entity);
+            throw new NotImplementedException();
         }
 
-        public List<DayOff> GetAll()
+        public Task Delete(DayOff entity)
         {
-            return dayOffRepository.GetAll();
+            throw new NotImplementedException();
         }
 
-        public DayOff GetById(int id)
+        public Task<List<DayOff>> GetAllWhere(Expression<Func<DayOff, bool>> expression)
         {
-            return dayOffRepository.GetById(id);
+            throw new NotImplementedException();
         }
 
-        public List<DayOff> GetListById(int id)
+        public Task<TResult> GetFilteredFirstOrDefault<TResult>(Expression<Func<DayOff, TResult>> selector, Expression<Func<DayOff, bool>> expression, Func<IQueryable<DayOff>, IOrderedQueryable<DayOff>> orderBy = null, Func<IQueryable<DayOff>, IIncludableQueryable<DayOff, object>> includes = null)
         {
-            return dayOffRepository.GetListFilter(x => x.DayOffID == id);
+            throw new NotImplementedException();
+        }
+
+        public Task<List<TResult>> GetFilteredList<TResult>(Expression<Func<DayOff, TResult>> selector, Expression<Func<DayOff, bool>> expression, Func<IQueryable<DayOff>, IOrderedQueryable<DayOff>> orderBy = null, Func<IQueryable<DayOff>, IIncludableQueryable<DayOff, object>> includes = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<DayOff> GetWhere(Expression<Func<DayOff, bool>> expression)
+        {
+            throw new NotImplementedException();
         }
 
         public void Update(DayOff entity)
         {
-            dayOffRepository.Update(entity);
+            throw new NotImplementedException();
         }
     }
 }

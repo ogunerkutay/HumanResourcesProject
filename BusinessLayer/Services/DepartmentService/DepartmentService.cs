@@ -1,8 +1,10 @@
 ﻿using DataAccessLayer.Abstract;
 using EntityLayer.Concrete;
+using Microsoft.EntityFrameworkCore.Query;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,34 +18,45 @@ namespace BusinessLayer.Services.DepartmentService
         {
             departmentRepository = _departmentRepository;
         }
-        public List<Department> GetAll()
-        {
-            return departmentRepository.GetAll();
 
-        }
-        public List<Department> GetListById(int id)
+        public Task<bool> Any(Expression<Func<Department, bool>> expression)
         {
-            return departmentRepository.GetListFilter(x => x.DepartmentID == id);
+            throw new NotImplementedException();
         }
 
-        public void Add(Department entity)
+        public Task Create(Department entity)
         {
-            departmentRepository.Create(entity);
+            throw new NotImplementedException();
         }
 
-        public void Delete(Department entity)
+        public Task Delete(Department entity)
         {
-            departmentRepository.Delete(entity);
+            throw new NotImplementedException();
         }
 
-        public Department GetById(int id)
+        public Task<List<Department>> GetAllWhere(Expression<Func<Department, bool>> expression)
         {
-            return departmentRepository.GetById(id);
+            throw new NotImplementedException();
+        }
+
+        public Task<TResult> GetFilteredFirstOrDefault<TResult>(Expression<Func<Department, TResult>> selector, Expression<Func<Department, bool>> expression, Func<IQueryable<Department>, IOrderedQueryable<Department>> orderBy = null, Func<IQueryable<Department>, IIncludableQueryable<Department, object>> includes = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<TResult>> GetFilteredList<TResult>(Expression<Func<Department, TResult>> selector, Expression<Func<Department, bool>> expression, Func<IQueryable<Department>, IOrderedQueryable<Department>> orderBy = null, Func<IQueryable<Department>, IIncludableQueryable<Department, object>> includes = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Department> GetWhere(Expression<Func<Department, bool>> expression)
+        {
+            throw new NotImplementedException();
         }
 
         public void Update(Department entity)
         {
-            departmentRepository.Update(entity);
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using DataAccessLayer.Abstract;
 using EntityLayer.Concrete;
+using Microsoft.EntityFrameworkCore.Query;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,34 +19,44 @@ namespace BusinessLayer.Services.EmploymentDetailsService
             employmentDetailsRepository = _employmentDetailsRepository;
         }
 
-        public void Add(EmploymentDetails entity)
+        public Task<bool> Any(Expression<Func<EmploymentDetails, bool>> expression)
         {
-            employmentDetailsRepository.Create(entity);
+            throw new NotImplementedException();
         }
 
-        public void Delete(EmploymentDetails entity)
+        public Task Create(EmploymentDetails entity)
         {
-            employmentDetailsRepository.Delete(entity);
+            throw new NotImplementedException();
         }
 
-        public List<EmploymentDetails> GetAll()
+        public Task Delete(EmploymentDetails entity)
         {
-            return employmentDetailsRepository.GetAll();
+            throw new NotImplementedException();
         }
 
-        public EmploymentDetails GetById(int id)
+        public Task<List<EmploymentDetails>> GetAllWhere(Expression<Func<EmploymentDetails, bool>> expression)
         {
-            return employmentDetailsRepository.GetById(id);
+            throw new NotImplementedException();
         }
 
-        public List<EmploymentDetails> GetListById(int id)
+        public Task<TResult> GetFilteredFirstOrDefault<TResult>(Expression<Func<EmploymentDetails, TResult>> selector, Expression<Func<EmploymentDetails, bool>> expression, Func<IQueryable<EmploymentDetails>, IOrderedQueryable<EmploymentDetails>> orderBy = null, Func<IQueryable<EmploymentDetails>, IIncludableQueryable<EmploymentDetails, object>> includes = null)
         {
-            return employmentDetailsRepository.GetListFilter(x => x.EmploymentDetailsID == id);
+            throw new NotImplementedException();
+        }
+
+        public Task<List<TResult>> GetFilteredList<TResult>(Expression<Func<EmploymentDetails, TResult>> selector, Expression<Func<EmploymentDetails, bool>> expression, Func<IQueryable<EmploymentDetails>, IOrderedQueryable<EmploymentDetails>> orderBy = null, Func<IQueryable<EmploymentDetails>, IIncludableQueryable<EmploymentDetails, object>> includes = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<EmploymentDetails> GetWhere(Expression<Func<EmploymentDetails, bool>> expression)
+        {
+            throw new NotImplementedException();
         }
 
         public void Update(EmploymentDetails entity)
         {
-            employmentDetailsRepository.Update(entity);
+            throw new NotImplementedException();
         }
     }
 }
