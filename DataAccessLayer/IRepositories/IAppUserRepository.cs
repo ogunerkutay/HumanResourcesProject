@@ -9,5 +9,6 @@ namespace DataAccessLayer.Abstract
 {
     public interface IAppUserRepository:IGenericRepository<AppUser>
     {
+        void StatusChange(AppUser appUser);
     }
 }

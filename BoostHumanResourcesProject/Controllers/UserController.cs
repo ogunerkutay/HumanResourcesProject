@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
+using System.Threading.Tasks;
 
 namespace BoostHumanResourcesProject.Controllers
 {
@@ -25,7 +26,7 @@ namespace BoostHumanResourcesProject.Controllers
 
         public IActionResult Index()
         {
-            appUserService.GetById(1);
+            //appUserService.GetById(1);
             return View();
         }
 
@@ -48,11 +49,11 @@ namespace BoostHumanResourcesProject.Controllers
         }
 
         [HttpPost]
-        public IActionResult Update(AppUserUpdateDTO appUserUpdateDTO)
+        public async Task<IActionResult> Update(AppUserUpdateDTO appUserUpdateDTO)
         {
             if (ModelState.IsValid)
             {
-                AppUser user = appUserService.GetById(appUserUpdateDTO.Id);
+                AppUser user = await appUserService.GetById(appUserUpdateDTO.Id);
 
 
                 if (user != null)
