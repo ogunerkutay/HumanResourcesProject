@@ -35,6 +35,18 @@ namespace BoostHumanResourcesProject.Controllers
             return View();
         }
 
+        public IActionResult Create()
+        {
+
+            return View();
+        }
+
+        public IActionResult StatusChange()
+        {
+
+            return View();
+        }
+
         [HttpPost]
         public IActionResult Update(AppUserUpdateDTO appUserUpdateDTO)
         {
