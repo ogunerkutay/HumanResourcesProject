@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DataAccessLayer.Migrations
 {
-    public partial class init_entity : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,10 +11,11 @@ namespace DataAccessLayer.Migrations
                 name: "AppUsers",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TCNO = table.Column<int>(type: "int", nullable: false),
+                    TCNO = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -39,21 +40,6 @@ namespace DataAccessLayer.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AppUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Debits",
-                columns: table => new
-                {
-                    DebitID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    GivenDate = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Debits", x => x.DebitID);
                 });
 
             migrationBuilder.CreateTable(
@@ -85,17 +71,39 @@ namespace DataAccessLayer.Migrations
                     DepartmentApproval = table.Column<bool>(type: "bit", nullable: false),
                     ManagerApproval = table.Column<bool>(type: "bit", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    AppUserID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_DayOffs", x => x.DayOffID);
                     table.ForeignKey(
-                        name: "FK_DayOffs_AppUsers_AppUserId",
-                        column: x => x.AppUserId,
+                        name: "FK_DayOffs_AppUsers_AppUserID",
+                        column: x => x.AppUserID,
                         principalTable: "AppUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Debits",
+                columns: table => new
+                {
+                    DebitID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    GivenDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    AppUserID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Debits", x => x.DebitID);
+                    table.ForeignKey(
+                        name: "FK_Debits_AppUsers_AppUserID",
+                        column: x => x.AppUserID,
+                        principalTable: "AppUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -106,17 +114,17 @@ namespace DataAccessLayer.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DepartmentName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DepartmentDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    AppUserID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Departments", x => x.DepartmentID);
                     table.ForeignKey(
-                        name: "FK_Departments_AppUsers_AppUserId",
-                        column: x => x.AppUserId,
+                        name: "FK_Departments_AppUsers_AppUserID",
+                        column: x => x.AppUserID,
                         principalTable: "AppUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -127,17 +135,41 @@ namespace DataAccessLayer.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     EmploymentDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DismissalDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    AppUserID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_EmploymentDetails", x => x.EmploymentDetailsID);
                     table.ForeignKey(
-                        name: "FK_EmploymentDetails_AppUsers_AppUserId",
-                        column: x => x.AppUserId,
+                        name: "FK_EmploymentDetails_AppUsers_AppUserID",
+                        column: x => x.AppUserID,
                         principalTable: "AppUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Overtimes",
+                columns: table => new
+                {
+                    OvertimeID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DermandDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    OvertimeDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Urgency = table.Column<int>(type: "int", nullable: false),
+                    ManHour = table.Column<double>(type: "float", nullable: false),
+                    ManagerApproval = table.Column<bool>(type: "bit", nullable: false),
+                    AppUserID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Overtimes", x => x.OvertimeID);
+                    table.ForeignKey(
+                        name: "FK_Overtimes_AppUsers_AppUserID",
+                        column: x => x.AppUserID,
+                        principalTable: "AppUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -146,7 +178,7 @@ namespace DataAccessLayer.Migrations
                 {
                     WorkHourID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    AppUserID = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    AppUserID = table.Column<int>(type: "int", nullable: false),
                     StartTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndTime = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -158,14 +190,14 @@ namespace DataAccessLayer.Migrations
                         column: x => x.AppUserID,
                         principalTable: "AppUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "AppUserAndWorkShift",
                 columns: table => new
                 {
-                    AppUserID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    AppUserID = table.Column<int>(type: "int", nullable: false),
                     WorkShiftID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -236,68 +268,20 @@ namespace DataAccessLayer.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Overtimes",
-                columns: table => new
-                {
-                    OvertimeID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    DermandDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    OvertimeDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Urgency = table.Column<int>(type: "int", nullable: false),
-                    ManHour = table.Column<double>(type: "float", nullable: false),
-                    ManagerApproval = table.Column<bool>(type: "bit", nullable: false),
-                    DepartmentID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Overtimes", x => x.OvertimeID);
-                    table.ForeignKey(
-                        name: "FK_Overtimes_Departments_DepartmentID",
-                        column: x => x.DepartmentID,
-                        principalTable: "Departments",
-                        principalColumn: "DepartmentID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AppUserAndOverTime",
-                columns: table => new
-                {
-                    AppUserID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    OvertimeID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AppUserAndOverTime", x => new { x.OvertimeID, x.AppUserID });
-                    table.ForeignKey(
-                        name: "FK_AppUserAndOverTime_AppUsers_AppUserID",
-                        column: x => x.AppUserID,
-                        principalTable: "AppUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_AppUserAndOverTime_Overtimes_OvertimeID",
-                        column: x => x.OvertimeID,
-                        principalTable: "Overtimes",
-                        principalColumn: "OvertimeID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AppUserAndOverTime_AppUserID",
-                table: "AppUserAndOverTime",
-                column: "AppUserID");
-
             migrationBuilder.CreateIndex(
                 name: "IX_AppUserAndWorkShift_AppUserID",
                 table: "AppUserAndWorkShift",
                 column: "AppUserID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DayOffs_AppUserId",
+                name: "IX_DayOffs_AppUserID",
                 table: "DayOffs",
-                column: "AppUserId");
+                column: "AppUserID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Debits_AppUserID",
+                table: "Debits",
+                column: "AppUserID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DepartmentAndWorkShift_DepartmentID",
@@ -305,14 +289,14 @@ namespace DataAccessLayer.Migrations
                 column: "DepartmentID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Departments_AppUserId",
+                name: "IX_Departments_AppUserID",
                 table: "Departments",
-                column: "AppUserId");
+                column: "AppUserID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EmploymentDetails_AppUserId",
+                name: "IX_EmploymentDetails_AppUserID",
                 table: "EmploymentDetails",
-                column: "AppUserId");
+                column: "AppUserID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Expenses_DepartmentID",
@@ -320,9 +304,9 @@ namespace DataAccessLayer.Migrations
                 column: "DepartmentID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Overtimes_DepartmentID",
+                name: "IX_Overtimes_AppUserID",
                 table: "Overtimes",
-                column: "DepartmentID");
+                column: "AppUserID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_WorkHours_AppUserID",
@@ -332,9 +316,6 @@ namespace DataAccessLayer.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "AppUserAndOverTime");
-
             migrationBuilder.DropTable(
                 name: "AppUserAndWorkShift");
 
@@ -354,10 +335,10 @@ namespace DataAccessLayer.Migrations
                 name: "Expenses");
 
             migrationBuilder.DropTable(
-                name: "WorkHours");
+                name: "Overtimes");
 
             migrationBuilder.DropTable(
-                name: "Overtimes");
+                name: "WorkHours");
 
             migrationBuilder.DropTable(
                 name: "WorkShifts");

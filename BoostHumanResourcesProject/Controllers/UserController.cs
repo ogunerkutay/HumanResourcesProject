@@ -64,7 +64,7 @@ namespace BoostHumanResourcesProject.Controllers
 
                             string projectRootPath = hostingEnvironment.WebRootPath;
                             string uploadsFolder = Path.Combine(projectRootPath, "images");
-                            string userFolder = Path.Combine(uploadsFolder, user.Id);
+                            string userFolder = Path.Combine(uploadsFolder, user.Id.ToString());
                             if (!Directory.Exists(userFolder))
                             {
                                 Directory.CreateDirectory(userFolder);

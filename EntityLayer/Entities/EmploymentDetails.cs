@@ -12,6 +12,6 @@ namespace EntityLayer.Concrete
         public DateTime EmploymentDate { get; set; }
         public DateTime DismissalDate { get; set; }
         public AppUser AppUser { get; set; }
-        public string AppUserId { get; set; }
+        public int AppUserID { get; set; }
     }
 }

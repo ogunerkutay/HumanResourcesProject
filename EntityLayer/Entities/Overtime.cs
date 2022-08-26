@@ -15,8 +15,8 @@ namespace EntityLayer.Concrete
         public Urgency Urgency { get; set; }
         public double ManHour { get; set; }
         public bool ManagerApproval { get; set; }
-        public int DepartmentID { get; set; }
-        public Department Department { get; set; }
+        public AppUser AppUser { get; set; }
+        public int AppUserID { get; set; }
 
     }
 }

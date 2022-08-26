@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EntityLayer.Concrete
 {
-    public class AppUser: IdentityUser
+    public class AppUser: IdentityUser <int>
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -20,9 +20,11 @@ namespace EntityLayer.Concrete
         public string Title { get; set; }
         public double GrossSalary { get; set; }
         public List<DayOff> DayOffs { get; set; }
+        public List<Overtime> Overtimes { get; set; }
         public List<Department> Departments { get; set; }
         public List<WorkHour> WorkHours { get; set; }
         public List<EmploymentDetails> EmploymentDetails { get; set; }
+        public List<Debit> Debits { get; set; }
         
     }
 }

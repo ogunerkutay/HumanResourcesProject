@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220825134008_init_user")]
-    partial class init_user
+    [Migration("20220826092622_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -22,8 +22,10 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("EntityLayer.Concrete.AppUser", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
@@ -99,28 +101,13 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("AppUsers");
                 });
 
-            modelBuilder.Entity("EntityLayer.Concrete.AppUserAndOverTime", b =>
-                {
-                    b.Property<int>("OvertimeID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("AppUserID")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("OvertimeID", "AppUserID");
-
-                    b.HasIndex("AppUserID");
-
-                    b.ToTable("AppUserAndOverTime");
-                });
-
             modelBuilder.Entity("EntityLayer.Concrete.AppUserAndWorkShift", b =>
                 {
                     b.Property<int>("WorkShiftID")
                         .HasColumnType("int");
 
-                    b.Property<string>("AppUserID")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("AppUserID")
+                        .HasColumnType("int");
 
                     b.HasKey("WorkShiftID", "AppUserID");
 
@@ -136,8 +123,8 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AppUserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("AppUserID")
+                        .HasColumnType("int");
 
                     b.Property<bool>("DepartmentApproval")
                         .HasColumnType("bit");
@@ -159,7 +146,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("DayOffID");
 
-                    b.HasIndex("AppUserId");
+                    b.HasIndex("AppUserID");
 
                     b.ToTable("DayOffs");
                 });
@@ -170,6 +157,9 @@ namespace DataAccessLayer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AppUserID")
+                        .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -182,6 +172,8 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("DebitID");
 
+                    b.HasIndex("AppUserID");
+
                     b.ToTable("Debits");
                 });
 
@@ -192,8 +184,8 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AppUserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("AppUserID")
+                        .HasColumnType("int");
 
                     b.Property<string>("DepartmentDescription")
                         .HasColumnType("nvarchar(max)");
@@ -203,7 +195,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("DepartmentID");
 
-                    b.HasIndex("AppUserId");
+                    b.HasIndex("AppUserID");
 
                     b.ToTable("Departments");
                 });
@@ -236,8 +228,8 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AppUserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("AppUserID")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("DismissalDate")
                         .HasColumnType("datetime2");
@@ -247,7 +239,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("EmploymentDetailsID");
 
-                    b.HasIndex("AppUserId");
+                    b.HasIndex("AppUserID");
 
                     b.ToTable("EmploymentDetails");
                 });
@@ -294,7 +286,7 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("DepartmentID")
+                    b.Property<int>("AppUserID")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DermandDate")
@@ -314,7 +306,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("OvertimeID");
 
-                    b.HasIndex("DepartmentID");
+                    b.HasIndex("AppUserID");
 
                     b.ToTable("Overtimes");
                 });
@@ -326,8 +318,8 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AppUserID")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("AppUserID")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("EndTime")
                         .HasColumnType("datetime2");
@@ -369,25 +361,6 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("WorkShifts");
                 });
 
-            modelBuilder.Entity("EntityLayer.Concrete.AppUserAndOverTime", b =>
-                {
-                    b.HasOne("EntityLayer.Concrete.AppUser", "AppUser")
-                        .WithMany()
-                        .HasForeignKey("AppUserID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EntityLayer.Concrete.Overtime", "Overtime")
-                        .WithMany()
-                        .HasForeignKey("OvertimeID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AppUser");
-
-                    b.Navigation("Overtime");
-                });
-
             modelBuilder.Entity("EntityLayer.Concrete.AppUserAndWorkShift", b =>
                 {
                     b.HasOne("EntityLayer.Concrete.AppUser", "AppUser")
@@ -411,7 +384,20 @@ namespace DataAccessLayer.Migrations
                 {
                     b.HasOne("EntityLayer.Concrete.AppUser", "AppUser")
                         .WithMany("DayOffs")
-                        .HasForeignKey("AppUserId");
+                        .HasForeignKey("AppUserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.Debit", b =>
+                {
+                    b.HasOne("EntityLayer.Concrete.AppUser", "AppUser")
+                        .WithMany("Debits")
+                        .HasForeignKey("AppUserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("AppUser");
                 });
@@ -420,7 +406,9 @@ namespace DataAccessLayer.Migrations
                 {
                     b.HasOne("EntityLayer.Concrete.AppUser", "AppUser")
                         .WithMany("Departments")
-                        .HasForeignKey("AppUserId");
+                        .HasForeignKey("AppUserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("AppUser");
                 });
@@ -448,7 +436,9 @@ namespace DataAccessLayer.Migrations
                 {
                     b.HasOne("EntityLayer.Concrete.AppUser", "AppUser")
                         .WithMany("EmploymentDetails")
-                        .HasForeignKey("AppUserId");
+                        .HasForeignKey("AppUserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("AppUser");
                 });
@@ -466,20 +456,22 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("EntityLayer.Concrete.Overtime", b =>
                 {
-                    b.HasOne("EntityLayer.Concrete.Department", "Department")
-                        .WithMany()
-                        .HasForeignKey("DepartmentID")
+                    b.HasOne("EntityLayer.Concrete.AppUser", "AppUser")
+                        .WithMany("Overtimes")
+                        .HasForeignKey("AppUserID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Department");
+                    b.Navigation("AppUser");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.WorkHour", b =>
                 {
                     b.HasOne("EntityLayer.Concrete.AppUser", "AppUser")
                         .WithMany("WorkHours")
-                        .HasForeignKey("AppUserID");
+                        .HasForeignKey("AppUserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("AppUser");
                 });
@@ -488,9 +480,13 @@ namespace DataAccessLayer.Migrations
                 {
                     b.Navigation("DayOffs");
 
+                    b.Navigation("Debits");
+
                     b.Navigation("Departments");
 
                     b.Navigation("EmploymentDetails");
+
+                    b.Navigation("Overtimes");
 
                     b.Navigation("WorkHours");
                 });

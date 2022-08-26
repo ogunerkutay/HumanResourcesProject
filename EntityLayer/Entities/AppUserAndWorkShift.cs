@@ -8,7 +8,7 @@ namespace EntityLayer.Concrete
 {
     public class AppUserAndWorkShift
     {
-        public string AppUserID { get; set; }
+        public int AppUserID { get; set; }
         public AppUser AppUser { get; set; }
 
         public WorkShift WorkShift { get; set; }

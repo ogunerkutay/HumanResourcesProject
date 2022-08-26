@@ -12,7 +12,7 @@ namespace EntityLayer.Concrete
         public string DepartmentName { get; set; }
         public string DepartmentDescription { get; set; }
         public AppUser AppUser { get; set; }
-        public string AppUserId { get; set; }
+        public int AppUserID { get; set; }
         public List<Expense> Expenses { get; set; }
     }
 }

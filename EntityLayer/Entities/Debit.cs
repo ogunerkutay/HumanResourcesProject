@@ -12,5 +12,8 @@ namespace EntityLayer.Concrete
         public string Name { get; set; }
         public string Description { get; set; }
         public DateTime GivenDate { get; set; }
+        public AppUser AppUser { get; set; }
+        public int AppUserID { get; set; }
+
     }
 }

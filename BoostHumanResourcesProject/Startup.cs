@@ -6,6 +6,7 @@ using BusinessLayer.Services.EmploymentDetailsService;
 using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
 using EntityLayer.Concrete;
+using EntityLayer.Entities;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -40,7 +41,7 @@ namespace BoostHumanResourcesProject
                options.UseSqlServer(Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING")));
 
             //Identity
-            services.AddIdentity<AppUser, IdentityRole>(x =>
+            services.AddIdentity<AppUser, AppRole>(x =>
             {
                 x.Password.RequireUppercase = false;// büyük harf zorunluluðu false
                 x.Password.RequireNonAlphanumeric = false;

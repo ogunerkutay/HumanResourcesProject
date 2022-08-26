@@ -6,7 +6,7 @@ public class AppDbContext : DbContext
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {
-
+        
     }
     public DbSet<AppUser> AppUsers { get; set; }
     public DbSet<DayOff> DayOffs { get; set; }
@@ -20,7 +20,7 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<AppUserAndOverTime>().HasKey(c => new { c.OvertimeID, c.AppUserID });
+       
         modelBuilder.Entity<AppUserAndWorkShift>().HasKey(c => new { c.WorkShiftID, c.AppUserID });
         modelBuilder.Entity<DepartmentAndWorkShift>().HasKey(c => new { c.WorkShiftID, c.DepartmentID });
 
