@@ -34,7 +34,7 @@ namespace BoostHumanResourcesProject
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddControllersWithViews(); //burasý yorum satýrý
 
             //DbContext
             services.AddDbContext<AppDbContext>(options =>
