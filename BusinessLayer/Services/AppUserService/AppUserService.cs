@@ -51,7 +51,7 @@ namespace BusinessLayer.Services.AppUserService
                 },
                 expression: x => x.Id == id && x.Status == true);
             return user;
-
+            //
         }
 
         public Task<TResult> GetFilteredFirstOrDefault<TResult>(Expression<Func<AppUser, TResult>> selector, Expression<Func<AppUser, bool>> expression, Func<IQueryable<AppUser>, IOrderedQueryable<AppUser>> orderBy = null, Func<IQueryable<AppUser>, IIncludableQueryable<AppUser, object>> includes = null)
