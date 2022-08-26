@@ -1,9 +1,12 @@
 ﻿using BusinessLayer.Abstract;
+using BusinessLayer.Models.DTOs;
 using DataAccessLayer.Abstract;
 using EntityLayer.Concrete;
+using Microsoft.EntityFrameworkCore.Query;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,29 +21,56 @@ namespace BusinessLayer.Services.AppUserService
             appUserRepository = _appUserRepository;
         }
 
-        public void Add(AppUser entity)
+        public Task<bool> Any(Expression<Func<AppUser, bool>> expression)
         {
-            appUserRepository.Create(entity);
+            throw new NotImplementedException();
         }
 
-        public void Delete(AppUser entity)
+        public Task Create(AppUser entity)
         {
-            appUserRepository.Delete(entity);
+            throw new NotImplementedException();
         }
 
-        public List<AppUser> GetAll()
+        public Task Delete(AppUser entity)
         {
-            return appUserRepository.GetAll();
+            throw new NotImplementedException();
         }
 
-        public AppUser GetById(int id)
+        public Task<List<AppUser>> GetAllWhere(Expression<Func<AppUser, bool>> expression)
         {
-            return appUserRepository.GetById(id);
+            throw new NotImplementedException();
         }
 
-        public List<AppUser> GetListById(int id)
+        public async Task<AppUser> GetById(int id)
         {
-            //return appUserRepository.GetListFilter(x => x.Id == id);
+            var user = await appUserRepository.GetFilteredFirstOrDefault(
+                selector: x => new AppUser
+                {
+                    Id = x.Id
+                    
+                },
+                expression: x => x.Id == id && x.Status == true);
+            return user;
+            //
+        }
+
+        public Task<TResult> GetFilteredFirstOrDefault<TResult>(Expression<Func<AppUser, TResult>> selector, Expression<Func<AppUser, bool>> expression, Func<IQueryable<AppUser>, IOrderedQueryable<AppUser>> orderBy = null, Func<IQueryable<AppUser>, IIncludableQueryable<AppUser, object>> includes = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<TResult>> GetFilteredList<TResult>(Expression<Func<AppUser, TResult>> selector, Expression<Func<AppUser, bool>> expression, Func<IQueryable<AppUser>, IOrderedQueryable<AppUser>> orderBy = null, Func<IQueryable<AppUser>, IIncludableQueryable<AppUser, object>> includes = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<AppUser> GetWhere(Expression<Func<AppUser, bool>> expression)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void StatusChange(AppUser appUser)
+        {
             throw new NotImplementedException();
         }
 
@@ -48,5 +78,6 @@ namespace BusinessLayer.Services.AppUserService
         {
             appUserRepository.Update(entity);
         }
+
     }
 }
