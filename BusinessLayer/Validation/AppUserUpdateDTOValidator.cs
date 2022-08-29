@@ -1,4 +1,5 @@
 ﻿using BusinessLayer.Models.DTOs;
+using BusinessLayer.Models.VMs;
 using FluentValidation;
 using System;
 using System.Collections.Generic;

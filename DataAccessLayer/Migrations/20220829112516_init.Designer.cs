@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220826092622_init")]
+    [Migration("20220829112516_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,6 +38,9 @@ namespace DataAccessLayer.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("DepartmentID")
+                        .HasColumnType("int");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -97,6 +100,8 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DepartmentID");
 
                     b.ToTable("AppUsers");
                 });
@@ -184,9 +189,6 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AppUserID")
-                        .HasColumnType("int");
-
                     b.Property<string>("DepartmentDescription")
                         .HasColumnType("nvarchar(max)");
 
@@ -194,8 +196,6 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("DepartmentID");
-
-                    b.HasIndex("AppUserID");
 
                     b.ToTable("Departments");
                 });
@@ -361,6 +361,17 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("WorkShifts");
                 });
 
+            modelBuilder.Entity("EntityLayer.Concrete.AppUser", b =>
+                {
+                    b.HasOne("EntityLayer.Concrete.Department", "Department")
+                        .WithMany("AppUsers")
+                        .HasForeignKey("DepartmentID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Department");
+                });
+
             modelBuilder.Entity("EntityLayer.Concrete.AppUserAndWorkShift", b =>
                 {
                     b.HasOne("EntityLayer.Concrete.AppUser", "AppUser")
@@ -395,17 +406,6 @@ namespace DataAccessLayer.Migrations
                 {
                     b.HasOne("EntityLayer.Concrete.AppUser", "AppUser")
                         .WithMany("Debits")
-                        .HasForeignKey("AppUserID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AppUser");
-                });
-
-            modelBuilder.Entity("EntityLayer.Concrete.Department", b =>
-                {
-                    b.HasOne("EntityLayer.Concrete.AppUser", "AppUser")
-                        .WithMany("Departments")
                         .HasForeignKey("AppUserID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -482,8 +482,6 @@ namespace DataAccessLayer.Migrations
 
                     b.Navigation("Debits");
 
-                    b.Navigation("Departments");
-
                     b.Navigation("EmploymentDetails");
 
                     b.Navigation("Overtimes");
@@ -493,6 +491,8 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("EntityLayer.Concrete.Department", b =>
                 {
+                    b.Navigation("AppUsers");
+
                     b.Navigation("Expenses");
                 });
 #pragma warning restore 612, 618

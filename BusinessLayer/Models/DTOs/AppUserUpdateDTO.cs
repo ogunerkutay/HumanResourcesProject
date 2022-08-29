@@ -1,4 +1,5 @@
-﻿using EntityLayer.Enums;
+﻿using EntityLayer.Concrete;
+using EntityLayer.Enums;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,10 @@ namespace BusinessLayer.Models.DTOs
         public string TCNO { get; set; }
         public DateTime BirthDate { get; set; }
         public string Address { get; set; }
+       public Department Department { get; set; }
+        public int DepartmentID { get; set; }
         public bool Status { get; set; }
+        public string ImagePath { get; set; }
         public string Title { get; set; }
         public double GrossSalary { get; set; }
         public IFormFile file { get; set; }

@@ -22,7 +22,6 @@ namespace EntityLayer.Concrete
         public double GrossSalary { get; set; }
 
         public Department Department { get; set; }
-
         public int DepartmentID { get; set; }
         public List<DayOff> DayOffs { get; set; }
         public List<Overtime> Overtimes { get; set; }

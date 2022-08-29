@@ -1,4 +1,5 @@
 ﻿using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace BusinessLayer.Models.VMs
 {
     public class AppUserDetailsVM
     {
+        public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string TCNO { get; set; }
@@ -17,7 +19,9 @@ namespace BusinessLayer.Models.VMs
         public string Address { get; set; }
         public bool Status { get; set; }
         public string Title { get; set; }
+        public string Email { get; set; }
         public double GrossSalary { get; set; }
+        public IFormFile file { get; set; }
         public List<DayOff> DayOffs { get; set; }
         public Department Department { get; set; }
         

@@ -1,4 +1,5 @@
 ﻿using BusinessLayer.Models.DTOs;
+using BusinessLayer.Models.VMs;
 using BusinessLayer.Services.GenericService;
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Identity;
@@ -10,10 +11,12 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Abstract
 {
-    public interface IAppUserService : IGenericService<AppUser>
+    public interface IAppUserService : IGenericService<AppUserUpdateDTO>
     {
   
-        Task<AppUser> GetById(int id);
-        void StatusChange(AppUser appUser);
+        Task<AppUserDetailsVM> GetById(int id);
+        Task<AppUserUpdateDTO> GetByIdDTO(int id);
+        Task<List<AppUserVM>> GetAllUsers();
+        void StatusChange(AppUserUpdateDTO appUser);
     }
 }

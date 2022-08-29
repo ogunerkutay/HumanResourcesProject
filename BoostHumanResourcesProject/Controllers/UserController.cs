@@ -12,6 +12,10 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using BusinessLayer.Services.DepartmentService;
 using System.Linq;
+using BusinessLayer.Models.VMs;
+using BusinessLayer.Validation;
+using FluentValidation;
+using FluentValidation.Results;
 
 namespace BoostHumanResourcesProject.Controllers
 {
@@ -22,7 +26,7 @@ namespace BoostHumanResourcesProject.Controllers
         private readonly IWebHostEnvironment hostingEnvironment;
         private readonly IDepartmentService departmentService;
 
-        public UserController(ILogger<UserController> logger, IAppUserService appUserService, IWebHostEnvironment hostingEnvironment,IDepartmentService departmentService)
+        public UserController(ILogger<UserController> logger, IAppUserService appUserService, IWebHostEnvironment hostingEnvironment, IDepartmentService departmentService)
         {
             _logger = logger;
             this.appUserService = appUserService;
@@ -30,35 +34,58 @@ namespace BoostHumanResourcesProject.Controllers
             this.departmentService = departmentService;
         }
 
-        public IActionResult PersonList()
+        public async Task<IActionResult> PersonList()
         {
-            //appUserService.GetById(1);
-            return View();
+
+            List<AppUserVM> appUserVMs = await appUserService.GetAllUsers();
+            return View(appUserVMs);
         }
         [HttpGet]
         public async Task<IActionResult> AddUser()
         {
-            List<SelectListItem> departmentValue = (from x in await departmentService.GetAllDepartments()
-                                                    select new SelectListItem
-                                                    {
-                                                        Text = x.DepartmentName,
-                                                        Value = x.DepartmentID.ToString()
-                                                    }).ToList();
-            ViewBag.department = departmentValue;
-            return View();
+            List<GetDepartmentsVM> departmentValue = (from x in await departmentService.GetAllDepartments()
+                                                      select new GetDepartmentsVM
+                                                      {
+                                                          DepartmentName = x.DepartmentName,
+                                                          DepartmentID = x.DepartmentID
+                                                      }).ToList();
+            AppUserandDepartments appUserandDepartments = new AppUserandDepartments();
+            AppUserUpdateDTO appUserUpdateDTO = new AppUserUpdateDTO();
+            appUserandDepartments.appUserUpdateDTO = appUserUpdateDTO;
+            appUserandDepartments.departmentsList = departmentValue;
+            return View(appUserandDepartments);
         }
 
         [HttpPost]
-        public IActionResult AddUser(AppUser user)
+        public async Task<IActionResult> AddUser(AppUserandDepartments user)
+        {
+            //AppUserUpdateDTO appUserUpdateDTO = user.appUserUpdateDTO;
+            //AppUserUpdateDTOValidator validationRules = new AppUserUpdateDTOValidator();
+            //ValidationResult validationResult = validationRules.Validate(appUserUpdateDTO);
+            if (ModelState.IsValid)
+            {
+
+
+
+                await appUserService.Create(user.appUserUpdateDTO);
+
+                return RedirectToAction("Update","User",user);
+            }
+            //else
+            //{
+            //    foreach (var item in validationResult.Errors)
+            //    {
+            //        ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+            //    }
+            //}
+            return View(user);
+
+        }
+        public async Task<IActionResult> UserDetails(int id)
         {
 
-            return View();
-        }
-        public IActionResult UserDetails(int id)
-        {
-            ViewBag.i = id;
-            var values = appUserService.GetById(id);
-            return View(values);
+            AppUserDetailsVM appUserDetailsVM = await appUserService.GetById(id);
+            return View(appUserDetailsVM);
         }
 
         public IActionResult StatusChange()
@@ -72,7 +99,7 @@ namespace BoostHumanResourcesProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                AppUser user = await appUserService.GetById(appUserUpdateDTO.Id);
+                AppUserUpdateDTO user = await appUserService.GetByIdDTO(appUserUpdateDTO.Id);
 
 
                 if (user != null)

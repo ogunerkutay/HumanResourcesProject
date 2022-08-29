@@ -1,4 +1,4 @@
-﻿@model EntityLayer.Concrete.AppUser
+﻿@model BusinessLayer.Models.VMs.AppUserandDepartments
 @{
     ViewData["Title"] = "AddUser";
     Layout = "~/Views/Shared/_ManagerLayout.cshtml";
@@ -9,36 +9,46 @@
 @using (Html.BeginForm("AddUser", "User", FormMethod.Post))
 {
     @Html.Label("Adı")
-    @Html.TextBoxFor(x=>x.FirstName,new{@class="form-control"})
-    @Html.ValidationMessageFor(x=>x.FirstName)
+    @Html.TextBoxFor(x=>x.appUserUpdateDTO.FirstName,new{@class="form-control"})
+    @Html.ValidationMessageFor(x=>x.appUserUpdateDTO.FirstName)
     <br />
     @Html.Label("Soyadı")
-    @Html.TextBoxFor(x=>x.LastName,new{@class="form-control"})
-    @Html.ValidationMessageFor(x=>x.LastName)
+    @Html.TextBoxFor(x=>x.appUserUpdateDTO.LastName,new{@class="form-control"})
+    @Html.ValidationMessageFor(x=>x.appUserUpdateDTO.LastName)
     <br />
     @Html.Label("TC NO")
-    @Html.TextBoxFor(x=>x.TCNO,new{@class="form-control"})
-    @Html.ValidationMessageFor(x=>x.TCNO)
+    @Html.TextBoxFor(x=>x.appUserUpdateDTO.TCNO,new{@class="form-control"})
+    @Html.ValidationMessageFor(x=>x.appUserUpdateDTO.TCNO)
     <br />
-    @*@Html.Label("Departman")
-    @Html.DropDownListFor(x=>x.DepartmentID,(List<SelectListItem>)ViewBag.department,new{@class="form-control"}*@
+    @Html.Label("Departman")
+           <select asp-for="appUserUpdateDTO.DepartmentID" class="form-control">
+        @foreach (var item in Model.departmentsList)
+        {
+                    <option value="@item.DepartmentID">
+                @item.DepartmentName
+                </option>
+        }
+        </select>
     <br />
     @Html.Label("Fotoğraf")
-    @Html.TextBoxFor(x=>x.ImagePath,new{@class="form-control"})
-    @Html.ValidationMessageFor(x=>x.ImagePath)
+     <div class="form-group">
+        <label asp-for="appUserUpdateDTO.file" class="control-label"></label>
+        <input type="file" name="file" class="form-control-file" />
+        <span asp-validation-for="appUserUpdateDTO.file" class="text-danger"></span>
+    </div>
     <br />
     @Html.Label("Doğum Tarihi")
-    @Html.TextBoxFor(x=>x.BirthDate,new{@class="form-control"})
-    @Html.ValidationMessageFor(x=>x.BirthDate)
+    @Html.TextBoxFor(x=>x.appUserUpdateDTO.BirthDate,new{@class="form-control"})
+    @Html.ValidationMessageFor(x=>x.appUserUpdateDTO.BirthDate)
     <br />
     @Html.Label("Adres")
-    @Html.TextBoxFor(x=>x.Address,new{@class="form-control"})
-    @Html.ValidationMessageFor(x=>x.Address)
+    @Html.TextBoxFor(x=>x.appUserUpdateDTO.Address,new{@class="form-control"})
+    @Html.ValidationMessageFor(x=>x.appUserUpdateDTO.Address)
     <br />
     @Html.Label("Ünvan")
-    @Html.TextBoxFor(x=>x.Title,new{@class="form-control"})
-    @Html.ValidationMessageFor(x=>x.Title)
+    @Html.TextBoxFor(x=>x.appUserUpdateDTO.Title,new{@class="form-control"})
+    @Html.ValidationMessageFor(x=>x.appUserUpdateDTO.Title)
     <br />
-
+    <button class="btn btn-primary" type="submit">Kaydet</button>
 
 }

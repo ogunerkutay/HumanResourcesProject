@@ -1,4 +1,5 @@
 using BusinessLayer.Abstract;
+using BusinessLayer.AutoMapper;
 using BusinessLayer.Services.AppUserService;
 using BusinessLayer.Services.DayOffService;
 using BusinessLayer.Services.DepartmentService;
@@ -67,7 +68,7 @@ namespace BoostHumanResourcesProject
 
 
             //AutoMapper
-
+            services.AddAutoMapper(typeof(Mapping));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
