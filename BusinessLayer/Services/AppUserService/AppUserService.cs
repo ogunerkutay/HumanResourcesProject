@@ -19,6 +19,7 @@ namespace BusinessLayer.Services.AppUserService
         public AppUserService(IAppUserRepository _appUserRepository)
         {
             appUserRepository = _appUserRepository;
+            //
         }
 
         public Task<bool> Any(Expression<Func<AppUser, bool>> expression)
