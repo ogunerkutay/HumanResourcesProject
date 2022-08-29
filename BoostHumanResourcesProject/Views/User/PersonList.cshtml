@@ -1,4 +1,11 @@
-﻿
+﻿@{
+    ViewData["Title"] = "PersonList";
+    Layout = "~/Views/Shared/_ManagerLayout.cshtml";
+}
+
+
+
+
 <div class="row">
     <div class="col-12 grid-margin">
         <div class="card">
@@ -17,7 +24,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            
+
                             <tr>
                                 <td>
                                     <img src="Foto" class="mr-2" alt="image">
@@ -32,7 +39,7 @@
                                     <label class="badge badge-gradient-success">Departman Adı</label>
                                 </td>
                                 <td> işe giriş tarihi </td>
-                                <td> <a href="@*/Blog/BlogReadAll/@item.BlogID*@" class="btn btn-dark">Detaylar</a> </td>
+                                <td> <a href="/User/UserDetails/" class="btn btn-dark">Detaylar</a> </td>
 
                             </tr>
 
@@ -44,3 +51,4 @@
         </div>
     </div>
 </div>
+

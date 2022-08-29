@@ -1,4 +1,5 @@
-﻿using DataAccessLayer.Abstract;
+﻿using BusinessLayer.Models.VMs;
+using DataAccessLayer.Abstract;
 using EntityLayer.Concrete;
 using Microsoft.EntityFrameworkCore.Query;
 using System;
@@ -17,6 +18,19 @@ namespace BusinessLayer.Services.DepartmentService
         public DepartmentService(IDepartmentRepository _departmentRepository)
         {
             departmentRepository = _departmentRepository;
+        }
+        public async Task<List<GetDepartmentsVM>> GetAllDepartments()
+        {
+            var departments = await departmentRepository.GetFilteredList(
+                selector: x => new GetDepartmentsVM
+                {
+                    DepartmentID = x.DepartmentID,
+                    DepartmentName = x.DepartmentName,
+                    DepartmentDescription = x.DepartmentDescription
+                },
+                expression: x => x.DepartmentName != null,
+                orderBy: x => x.OrderBy(x => x.DepartmentName));
+            return departments;
         }
 
         public Task<bool> Any(Expression<Func<Department, bool>> expression)

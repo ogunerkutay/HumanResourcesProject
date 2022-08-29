@@ -19,7 +19,8 @@ namespace BusinessLayer.Models.VMs
         public string Title { get; set; }
         public double GrossSalary { get; set; }
         public List<DayOff> DayOffs { get; set; }
-        public List<Department> Departments { get; set; }
+        public Department Department { get; set; }
+        
         public List<WorkHour> WorkHours { get; set; }
         public List<EmploymentDetails> EmploymentDetails { get; set; }
     }

@@ -24,9 +24,9 @@
                 <div class="card-body">
                     <img src="~/writer/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
                     <h4 class="font-weight-normal mb-3">
-                        Toplam Blog Sayısı <i class="mdi mdi-chart-line mdi-24px float-right"></i>
+                       Personel Sayısı <i class="mdi mdi-chart-line mdi-24px float-right"></i>
                     </h4>
-                    <h2 class="mb-5">@*@ViewBag.v1*@</h2>
+                    <h2 class="mb-5">@*@ViewBag.v1*@ 150</h2>
 
                 </div>
             </div>
@@ -36,9 +36,9 @@
                 <div class="card-body">
                     <img src="~/writer/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
                     <h4 class="font-weight-normal mb-3">
-                        Sizin Blog Sayınız <i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
+                        Departman Sayısı <i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
                     </h4>
-                    <h2 class="mb-5">@*@ViewBag.v2*@</h2>
+                    <h2 class="mb-5">@*@ViewBag.v2*@ 4</h2>
 
                 </div>
             </div>
@@ -48,15 +48,17 @@
                 <div class="card-body">
                     <img src="~/writer/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
                     <h4 class="font-weight-normal mb-3">
-                        Kategori Sayısı <i class="mdi mdi-diamond mdi-24px float-right"></i>
+                        Bilmem Ne Sayısı <i class="mdi mdi-diamond mdi-24px float-right"></i>
                     </h4>
-                    <h2 class="mb-5">@*@ViewBag.v3*@</h2>
+                    <h2 class="mb-5">@*@ViewBag.v3*@ 30</h2>
 
                 </div>
             </div>
         </div>
     </div>
-        @await Component.InvokeAsync("PersonList")
+        @await Component.InvokeAsync("UserAbout")
+
+        
 
     <!-- container-scroller -->
     <!-- plugins:js -->

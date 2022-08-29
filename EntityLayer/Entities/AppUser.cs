@@ -20,10 +20,15 @@ namespace EntityLayer.Concrete
         public bool Status { get; set; }
         public string Title { get; set; }
         public double GrossSalary { get; set; }
+
+        public Department Department { get; set; }
+
+        public int DepartmentID { get; set; }
         public List<DayOff> DayOffs { get; set; }
         public List<Overtime> Overtimes { get; set; }
-        public List<Department> Departments { get; set; }
+        
         public List<WorkHour> WorkHours { get; set; }
+
         public List<EmploymentDetails> EmploymentDetails { get; set; }
         public List<Debit> Debits { get; set; }
         
