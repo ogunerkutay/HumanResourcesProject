@@ -62,15 +62,12 @@ namespace BoostHumanResourcesProject.Controllers
             //AppUserUpdateDTO appUserUpdateDTO = user.appUserUpdateDTO;
             //AppUserUpdateDTOValidator validationRules = new AppUserUpdateDTOValidator();
             //ValidationResult validationResult = validationRules.Validate(appUserUpdateDTO);
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
+            //    await appUserService.Create(user.appUserUpdateDTO);
 
-
-
-                await appUserService.Create(user.appUserUpdateDTO);
-
-                return RedirectToAction("Update","User",user);
-            }
+            //    return RedirectToAction("Update","User",user);
+            //}
             //else
             //{
             //    foreach (var item in validationResult.Errors)
@@ -78,7 +75,29 @@ namespace BoostHumanResourcesProject.Controllers
             //        ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
             //    }
             //}
-            return View(user);
+            
+            if (user.appUserUpdateDTO.file != null)
+            {
+                var extension = Path.GetExtension(user.appUserUpdateDTO.file.FileName);//
+                var newImageName = Guid.NewGuid() + extension;
+                string projectRootPath = hostingEnvironment.WebRootPath;
+                string uploadsFolder = Path.Combine(projectRootPath, "images");
+                string location = Path.Combine(uploadsFolder, newImageName);
+                using (var fileStream = new FileStream(location, FileMode.Create))
+                {
+                    user.appUserUpdateDTO.file.CopyTo(fileStream);
+                }
+
+                user.appUserUpdateDTO.ImagePath = newImageName;
+            }
+
+            await appUserService.Create(user.appUserUpdateDTO);
+
+            return RedirectToAction("PersonList", "User");
+
+            
+
+            //return View(user);
 
         }
         public async Task<IActionResult> UserDetails(int id)
