@@ -55,43 +55,52 @@ namespace BoostHumanResourcesProject.Controllers
             appUserandDepartments.departmentsList = departmentValue;
             return View(appUserandDepartments);
         }
-
+     
         [HttpPost]
         public async Task<IActionResult> AddUser(AppUserandDepartments user)
         {
-            AppUserUpdateDTO appUserUpdateDTO = user.appUserUpdateDTO;
-            AppUserUpdateDTOValidator validationRules = new AppUserUpdateDTOValidator();
-            ValidationResult validationResult = validationRules.Validate(appUserUpdateDTO);
+            //AppUserUpdateDTO appUserUpdateDTO = new AppUserUpdateDTO();
+            //appUserUpdateDTO = user.appUserUpdateDTO;
+            //AppUserUpdateDTOValidator validationRules = new AppUserUpdateDTOValidator();
+            //ValidationResult validationResult = validationRules.Validate(appUserUpdateDTO);
             if (ModelState.IsValid)
             {
+                if (user.appUserUpdateDTO.file != null)
+                {
+                    var extension = Path.GetExtension(user.appUserUpdateDTO.file.FileName);
+                    var newImageName = Guid.NewGuid() + extension;
+                    string projectRootPath = hostingEnvironment.WebRootPath;
+                    string uploadsFolder = Path.Combine(projectRootPath, "images");
+                    string location = Path.Combine(uploadsFolder, newImageName);
+                    using (var fileStream = new FileStream(location, FileMode.Create))
+                    {
+                        user.appUserUpdateDTO.file.CopyTo(fileStream);
+                    }
+                    user.appUserUpdateDTO.ImagePath = newImageName;
+                }
                 await appUserService.Create(user.appUserUpdateDTO);
-
-                return RedirectToAction("Update", "User", user);
+                return RedirectToAction("PersonList", "User");
             }
-            else
-            {
-                foreach (var item in validationResult.Errors)
-                {
-                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
-                }
-            }
-
-            if (user.appUserUpdateDTO.file != null)
-            {
-                var extension = Path.GetExtension(user.appUserUpdateDTO.file.FileName);//
-                var newImageName = Guid.NewGuid() + extension;
-                string projectRootPath = hostingEnvironment.WebRootPath;
-                string uploadsFolder = Path.Combine(projectRootPath, "images");
-                string location = Path.Combine(uploadsFolder, newImageName);
-                using (var fileStream = new FileStream(location, FileMode.Create))
-                {
-                    user.appUserUpdateDTO.file.CopyTo(fileStream);
-                }
-                user.appUserUpdateDTO.ImagePath = newImageName;
-            }
-            await appUserService.Create(user.appUserUpdateDTO);
-            return RedirectToAction("PersonList", "User");
+            //else
+            //{
+            //    foreach (var item in ModelState.Errors)
+            //    {
+            //        ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+            //    }
+            //}
+            List<GetDepartmentsVM> departmentValue = (from x in await departmentService.GetAllDepartments()
+                                                      select new GetDepartmentsVM
+                                                      {
+                                                          DepartmentName = x.DepartmentName,
+                                                          DepartmentID = x.DepartmentID
+                                                      }).ToList();
+            AppUserandDepartments appUserandDepartments = new AppUserandDepartments();
+            
+            appUserandDepartments.appUserUpdateDTO = user.appUserUpdateDTO;
+            appUserandDepartments.departmentsList = departmentValue;
+            return View(appUserandDepartments);
         }
+
         public async Task<IActionResult> UserDetails(int id)
         {
 
@@ -148,7 +157,7 @@ namespace BoostHumanResourcesProject.Controllers
                         //}
                         var extension = Path.GetExtension(appUserUpdateDTO.file.FileName);
                         newImageName = Guid.NewGuid() + extension;
-              
+
                         string filePath = Path.Combine(uploadsFolder, newImageName);
 
                         using (var fileStream = new FileStream(filePath, FileMode.Create))

@@ -1,13 +1,18 @@
+using BoostHumanResourcesProject;
 using BusinessLayer.Abstract;
 using BusinessLayer.AutoMapper;
+using BusinessLayer.Models.DTOs;
+using BusinessLayer.Models.VMs;
 using BusinessLayer.Services.AppUserService;
 using BusinessLayer.Services.DayOffService;
 using BusinessLayer.Services.DepartmentService;
 using BusinessLayer.Services.EmploymentDetailsService;
+using BusinessLayer.Validation;
 using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
 using EntityLayer.Concrete;
 using EntityLayer.Entities;
+using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -47,10 +52,17 @@ namespace BoostHumanResourcesProject
                 x.Password.RequireUppercase = false;// büyük harf zorunluluðu false
                 x.Password.RequireNonAlphanumeric = false;
             }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+
+            //services.AddFluentValidationAutoValidation();
+            //services.AddFluentValidationClientsideAdapters();
+            //services.AddValidatorsFromAssemblyContaining<Startup>();
             services.AddControllersWithViews().AddFluentValidation(options =>
             {
                 options.RegisterValidatorsFromAssemblyContaining<Startup>();
-            }); //fluent validation kullandýðýmýz için eklendi
+            });
+            services.AddScoped<IValidator<AppUserandDepartments>, AppUserandDepartmentsValidators>();
+            services.AddScoped<IValidator<AppUserUpdateDTO>, AppUserUpdateDTOValidator>();
+            //fluent validation kullandýðýmýz için eklendi
 
             //Repositories
             services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
