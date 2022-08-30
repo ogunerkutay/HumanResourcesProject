@@ -19,6 +19,7 @@ namespace EntityLayer.Concrete
         public string Address { get; set; }
         public bool Status { get; set; }
         public string Title { get; set; }
+        
         public double GrossSalary { get; set; }
 
         public Department Department { get; set; }
