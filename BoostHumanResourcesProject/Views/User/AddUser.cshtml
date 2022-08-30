@@ -6,7 +6,7 @@
 
 <h1>Yeni Personel</h1>
 <br />
-@using (Html.BeginForm("AddUser", "User", FormMethod.Post))
+@using (Html.BeginForm("AddUser", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.Label("Adı")
     @Html.TextBoxFor(x=>x.appUserUpdateDTO.FirstName,new{@class="form-control"})
@@ -32,8 +32,9 @@
     <br />
     @Html.Label("Fotoğraf")
      <div class="form-group">
-        <label asp-for="appUserUpdateDTO.file" class="control-label"></label>
-        <input type="file" name="file" class="form-control-file" />
+       @* <label asp-for="appUserUpdateDTO.file" class="control-label"></label>*@
+       @* <input type="file" name="file" class="form-control-file" />*@
+        <input type="file" asp-for="appUserUpdateDTO.file" />
         <span asp-validation-for="appUserUpdateDTO.file" class="text-danger"></span>
     </div>
     <br />
