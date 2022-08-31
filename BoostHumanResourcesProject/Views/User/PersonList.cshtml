@@ -5,6 +5,11 @@
     Layout = "~/Views/Shared/_ManagerLayout.cshtml";
 }
 
+@*@{
+    string renk = "";
+
+}*@
+
 <div class="search-field d-none d-md-block bg-white">
     <form class="d-flex align-items-center h-100" action="#">
         <div class="input-group">
@@ -38,6 +43,34 @@
                         <tbody>
                             @foreach (var item in Model)
                             {
+                                string renk = string.Empty;
+                                @*renk = "background: linear-gradient(to right,rgb(255, 0, 0) 0%, rgb(0, 255, 0) 100%);";*@
+                            
+                                
+                                if (item.Department.DepartmentName == "Pazarlama")
+                                {
+                                    renk = "badge-gradient-success";
+                                }
+                                if (item.Department.DepartmentName == "Üretim")
+                                {
+                                    renk = "badge-gradient-warning";
+                                }
+                                if (item.Department.DepartmentName == "IT")
+                                {
+                                    renk = "badge-gradient-danger";
+                                }
+                                @*if (item.Department.DepartmentName == "1")
+                            {
+                            color = "badge badge-gradient-secondary";
+                            }
+                            if (item.Department.DepartmentName == "2")
+                            {
+                            color = "badge badge-gradient-info";
+                            }
+                            if (item.Department.DepartmentName == "3")
+                            {
+                            color = "badge badge-gradient-primary";
+                            }*@
                                 <tr>
                                     <td>
                                         <img src="~/images/@item.ImagePath" class="mr-2" alt="image">
@@ -49,7 +82,7 @@
                                         @item.LastName
                                     </td>
                                     <td>
-                                        <label class="badge badge-gradient-success">@item.Department.DepartmentName</label>
+                                        <label class="badge @renk"  > @item.Department.DepartmentName</label>
                                     </td>
                                     <td> @item.Title </td>
                                     <td> <a href="/User/UserDetails/@item.Id" class="btn btn-dark">Detaylar</a> </td>
