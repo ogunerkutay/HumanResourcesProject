@@ -83,7 +83,9 @@ namespace BusinessLayer.Services.AppUserService
                     TCNO = x.TCNO,
                     BirthDate = x.BirthDate,
                     Address = x.Address,
-                    Title = x.Title
+                    Title = x.Title,
+                    ImagePath= x.ImagePath,
+                    PhoneNumber = x.PhoneNumber
                     
                 },
                 expression: x => x.Id == id && x.Status == true);

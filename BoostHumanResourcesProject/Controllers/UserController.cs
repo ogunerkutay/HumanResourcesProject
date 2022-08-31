@@ -78,6 +78,10 @@ namespace BoostHumanResourcesProject.Controllers
                     }
                     user.appUserUpdateDTO.ImagePath = newImageName;
                 }
+                else
+                {
+                    user.appUserUpdateDTO.ImagePath = "pic-1.png";
+                }
                 await appUserService.Create(user.appUserUpdateDTO);
                 return RedirectToAction("PersonList", "User");
             }

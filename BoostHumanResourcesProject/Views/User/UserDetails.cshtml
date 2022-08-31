@@ -4,7 +4,7 @@
     ViewData["Title"] = "UserDetails";
     Layout = "~/Views/Shared/_ManagerLayout.cshtml";
 }
-
+@*
 <h1>Personelin Detayları</h1>
 
 
@@ -18,7 +18,7 @@
         <th>Ünvan</th>
         <th>Telefon No</th>
         <th>Departman</th>
-        
+
     </tr>
 
     <tr>
@@ -33,5 +33,42 @@
         <td>@Model.Department.DepartmentName</td>
     </tr>
 
-</table>
+</table>*@
 
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Personelin Detayları</h4>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Fotoğraf</th>
+                        <th>İsim</th>
+                        <th>Soyİsim</th>
+                        <th>TC NO</th>
+                        <th>Doğum Tarihi</th>
+                        <th>Adres</th>
+                        <th>Ünvan</th>
+                        <th>Telefon No</th>
+                        <th>Departman</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <img src="~/images/@Model.ImagePath" class="mr-2" alt="image">
+                        </td>
+                        <td> @Model.FirstName </td>
+                        <td> @Model.LastName </td>
+                        <td> @Model.TCNO </td>
+                        <td>@(((DateTime)Model.BirthDate).ToString("dd-MMM-yyyy")) </td>
+                        <td> @Model.Address </td>
+                        <td> @Model.Title </td>
+                        <td> @Model.PhoneNumber </td>
+                        <td> @Model.Department.DepartmentName </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
