@@ -30,6 +30,7 @@ namespace BusinessLayer.Models.DTOs
         public IFormFile file { get; set; }
 
 
-        
+
+
     }
 }

@@ -36,6 +36,7 @@ namespace BusinessLayer.Services.AppUserService
         {
             var createUser = mapper.Map<AppUser>(user);
             createUser.Status = true;
+            
             await appUserRepository.Create(createUser);
            
         }
