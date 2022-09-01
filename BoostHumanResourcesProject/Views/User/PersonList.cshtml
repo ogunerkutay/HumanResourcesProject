@@ -16,11 +16,41 @@
             <div class="input-group-prepend bg-transparent">
                 <i class="input-group-text border-0 mdi mdi-magnify" style="font-size: 20px"></i>
             </div>
-            <input type="text" class="form-control bg-transparent border-0" style="font-size: 14px" placeholder="Aranacak kelime">
+            <input type="text" id="myInput" onkeyup="myFunction()" class="form-control bg-transparent border-0" style="font-size: 14px" placeholder="Aranacak kelime">
         </div>
     </form>
 </div>
 <br>
+
+
+<script>
+function myFunction() {
+    var input, filter, myTableBody, tr, firstName, lastName, i, firstNameValue, lastNameValue, departmantName, departmantNameValue, unvanName, unvanNameValue ;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    myTableBody = document.getElementById("myTableBody");
+    tr = myTableBody.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+        firstName = tr[i].getElementsByTagName("td")[1];
+        lastName = tr[i].getElementsByTagName("td")[2];
+        departmantName = tr[i].getElementsByTagName("td")[3];
+        unvanName = tr[i].getElementsByTagName("td")[4];
+
+        firstNameValue = firstName.textContent || firstName.innerText;
+        lastNameValue = lastName.textContent || lastName.innerText;
+        departmantNameValue = departmantName.textContent || departmantName.innerText;
+        unvanNameValue = unvanName.textContent || unvanName.innerText;
+
+        if (firstNameValue.toUpperCase().indexOf(filter) > -1 || lastNameValue.toUpperCase().indexOf(filter) > -1
+            || departmantNameValue.toUpperCase().indexOf(filter) > -1 || unvanNameValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+        } else {
+            tr[i].style.display = "none";
+        }
+
+    }
+}
+</script>
 
 
 <div class="row">
@@ -29,7 +59,7 @@
             <div class="card-body">
                 <h4 class="card-title">Personeller</h4>
                 <div class="table-responsive">
-                    <table class="table">
+                    <table class="table" id="myTable">
                         <thead>
                             <tr>
                                 <th> Fotoğraf </th>
@@ -40,7 +70,7 @@
                                 <th> Detaylar </th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="myTableBody">
                             @foreach (var item in Model)
                             {
                                 string renk = string.Empty;

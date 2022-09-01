@@ -30,7 +30,7 @@ namespace BusinessLayer.Validation
             //RuleFor(x => x.file.ContentType).NotEmpty().Must(x => x.Equals("image/jpeg") || x.Equals("image/jpg") || x.Equals("image/png"))
             //.WithMessage("Dosya tipi izin verilenden farklıdır");
 
-
+            RuleFor(x => x.DepartmentID).NotEmpty().WithMessage("Departman boş geçilemez");
 
 
         }

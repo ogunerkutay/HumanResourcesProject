@@ -9,23 +9,28 @@
 @using (Html.BeginForm("AddUser", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.Label("Adı")
-    @Html.TextBoxFor(x=>x.appUserUpdateDTO.FirstName,new{@class="form-control"})
-    @Html.ValidationMessageFor(x=>x.appUserUpdateDTO.FirstName,"",new{@class="text-danger"})
+    @Html.TextBoxFor(x => x.appUserUpdateDTO.FirstName, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.appUserUpdateDTO.FirstName, "", new { @class = "text-danger" })
     <br />
     @Html.Label("Soyadı")
-    @Html.TextBoxFor(x=>x.appUserUpdateDTO.LastName,new{@class="form-control"})
-    @Html.ValidationMessageFor(x=>x.appUserUpdateDTO.LastName,"",new{@class="text-danger"})
+    @Html.TextBoxFor(x => x.appUserUpdateDTO.LastName, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.appUserUpdateDTO.LastName, "", new { @class = "text-danger" })
     <br />
     @Html.Label("Telefon No")
-    @Html.TextBoxFor(x=>x.appUserUpdateDTO.PhoneNumber,new{@class="form-control"})
-    @Html.ValidationMessageFor(x=>x.appUserUpdateDTO.PhoneNumber,"",new{@class="text-danger"})
+    @Html.TextBoxFor(x => x.appUserUpdateDTO.PhoneNumber, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.appUserUpdateDTO.PhoneNumber, "", new { @class = "text-danger" })
     <br />
     @Html.Label("TC NO")
-    @Html.TextBoxFor(x=>x.appUserUpdateDTO.TCNO,new{@class="form-control"})
-    @Html.ValidationMessageFor(x=>x.appUserUpdateDTO.TCNO,"",new{@class="text-danger"})
+    @Html.TextBoxFor(x => x.appUserUpdateDTO.TCNO, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.appUserUpdateDTO.TCNO, "", new { @class = "text-danger" })
     <br />
     @Html.Label("Departman")
     <select asp-for="appUserUpdateDTO.DepartmentID" class="form-control">
+
+        <option value="">
+            Lütfen bir departman seçiniz
+        </option>
+
         @foreach (var item in Model.departmentsList)
         {
             <option value="@item.DepartmentID">
@@ -33,6 +38,7 @@
             </option>
         }
     </select>
+    @Html.ValidationMessageFor(x => x.appUserUpdateDTO.DepartmentID, "", new { @class = "text-danger" })
     <br />
     @Html.Label("Fotoğraf")
     <div class="form-group">
@@ -43,16 +49,16 @@
     </div>
     <br />
     @Html.Label("Doğum Tarihi")
-    @Html.TextBoxFor(x=>x.appUserUpdateDTO.BirthDate,new{@class="form-control"})
-    @Html.ValidationMessageFor(x=>x.appUserUpdateDTO.BirthDate,"",new{@class="text-danger"})
+    @Html.TextBoxFor(x => x.appUserUpdateDTO.BirthDate, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.appUserUpdateDTO.BirthDate, "", new { @class = "text-danger" })
     <br />
     @Html.Label("Adres")
-    @Html.TextBoxFor(x=>x.appUserUpdateDTO.Address,new{@class="form-control"})
-    @Html.ValidationMessageFor(x=>x.appUserUpdateDTO.Address,"",new{@class="text-danger"})
+    @Html.TextBoxFor(x => x.appUserUpdateDTO.Address, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.appUserUpdateDTO.Address, "", new { @class = "text-danger" })
     <br />
     @Html.Label("Ünvan")
-    @Html.TextBoxFor(x=>x.appUserUpdateDTO.Title,new{@class="form-control"})
-    @Html.ValidationMessageFor(x=>x.appUserUpdateDTO.Title,"",new{@class="text-danger"})
+    @Html.TextBoxFor(x => x.appUserUpdateDTO.Title, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.appUserUpdateDTO.Title, "", new { @class = "text-danger" })
     <br />
     <button class="btn btn-primary" type="submit">Kaydet</button>
 
