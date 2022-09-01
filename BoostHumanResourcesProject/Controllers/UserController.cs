@@ -65,6 +65,7 @@ namespace BoostHumanResourcesProject.Controllers
             //ValidationResult validationResult = validationRules.Validate(appUserUpdateDTO);
             if (ModelState.IsValid)
             {
+
                 if (user.appUserUpdateDTO.file != null)
                 {
                     var extension = Path.GetExtension(user.appUserUpdateDTO.file.FileName);
@@ -82,6 +83,7 @@ namespace BoostHumanResourcesProject.Controllers
                 {
                     user.appUserUpdateDTO.ImagePath = "pic-1.png";
                 }
+                
                 await appUserService.Create(user.appUserUpdateDTO);
                 return RedirectToAction("PersonList", "User");
             }

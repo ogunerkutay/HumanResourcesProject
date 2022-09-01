@@ -359,6 +359,27 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("WorkShifts");
                 });
 
+            modelBuilder.Entity("EntityLayer.Entities.AppRole", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppRoles");
+                });
+
             modelBuilder.Entity("EntityLayer.Concrete.AppUser", b =>
                 {
                     b.HasOne("EntityLayer.Concrete.Department", "Department")

@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220829112516_init")]
-    partial class init
+    [Migration("20220901081834_init_first")]
+    partial class init_first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -359,6 +359,27 @@ namespace DataAccessLayer.Migrations
                     b.HasKey("WorkShiftID");
 
                     b.ToTable("WorkShifts");
+                });
+
+            modelBuilder.Entity("EntityLayer.Entities.AppRole", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppRoles");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.AppUser", b =>
