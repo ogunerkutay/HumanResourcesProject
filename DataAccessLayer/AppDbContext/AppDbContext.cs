@@ -29,7 +29,9 @@ namespace DataAccessLayer
 
             modelBuilder.Entity<AppUserAndWorkShift>().HasKey(c => new { c.WorkShiftID, c.AppUserID });
             modelBuilder.Entity<DepartmentAndWorkShift>().HasKey(c => new { c.WorkShiftID, c.DepartmentID });
-            base.OnModelCreating(modelBuilder);
+
+
+            base.OnModelCreating(modelBuilder); //
             
 
         }
