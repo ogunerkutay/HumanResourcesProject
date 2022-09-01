@@ -77,7 +77,7 @@ function myFunction() {
                                 @*renk = "background: linear-gradient(to right,rgb(255, 0, 0) 0%, rgb(0, 255, 0) 100%);";*@
                             
                                 
-                                if (item.Department.DepartmentName == "Pazarlama")
+                                if (item.Department.DepartmentName == "Yönetim")
                                 {
                                     renk = "badge-gradient-success";
                                 }
@@ -89,6 +89,35 @@ function myFunction() {
                                 {
                                     renk = "badge-gradient-danger";
                                 }
+                                if (item.Department.DepartmentName == "İnsan Kaynakları")
+                                {
+                                    renk = "badge-gradient-info";
+                                }
+                                if (item.Department.DepartmentName == "Muhasebe")
+                                {
+                                    renk = "badge-gradient-primary";
+                                }
+                                if (item.Department.DepartmentName == "Pazarlama")
+                                {
+                                    renk = "badge-gradient-secondary";
+                                }
+                                if (item.Department.DepartmentName == "Satın Alma")
+                                {
+                                    renk = "badge-gradient-dark";
+                                }
+                                if (item.Department.DepartmentName == "Lojistik")
+                                {
+                                    renk = "badge-gradient-muted";
+                                }
+                                if (item.Department.DepartmentName == "Güvenlik")
+                                {
+                                    renk = "badge-gradient-light";
+                                }
+                                if (item.Department.DepartmentName == "Mühendislik")
+                                {
+                                    renk = "badge-gradient-secondary";
+                                }
+
                                 @*if (item.Department.DepartmentName == "1")
                             {
                             color = "badge badge-gradient-secondary";

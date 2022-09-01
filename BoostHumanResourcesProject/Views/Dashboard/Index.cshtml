@@ -1,4 +1,6 @@
-﻿@{
+﻿@using BusinessLayer.Models.VMs
+@model AppUserDetailsVM
+@{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_ManagerLayout.cshtml";
 }
@@ -20,6 +22,7 @@
     <div class="row">
         <div class="col-md-4 stretch-card grid-margin">
             <div class="card bg-gradient-danger card-img-holder text-white">
+                
                 <div class="card-body">
                     <img src="~/writer/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
                     <h4 class="font-weight-normal mb-3">
@@ -49,7 +52,7 @@
                     <h4 class="font-weight-normal mb-3">
                         Yıllık İzin Gün Sayısı <i class="mdi mdi-diamond mdi-24px float-right"></i>
                     </h4>
-                    <h2 class="mb-5">@ViewBag.v3 </h2>
+                    <h2 class="mb-5">@*@ViewBag.v3*@ 14</h2>
 
                 </div>
             </div>
@@ -83,7 +86,7 @@
                     <div class="col-md-6">
                         <address>
                             <p class="font-weight-bold">Jane DOE</p>
-                            <p class="font-weight-light"> Yönetici </p>
+                            <p class="font-weight-light">Şirket Yöneticisi </p>
                             <p> +90 523 548 41 42 </p>
                             <p> Istanbul, Türkiye </p>
                         </address>
@@ -95,6 +98,7 @@
                             <p class="font-weight-bold"> Web Sitesi </p>
                             <p> www.Boost.com </p>
                         </address>
+                        <a href="/User/UserDetails/@Model.Id" class="btn btn-gradient-info">Detaylar</a>
                     </div>
                 </div>
             </div>
@@ -102,7 +106,7 @@
             </div>
  
 
-        @await Component.InvokeAsync("UserAbout")
+       @* @await Component.InvokeAsync("UserAbout")*@
 
         
 
