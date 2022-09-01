@@ -48,8 +48,9 @@
         <span asp-validation-for="appUserUpdateDTO.file" class="text-danger"></span>
     </div>
     <br />
+    
     @Html.Label("Doğum Tarihi")
-    @Html.TextBoxFor(x => x.appUserUpdateDTO.BirthDate, new { @class = "form-control" })
+    @Html.TextBoxFor(x => x.appUserUpdateDTO.BirthDate, "{0:d MMM yyyy}" , new { @class = "form-control" , @id = "dateTimeInput" })
     @Html.ValidationMessageFor(x => x.appUserUpdateDTO.BirthDate, "", new { @class = "text-danger" })
     <br />
     @Html.Label("Adres")
@@ -62,4 +63,11 @@
     <br />
     <button class="btn btn-primary" type="submit">Kaydet</button>
 
+
 }
+
+<script>
+    var dateTimeInput
+    dateTimeInput = document.getElementById("dateTimeInput");
+    dateTimeInput.value = "2000-01-01";
+</script>
