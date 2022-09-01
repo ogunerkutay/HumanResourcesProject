@@ -1,4 +1,4 @@
-﻿using EntityLayer.Concrete;
+﻿using EntityLayer.Entities;
 using EntityLayer.Enums;
 using Microsoft.AspNetCore.Http;
 using System;

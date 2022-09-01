@@ -1,4 +1,4 @@
-﻿using EntityLayer.Concrete;
+﻿using EntityLayer.Entities;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using System;

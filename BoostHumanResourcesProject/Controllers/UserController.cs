@@ -1,6 +1,6 @@
 ﻿using BusinessLayer.Abstract;
 using BusinessLayer.Models.DTOs;
-using EntityLayer.Concrete;
+using EntityLayer.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;

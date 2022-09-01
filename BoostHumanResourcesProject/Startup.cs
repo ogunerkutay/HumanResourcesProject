@@ -11,7 +11,7 @@ using BusinessLayer.Validation;
 using DataAccessLayer.Abstract;
 using DataAccessLayer.AppDbContext;
 using DataAccessLayer.Concrete;
-using EntityLayer.Concrete;
+using EntityLayer.Entities;
 
 using FluentValidation;
 using FluentValidation.AspNetCore;

@@ -1,6 +1,6 @@
 ﻿using BusinessLayer.Models.VMs;
 using DataAccessLayer.Abstract;
-using EntityLayer.Concrete;
+using EntityLayer.Entities;
 using Microsoft.EntityFrameworkCore.Query;
 using System;
 using System.Collections.Generic;

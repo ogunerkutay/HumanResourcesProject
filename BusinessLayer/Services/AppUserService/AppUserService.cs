@@ -4,7 +4,7 @@ using BusinessLayer.Models.DTOs;
 using BusinessLayer.Models.VMs;
 using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
-using EntityLayer.Concrete;
+using EntityLayer.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 using System;

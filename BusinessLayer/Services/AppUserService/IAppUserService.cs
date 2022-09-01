@@ -1,7 +1,7 @@
 ﻿using BusinessLayer.Models.DTOs;
 using BusinessLayer.Models.VMs;
 using BusinessLayer.Services.GenericService;
-using EntityLayer.Concrete;
+using EntityLayer.Entities;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;

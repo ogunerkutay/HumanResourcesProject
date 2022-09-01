@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using BusinessLayer.Models.DTOs;
-using EntityLayer.Concrete;
+using EntityLayer.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
