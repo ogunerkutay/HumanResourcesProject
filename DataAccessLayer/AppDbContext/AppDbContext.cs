@@ -1,12 +1,12 @@
 ﻿using EntityLayer.Entities;
-using Microsoft.AspNetCore.Identity;
+
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 
 namespace DataAccessLayer
 {
-    public class AppDbContext : IdentityDbContext<AppUser, AppRole, int>
+    public class AppDbContext : IdentityDbContext<AppUser,AppRole,int> 
     {
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
@@ -29,6 +29,8 @@ namespace DataAccessLayer
 
             modelBuilder.Entity<AppUserAndWorkShift>().HasKey(c => new { c.WorkShiftID, c.AppUserID });
             modelBuilder.Entity<DepartmentAndWorkShift>().HasKey(c => new { c.WorkShiftID, c.DepartmentID });
+            base.OnModelCreating(modelBuilder);
+            
 
         }
     }

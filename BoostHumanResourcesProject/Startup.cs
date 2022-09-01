@@ -43,6 +43,7 @@ namespace BoostHumanResourcesProject
         {
             services.AddControllersWithViews(); //burasý yorum satýrý
 
+            
             //DbContext
             services.AddDbContext<AppDbContext>(options =>
                options.UseSqlServer(Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING")));
@@ -54,6 +55,8 @@ namespace BoostHumanResourcesProject
                 x.Password.RequireNonAlphanumeric = false;
             }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
+            //services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+            services.AddMvc();
             //services.AddFluentValidationAutoValidation();
             //services.AddFluentValidationClientsideAdapters();
             //services.AddValidatorsFromAssemblyContaining<Startup>();
