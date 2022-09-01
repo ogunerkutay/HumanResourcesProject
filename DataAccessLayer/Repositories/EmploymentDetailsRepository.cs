@@ -1,4 +1,4 @@
-﻿using DataAccessLayer.Abstract;
+﻿using DataAccessLayer.IRepositories;
 using EntityLayer.Entities;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccessLayer.Concrete
+namespace DataAccessLayer.Repositories
 {
     public class EmploymentDetailsRepository : GenericRepository<EmploymentDetails>, IEmploymentDetailsRepository
     {

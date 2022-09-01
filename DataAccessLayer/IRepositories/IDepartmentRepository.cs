@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccessLayer.Abstract
+namespace DataAccessLayer.IRepositories
 {
     public interface IDepartmentRepository:IGenericRepository<Department>
     {

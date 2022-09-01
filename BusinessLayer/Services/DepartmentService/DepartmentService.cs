@@ -1,5 +1,5 @@
 ﻿using BusinessLayer.Models.VMs;
-using DataAccessLayer.Abstract;
+using DataAccessLayer.IRepositories;
 using EntityLayer.Entities;
 using Microsoft.EntityFrameworkCore.Query;
 using System;

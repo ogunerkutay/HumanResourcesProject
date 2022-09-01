@@ -4,15 +4,15 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 
-namespace DataAccessLayer.AppDbContext
+namespace DataAccessLayer
 {
-    public class AppDbContext : IdentityDbContext<AppUser>
+    public class AppDbContext : IdentityDbContext<AppUser, AppRole, int>
     {
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
 
-        }//
+        }
 
         public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<DayOff> DayOffs { get; set; }

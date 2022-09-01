@@ -1,4 +1,4 @@
-﻿using DataAccessLayer.Abstract;
+﻿using DataAccessLayer.IRepositories;
 using EntityLayer.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccessLayer.Concrete
+namespace DataAccessLayer.Repositories
 {
     public class AppUserRepository : GenericRepository<AppUser>, IAppUserRepository
     {

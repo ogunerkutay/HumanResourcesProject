@@ -8,9 +8,8 @@ using BusinessLayer.Services.DayOffService;
 using BusinessLayer.Services.DepartmentService;
 using BusinessLayer.Services.EmploymentDetailsService;
 using BusinessLayer.Validation;
-using DataAccessLayer.Abstract;
-using DataAccessLayer.AppDbContext;
-using DataAccessLayer.Concrete;
+using DataAccessLayer.IRepositories;
+using DataAccessLayer;
 using EntityLayer.Entities;
 
 using FluentValidation;
@@ -27,6 +26,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DataAccessLayer.Repositories;
 
 namespace BoostHumanResourcesProject
 {
@@ -48,7 +48,7 @@ namespace BoostHumanResourcesProject
                options.UseSqlServer(Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING")));
 
             //Identity
-            services.AddIdentity<AppUser, IdentityRole>(x =>
+            services.AddIdentity<AppUser, AppRole>(x =>
             {
                 x.Password.RequireUppercase = false;// büyük harf zorunluluðu false
                 x.Password.RequireNonAlphanumeric = false;
