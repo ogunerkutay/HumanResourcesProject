@@ -12415,7 +12415,7 @@ code {
       background: initial; }
     .dropdown .dropdown-menu .dropdown-item:hover {
       background-color: #f8f9fa;
-      color: #ffffff; }
+      color: darkred; }
 
 /* Forms */
 .form-group {
@@ -13028,7 +13028,7 @@ dl {
               font-size: 17px; }
             .navbar .navbar-menu-wrapper .navbar-nav .nav-item.dropdown .dropdown-menu.navbar-dropdown .dropdown-item .ellipsis {
               max-width: 200px;
-              overflow: hidden;
+              /*overflow: hidden;*/
               text-overflow: ellipsis; }
             .rtl .navbar .navbar-menu-wrapper .navbar-nav .nav-item.dropdown .dropdown-menu.navbar-dropdown .dropdown-item i {
               margin-left: 10px; }
