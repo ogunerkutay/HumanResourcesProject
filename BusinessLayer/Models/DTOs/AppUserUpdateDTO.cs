@@ -29,6 +29,7 @@ namespace BusinessLayer.Models.DTOs
         public string Title { get; set; }
         public double GrossSalary { get; set; }
         public IFormFile file { get; set; }
+        public Gender Gender { get; set; }
 
 
 

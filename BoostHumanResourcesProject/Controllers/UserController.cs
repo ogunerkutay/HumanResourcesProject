@@ -81,7 +81,14 @@ namespace BoostHumanResourcesProject.Controllers
                 }
                 else
                 {
-                    user.appUserUpdateDTO.ImagePath = "pic-1.png";
+                    if (user.appUserUpdateDTO.Gender == EntityLayer.Enums.Gender.Kadın)
+                    {
+                        user.appUserUpdateDTO.ImagePath = "pic-2.png";
+                    }
+                    else
+                    {
+                        user.appUserUpdateDTO.ImagePath = "pic-1.png";
+                    }
                 }
    
                 user.appUserUpdateDTO.EmploymentDate = DateTime.Parse(DateTime.Now.ToShortDateString());

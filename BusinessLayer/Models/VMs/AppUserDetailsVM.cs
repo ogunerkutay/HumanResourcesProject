@@ -1,4 +1,5 @@
 ﻿using EntityLayer.Entities;
+using EntityLayer.Enums;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace BusinessLayer.Models.VMs
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string TCNO { get; set; }
+        public Gender Gender { get; set; }
         public string PhoneNumber { get; set; }
         public string ImagePath { get; set; }
         public DateTime BirthDate { get; set; }

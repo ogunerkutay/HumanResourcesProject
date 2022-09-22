@@ -45,6 +45,7 @@
                         <th>Fotoğraf</th>
                         <th>İsim</th>
                         <th>Soyİsim</th>
+                        <th>Cinsiyet</th>
                         <th>TC NO</th>
                         <th>Doğum Tarihi</th>
                         <th>Adres</th>
@@ -60,6 +61,7 @@
                         </td>
                         <td> @Model.FirstName </td>
                         <td> @Model.LastName </td>
+                        <td> @Model.Gender </td>
                         <td> @Model.TCNO </td>
                         <td>@(((DateTime)Model.BirthDate).ToString("MM/dd/yyyy")) </td>
                         <td> @Model.Address </td>

@@ -1,4 +1,5 @@
 ﻿using EntityLayer.Entities;
+using EntityLayer.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace BusinessLayer.Models.VMs
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public Gender Gender { get; set; }
         public string ImagePath { get; set; }
         public string Title { get; set; }
         public Department Department { get; set; }

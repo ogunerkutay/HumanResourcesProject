@@ -59,6 +59,7 @@ namespace BusinessLayer.Services.AppUserService
                     FirstName = x.FirstName,
                     LastName = x.LastName,
                     ImagePath = x.ImagePath,
+                    Gender =x.Gender,
                     Title = x.Title,
                     Department = x.Department
 
@@ -81,6 +82,7 @@ namespace BusinessLayer.Services.AppUserService
                     LastName = x.LastName,
                     Department = x.Department,
                     TCNO = x.TCNO,
+                    Gender = x.Gender,
                     BirthDate = x.BirthDate,
                     Address = x.Address,
                     Title = x.Title,

@@ -16,6 +16,13 @@
     @Html.TextBoxFor(x => x.appUserUpdateDTO.LastName, new { @class = "form-control" })
     @Html.ValidationMessageFor(x => x.appUserUpdateDTO.LastName, "", new { @class = "text-danger" })
     <br />
+    <div class="col-md-10">
+        Kadın
+        @Html.RadioButtonFor(model => model.appUserUpdateDTO.Gender, 1)
+        Erkek
+        @Html.RadioButtonFor(model => model.appUserUpdateDTO.Gender, 2)
+    </div>
+    <br />
     @Html.Label("Telefon No")
     @Html.TextBoxFor(x => x.appUserUpdateDTO.PhoneNumber, new { @class = "form-control" })
     @Html.ValidationMessageFor(x => x.appUserUpdateDTO.PhoneNumber, "", new { @class = "text-danger" })
@@ -38,6 +45,7 @@
             </option>
         }
     </select>
+
     @Html.ValidationMessageFor(x => x.appUserUpdateDTO.DepartmentID, "", new { @class = "text-danger" })
     <br />
     @Html.Label("Fotoğraf")
@@ -48,9 +56,9 @@
         <span asp-validation-for="appUserUpdateDTO.file" class="text-danger"></span>
     </div>
     <br />
-    
+
     @Html.Label("Doğum Tarihi")
-    @Html.TextBoxFor(x => x.appUserUpdateDTO.BirthDate, "{0:d MMM yyyy}" , new { @class = "form-control" , @id = "dateTimeInput" })
+    @Html.TextBoxFor(x => x.appUserUpdateDTO.BirthDate, "{0:d MMM yyyy}", new { @class = "form-control", @id = "dateTimeInput" })
     @Html.ValidationMessageFor(x => x.appUserUpdateDTO.BirthDate, "", new { @class = "text-danger" })
     <br />
     @Html.Label("Adres")

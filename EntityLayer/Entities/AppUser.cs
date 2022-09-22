@@ -15,6 +15,7 @@ namespace EntityLayer.Entities
         public string LastName { get; set; }
         public string TCNO { get; set; }
         public string ImagePath { get; set; }
+        public Gender Gender { get; set; }
         public DateTime BirthDate { get; set; }
         public string Address { get; set; }
         public bool Status { get; set; }
