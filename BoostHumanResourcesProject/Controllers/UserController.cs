@@ -83,9 +83,13 @@ namespace BoostHumanResourcesProject.Controllers
                 {
                     user.appUserUpdateDTO.ImagePath = "pic-1.png";
                 }
+   
+                user.appUserUpdateDTO.EmploymentDate = DateTime.Parse(DateTime.Now.ToShortDateString());
                 await appUserService.Create(user.appUserUpdateDTO);
                 return RedirectToAction("PersonList", "User");
             }
+
+
             //else
             //{
             //    foreach (var item in ModelState.Errors)

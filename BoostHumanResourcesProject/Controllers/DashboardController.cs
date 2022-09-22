@@ -26,7 +26,8 @@ namespace BoostHumanResourcesProject.Controllers
             
             ViewBag.v1 = appDbContext.AppUsers.Count().ToString();
             ViewBag.v2 = appDbContext.Departments.Count().ToString();
-            ViewBag.v3 = appDbContext.DayOffs.Count().ToString();
+            
+
             return View(appUserDetailsVM);
         }
     }

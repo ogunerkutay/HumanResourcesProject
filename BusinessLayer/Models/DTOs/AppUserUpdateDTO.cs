@@ -20,8 +20,9 @@ namespace BusinessLayer.Models.DTOs
         public string TCNO { get; set; }
         public string PhoneNumber { get; set; }
         public DateTime BirthDate { get; set; }
+        public DateTime EmploymentDate { get; set; }
         public string Address { get; set; }
-       public Department Department { get; set; }
+        public Department Department { get; set; }
         public int DepartmentID { get; set; }
         public bool Status { get; set; }
         public string ImagePath { get; set; }

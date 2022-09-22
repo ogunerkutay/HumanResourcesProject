@@ -85,7 +85,8 @@ namespace BusinessLayer.Services.AppUserService
                     Address = x.Address,
                     Title = x.Title,
                     ImagePath= x.ImagePath,
-                    PhoneNumber = x.PhoneNumber
+                    PhoneNumber = x.PhoneNumber,
+                    AnnualLeave = x.AnnualLeave
                     
                 },
                 expression: x => x.Id == id && x.Status == true);
