@@ -23,10 +23,10 @@ namespace BoostHumanResourcesProject.Controllers
         public async Task<IActionResult> Index()
         {
             AppUserDetailsVM appUserDetailsVM = await appUserService.GetById(8);
-            
+
             ViewBag.v1 = appDbContext.AppUsers.Count().ToString();
             ViewBag.v2 = appDbContext.Departments.Count().ToString();
-            
+
 
             return View(appUserDetailsVM);
         }

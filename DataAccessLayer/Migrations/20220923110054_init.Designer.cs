@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220922102503_init2")]
-    partial class init2
+    [Migration("20220923110054_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -66,7 +66,7 @@ namespace DataAccessLayer.Migrations
                     b.Property<int>("AnnualLeave")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("int")
-                        .HasComputedColumnSql("DATEDIFF(year, GETDATE(), [EmploymentDate])");
+                        .HasComputedColumnSql("IIF((DATEDIFF(year, [EmploymentDate], GETDATE())) > 15, 26, IIF((DATEDIFF(year, [EmploymentDate], GETDATE())) > 5, 20, 14))");
 
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
@@ -90,6 +90,9 @@ namespace DataAccessLayer.Migrations
 
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
 
                     b.Property<double>("GrossSalary")
                         .HasColumnType("float");
@@ -141,6 +144,9 @@ namespace DataAccessLayer.Migrations
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
+
+                    b.Property<int>("remainingDayOff")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
