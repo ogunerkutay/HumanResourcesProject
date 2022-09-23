@@ -91,7 +91,7 @@ namespace BoostHumanResourcesProject.Controllers
                     }
                 }
    
-                user.appUserUpdateDTO.EmploymentDate = DateTime.Parse(DateTime.Now.ToShortDateString());
+                user.appUserUpdateDTO.EmploymentDate = DateTime.Parse(DateTime.Now.ToString("dd-MM-yyyy"));
                 await appUserService.Create(user.appUserUpdateDTO);
                 return RedirectToAction("PersonList", "User");
             }

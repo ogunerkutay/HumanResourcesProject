@@ -17,12 +17,14 @@
     @Html.ValidationMessageFor(x => x.appUserUpdateDTO.LastName, "", new { @class = "text-danger" })
     <br />
     @Html.Label("Cinsiyet")
+
     <div class="col-md-10">
         Kadın
         @Html.RadioButtonFor(model => model.appUserUpdateDTO.Gender, 1)
         Erkek
         @Html.RadioButtonFor(model => model.appUserUpdateDTO.Gender, 2)
     </div>
+
     <br />
     @Html.Label("Telefon No")
     @Html.TextBoxFor(x => x.appUserUpdateDTO.PhoneNumber, new { @class = "form-control" })

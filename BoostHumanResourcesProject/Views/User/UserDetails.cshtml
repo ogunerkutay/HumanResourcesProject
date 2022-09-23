@@ -68,7 +68,7 @@
                         <td>@(((DateTime)Model.BirthDate).ToString("MM/dd/yyyy")) </td>
                         <td> @Model.Address </td>
                         <td> @Model.Title </td>
-                        <td> @Model.EmploymentDate </td>
+                        <td>@(((DateTime)Model.EmploymentDate).ToString("MM/dd/yyyy")) </td>
                         <td> @Model.AnnualLeave </td>
                         <td> @Model.PhoneNumber </td>
                         <td> @Model.Department.DepartmentName </td>
@@ -82,13 +82,13 @@
 <div class="col-12">
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Horizontal Two column</h4>
+            <h4 class="card-title">Personelin Detayları</h4>
             <form class="form-sample">
-                <p class="card-description"> Personal info </p>
+                
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">First Name</label>
+                            <label class="col-sm-3 col-form-label">İsim</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" />
                             </div>
@@ -96,7 +96,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Last Name</label>
+                            <label class="col-sm-3 col-form-label">Soyisim</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" />
                             </div>
@@ -106,18 +106,18 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Gender</label>
+                            <label class="col-sm-3 col-form-label">Cinsiyet</label>
                             <div class="col-sm-9">
                                 <select class="form-control">
-                                    <option>Male</option>
-                                    <option>Female</option>
+                                    <option>Erkek</option>
+                                    <option>Kadın</option>
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Date of Birth</label>
+                            <label class="col-sm-3 col-form-label">Doğum Tarihi</label>
                             <div class="col-sm-9">
                                 <input class="form-control" placeholder="dd/mm/yyyy" />
                             </div>
