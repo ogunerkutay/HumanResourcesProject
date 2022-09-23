@@ -16,6 +16,7 @@
     @Html.TextBoxFor(x => x.appUserUpdateDTO.LastName, new { @class = "form-control" })
     @Html.ValidationMessageFor(x => x.appUserUpdateDTO.LastName, "", new { @class = "text-danger" })
     <br />
+    @Html.Label("Cinsiyet")
     <div class="col-md-10">
         Kadın
         @Html.RadioButtonFor(model => model.appUserUpdateDTO.Gender, 1)
