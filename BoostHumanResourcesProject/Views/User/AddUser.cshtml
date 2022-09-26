@@ -8,9 +8,13 @@
 <br />
 @using (Html.BeginForm("AddUser", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    @Html.Label("Adı")
+    @Html.Label("Birinci Adı")
     @Html.TextBoxFor(x => x.appUserUpdateDTO.FirstName, new { @class = "form-control" })
     @Html.ValidationMessageFor(x => x.appUserUpdateDTO.FirstName, "", new { @class = "text-danger" })
+    <br />
+    @Html.Label("İkinci Adı")
+    @Html.TextBoxFor(x => x.appUserUpdateDTO.SecondName, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.appUserUpdateDTO.LastName, "", new { @class = "text-danger" })
     <br />
     @Html.Label("Soyadı")
     @Html.TextBoxFor(x => x.appUserUpdateDTO.LastName, new { @class = "form-control" })
