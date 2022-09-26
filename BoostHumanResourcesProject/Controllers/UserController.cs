@@ -93,9 +93,10 @@ namespace BoostHumanResourcesProject.Controllers
    
                 user.appUserUpdateDTO.EmploymentDate = DateTime.Parse(DateTime.Now.ToString("dd-MM-yyyy"));
                 await appUserService.Create(user.appUserUpdateDTO);
+                TempData["message"] = $"{user.appUserUpdateDTO.FirstName} {user.appUserUpdateDTO.LastName} isimli kullanıcı eklendi";
                 return RedirectToAction("PersonList", "User");
             }
-
+            
 
             //else
             //{

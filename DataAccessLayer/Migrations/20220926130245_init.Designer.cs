@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220923110054_init")]
+    [Migration("20220926130245_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -69,7 +69,7 @@ namespace DataAccessLayer.Migrations
                         .HasComputedColumnSql("IIF((DATEDIFF(year, [EmploymentDate], GETDATE())) > 15, 26, IIF((DATEDIFF(year, [EmploymentDate], GETDATE())) > 5, 20, 14))");
 
                     b.Property<DateTime>("BirthDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("Date");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -125,6 +125,9 @@ namespace DataAccessLayer.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("SecondName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -195,16 +198,16 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("Date");
 
                     b.Property<bool>("ManagerApproval")
                         .HasColumnType("bit");
 
                     b.Property<DateTime>("ReturnDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("Date");
 
                     b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("Date");
 
                     b.HasKey("DayOffID");
 
@@ -269,7 +272,7 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("WorkDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("Date");
 
                     b.HasKey("WorkShiftID", "DepartmentID");
 
@@ -289,7 +292,7 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DismissalDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("Date");
 
                     b.Property<DateTime>("EmploymentDate")
                         .HasColumnType("datetime2");
@@ -346,7 +349,7 @@ namespace DataAccessLayer.Migrations
                     b.Property<int>("AppUserID")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("DermandDate")
+                    b.Property<DateTime>("DemandDate")
                         .HasColumnType("datetime2");
 
                     b.Property<double>("ManHour")

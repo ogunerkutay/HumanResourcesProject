@@ -81,11 +81,12 @@ namespace DataAccessLayer.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SecondName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TCNO = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Gender = table.Column<int>(type: "int", nullable: false),
-                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    BirthDate = table.Column<DateTime>(type: "Date", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Status = table.Column<bool>(type: "bit", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -152,7 +153,7 @@ namespace DataAccessLayer.Migrations
                     WorkShiftID = table.Column<int>(type: "int", nullable: false),
                     DepartmentID = table.Column<int>(type: "int", nullable: false),
                     DepartmentAndWorkShiftID = table.Column<int>(type: "int", nullable: false),
-                    WorkDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    WorkDate = table.Column<DateTime>(type: "Date", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -286,9 +287,9 @@ namespace DataAccessLayer.Migrations
                 {
                     DayOffID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ReturnDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "Date", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "Date", nullable: false),
+                    ReturnDate = table.Column<DateTime>(type: "Date", nullable: false),
                     DepartmentApproval = table.Column<bool>(type: "bit", nullable: false),
                     ManagerApproval = table.Column<bool>(type: "bit", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -334,7 +335,7 @@ namespace DataAccessLayer.Migrations
                     EmploymentDetailsID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     EmploymentDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DismissalDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DismissalDate = table.Column<DateTime>(type: "Date", nullable: false),
                     AppUserID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -354,7 +355,7 @@ namespace DataAccessLayer.Migrations
                 {
                     OvertimeID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DermandDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DemandDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     OvertimeDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Urgency = table.Column<int>(type: "int", nullable: false),
                     ManHour = table.Column<double>(type: "float", nullable: false),

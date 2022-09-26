@@ -5,10 +5,17 @@
     Layout = "~/Views/Shared/_ManagerLayout.cshtml";
 }
 
-@*@{
-    string renk = "";
+@if (TempData["message"] != null)
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-success">
+                @TempData["message"]
+            </div>
+        </div>
+    </div>
 
-}*@
+}
 
 <div class="search-field d-none d-md-block bg-white">
     <form class="d-flex align-items-center h-100" action="#">
