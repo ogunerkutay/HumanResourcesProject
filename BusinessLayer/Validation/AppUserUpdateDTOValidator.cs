@@ -23,8 +23,8 @@ namespace BusinessLayer.Validation
             .GreaterThan(p => DateTime.Now.AddYears(-70)).WithMessage("Personeller 70 yaşından büyük olamaz");
             RuleFor(x => x.Address).NotEmpty().WithMessage("Adres boş geçilemez");
             //RuleFor(x => x.Status).IsInEnum().WithMessage("Çalışma durumu belirtilmelidir"); 
-            RuleFor(x => x.Title).NotEmpty().WithMessage("Ünvan boş geçilemez").Matches(@"^[abcçdefgğhıijklmnoöpqrsştuüvwxyzABCÇDEFGĞHIİJKLMNOÖPQRSŞTUÜVWXYZ]+$").WithMessage("Sadece harf girişi yapılmalıdır.").MinimumLength(2).WithMessage("Ünvan  2 harften küçük olamaz").MaximumLength(20).WithMessage("Ünvan 20 karakterden fazla olamaz");
-
+            RuleFor(x => x.Title).NotEmpty().WithMessage("Ünvan boş geçilemez").Matches(@"^[ abcçdefgğhıijklmnoöpqrsştuüvwxyzABCÇDEFGĞHIİJKLMNOÖPQRSŞTUÜVWXYZ]+$").WithMessage("Sadece harf girişi yapılmalıdır.").MinimumLength(2).WithMessage("Ünvan  2 harften küçük olamaz").MaximumLength(20).WithMessage("Ünvan 20 karakterden fazla olamaz");
+             
             //RuleFor(x => x.TCNO).NotEmpty().WithMessage("Maaş girişi yapılmalıdır.")
             //   .Matches(@"^\\d + $").WithMessage("Sadece sayı girişi yapılmalıdır.");
 
