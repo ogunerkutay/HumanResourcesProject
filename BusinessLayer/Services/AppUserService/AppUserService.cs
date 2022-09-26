@@ -57,6 +57,7 @@ namespace BusinessLayer.Services.AppUserService
                 {
                     Id = x.Id,
                     FirstName = x.FirstName,
+                    SecondName = x.SecondName,
                     LastName = x.LastName,
                     ImagePath = x.ImagePath,
                     Gender =x.Gender,
@@ -79,6 +80,7 @@ namespace BusinessLayer.Services.AppUserService
                 {
                     Id = x.Id,
                     FirstName = x.FirstName,
+                    SecondName = x.SecondName,
                     LastName = x.LastName,
                     Department = x.Department,
                     TCNO = x.TCNO,
