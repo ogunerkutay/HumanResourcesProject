@@ -4,7 +4,17 @@
     Layout = "~/Views/Shared/_ManagerLayout.cshtml";
 }
 
-<h1>Yeni Personel</h1>
+
+
+<div class="page-header">
+    <h3 class="page-title">
+        <span class="page-title-icon bg-gradient-primary text-white mr-2">
+            <i class="mdi mdi-contacts menu-icon"></i>
+        </span> Yeni Personel
+    </h3>
+</div>
+
+
 <br />
 @using (Html.BeginForm("AddUser", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
@@ -45,6 +55,8 @@
             Lütfen bir departman seçiniz
         </option>
 
+
+
         @foreach (var item in Model.departmentsList)
         {
             <option value="@item.DepartmentID">
@@ -73,7 +85,47 @@
     @Html.ValidationMessageFor(x => x.appUserUpdateDTO.Address, "", new { @class = "text-danger" })
     <br />
     @Html.Label("Ünvan")
-    @Html.TextBoxFor(x => x.appUserUpdateDTO.Title, new { @class = "form-control" })
+    <select asp-for="appUserUpdateDTO.Title" class="form-control">
+        <option value="Programcı">
+            Programcı
+        </option>
+        <option value="Veri Tabanı Uzmanı">
+            Veri Tabanı Uzmanı
+        </option>
+        <option value="Bilgi İşlem Uzmanı">
+            Bilgi İşlem Uzmanı
+        </option>
+        <option value="Proje Uzmanı/Yönetici">
+            Proje Uzmanı/Yönetici
+        </option>
+        <option value="Sistem Analisti Uzmanı/Yöneticisi">
+            Sistem Analisti Uzmanı/Yöneticisi
+        </option>
+        <option value="Veri Analisti Uzmanı/Yönetici">
+            Veri Analisti Uzmanı/Yönetici
+        </option>
+        <option value="Sistem ve Ağ Uzmanı/Yöneticisi">
+            Sistem ve Ağ Uzmanı/Yöneticisi
+        </option>
+        <option value="İnsan Kaynakları Uzmanı/Yöneticisi">
+            İnsan Kaynakları Uzmanı/Yöneticisi
+        </option>
+        <option value="Satış ve Pazarlama Uzmanı/Yöneticisi">
+            Satış ve Pazarlama Uzmanı/Yöneticisi
+        </option>
+        <option value="Bilgi Sistemleri Denetçisi">
+            Bilgi Sistemleri Denetçisi
+        </option>
+        <option value="Genel Müdür">
+            Genel Müdür
+        </option>
+        <option value="Müdür Yardımcısı">
+            Müdür Yardımcısı
+        </option>
+        <option value="Müdür">
+            Müdür
+        </option>
+    </select>
     @Html.ValidationMessageFor(x => x.appUserUpdateDTO.Title, "", new { @class = "text-danger" })
     <br />
     <button class="btn btn-primary" type="submit">Kaydet</button>

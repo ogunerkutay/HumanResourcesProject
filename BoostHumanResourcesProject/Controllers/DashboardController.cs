@@ -20,9 +20,10 @@ namespace BoostHumanResourcesProject.Controllers
             //table = _appDbContext.Set<T>();
         }
 
-        public async Task<IActionResult> Index()
+        [HttpGet]
+        public async Task<IActionResult> Index(int id)
         {
-            AppUserDetailsVM appUserDetailsVM = await appUserService.GetById(4);
+            AppUserDetailsVM appUserDetailsVM = await appUserService.GetById(id);
 
             ViewBag.v1 = appDbContext.AppUsers.Count().ToString();
             ViewBag.v2 = appDbContext.Departments.Count().ToString();

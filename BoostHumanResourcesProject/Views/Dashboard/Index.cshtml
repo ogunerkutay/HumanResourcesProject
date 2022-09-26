@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_ManagerLayout.cshtml";
 }
 
-<!DOCKTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <body>
@@ -14,19 +14,18 @@
         <h3 class="page-title">
             <span class="page-title-icon bg-gradient-primary text-white mr-2">
                 <i class="mdi mdi-home"></i>
-            </span> Ana Sayfa
+            </span> Yönetici Paneli
         </h3>
-
     </div>
 
     <div class="row">
         <div class="col-md-4 stretch-card grid-margin">
             <div class="card bg-gradient-danger card-img-holder text-white">
-                
+
                 <div class="card-body">
                     <img src="~/writer/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
                     <h4 class="font-weight-normal mb-3">
-                       Personel Sayısı <i class="mdi mdi-chart-line mdi-24px float-right"></i>
+                        Personel Sayısı <i class="mdi mdi-chart-line mdi-24px float-right"></i>
                     </h4>
                     <h2 class="mb-5">@ViewBag.v1</h2>
 
@@ -58,74 +57,44 @@
             </div>
         </div>
     </div>
-   @* <div class="col-md-6 grid-margin stretch-card">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Blockquotes</h4>
-                <p class="card-description">
-                    Wrap content inside<code>&lt;blockquote class="blockquote"&gt;</code>
-                </p>
-                <blockquote class="blockquote">
-                    <p class="mb-0">Lorem ipsum dolor sit aemet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                </blockquote>
-            </div>
-            <div class="card-body">
-                <blockquote class="blockquote blockquote-primary">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                    <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-                </blockquote>
-            </div>
-        </div>
-    </div>*@
-    <div class="col-md-6 grid-margin stretch-card">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Hoşgeldiniz,</h4>
-                <img src="~/writer/assets/images/faces/face10.jpg" alt="profile">
-                <div class="row">
-                    <div class="col-md-6">
-                        <address>
-                            <p class="font-weight-bold">Jane DOE</p>
-                            <p class="font-weight-light">Şirket Yöneticisi </p>
-                            <p> +90 523 548 41 42 </p>
-                            <p> Istanbul, Türkiye </p>
-                        </address>
+    <div class="row">
+        <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title"> @(Model.FirstName + " " + Model.LastName + " " + "Hoşgeldiniz")</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img src="~/writer/assets/images/faces/face10.jpg" alt="profile">
+                            <p class="font-weight-bold mb-2">@Model.Title</p>
+                        </div>
+                        <div class="col-md-6">
+                            <address>
+                                <p class="font-weight-bold">Telefon:</p>
+                                <p class="mb-2">@Model.PhoneNumber</p>
+                                <p class="font-weight-bold">Adres:</p>
+                                <p class="mb-2">@Model.Address</p>
+                            </address>
+                        </div>
+
                     </div>
-                    <div class="col-md-6">
-                        <address class="text-primary">
-                            <p class="font-weight-bold"> E-mail </p>
-                            <p class="mb-2"> janedoe@examplemeail.com </p>
-                            <p class="font-weight-bold"> Web Sitesi </p>
-                            <p> www.Boost.com </p>
-                        </address>
-                        <a href="/User/UserDetails/@Model.Id" class="btn btn-gradient-info">Detaylar</a>
+                    <hr />
+                    <div class="row">
+                        <div class="col-12">
+                            <address class="text-primary">
+                                <p class="font-weight-bold mb-2">@("Email: " + @Model.Email)</p>
+                                <p class="font-weight-bold mb-2">@("Şirket: BoostHR")</p>
+                            </address>
+                        </div>
                     </div>
+                    <a href="/User/UserDetails/@Model.Id" class="btn btn-gradient-info col-12">Detaylar</a>
                 </div>
             </div>
-            </div>
-            </div>
- 
+        </div>
+        <div class="col-md-6 container">
+           
+        </div>
+    </div>
 
-       @* @await Component.InvokeAsync("UserAbout")*@
-
-        
-
-   @* <!-- container-scroller -->
-    <!-- plugins:js -->
-    <script src="~/writer/assets/vendors/js/vendor.bundle.base.js"></script>
-    <!-- endinject -->
-    <!-- Plugin js for this page -->
-    <script src="~/writer/assets/vendors/chart.js/Chart.min.js"></script>
-    <!-- End plugin js for this page -->
-    <!-- inject:js -->
-    <script src="~/writer/assets/js/off-canvas.js"></script>
-    <script src="~/writer/assets/js/hoverable-collapse.js"></script>
-    <script src="~/writer/assets/js/misc.js"></script>
-    <!-- endinject -->
-    <!-- Custom js for this page -->
-    <script src="~/writer/assets/js/dashboard.js"></script>
-    <script src="~/writer/assets/js/todolist.js"></script>
-    <!-- End custom js for this page -->*@
 </body>
 </html>
 

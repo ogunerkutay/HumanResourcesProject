@@ -5,6 +5,16 @@
     Layout = "~/Views/Shared/_ManagerLayout.cshtml";
 }
 
+
+<div class="page-header">
+    <h3 class="page-title">
+        <span class="page-title-icon bg-gradient-primary text-white mr-2">
+            <i class="mdi mdi-format-list-bulleted menu-icon"></i>
+        </span> Personel Listesi
+    </h3>
+</div>
+
+
 @if (TempData["message"] != null)
 {
     <div class="row">
@@ -16,6 +26,9 @@
     </div>
 
 }
+
+
+
 
 <div class="search-field d-none d-md-block bg-white">
     <form class="d-flex align-items-center h-100" action="#">
@@ -61,7 +74,7 @@
 
 
 <div class="row">
-    <div class="col-12 grid-margin">
+    <div class="col-12">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Personeller</h4>
@@ -142,14 +155,14 @@
                                         <img src="~/images/@item.ImagePath" class="mr-2" alt="image">
                                     </td>
                                     <td>
-                                        @item.FirstName
-                                     @*   @if (item.SecondName != null)
+                                        @if (item.SecondName != null)
                                         {
-                                            item.FirstName + " " + item.SecondName }
+                                            @(item.FirstName + " " + item.SecondName)
+                                        }
                                         else
                                         {
                                             @item.FirstName
-                                        }; //SOOOORRR*@
+                                        }
                                     </td>
                                     <td>
                                         @item.LastName

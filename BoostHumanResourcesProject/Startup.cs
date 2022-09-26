@@ -113,7 +113,7 @@ namespace BoostHumanResourcesProject
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Dashboard}/{action=Index}/{id?}");
+                    pattern: "{controller=Dashboard}/{action=Index}/{id=4}");
             });
         }
     }

@@ -66,6 +66,10 @@ namespace BoostHumanResourcesProject.Controllers
             if (ModelState.IsValid)
             {
 
+                user.appUserUpdateDTO.FirstName = user.appUserUpdateDTO.FirstName.Trim();
+                user.appUserUpdateDTO.SecondName = user.appUserUpdateDTO.SecondName.Trim();
+                user.appUserUpdateDTO.LastName = user.appUserUpdateDTO.LastName.Trim();
+
                 if (user.appUserUpdateDTO.file != null)
                 {
                     var extension = Path.GetExtension(user.appUserUpdateDTO.file.FileName);
