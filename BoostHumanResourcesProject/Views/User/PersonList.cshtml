@@ -31,32 +31,32 @@
 
 
 <script>
-function myFunction() {
-    var input, filter, myTableBody, tr, firstName, lastName, i, firstNameValue, lastNameValue, departmantName, departmantNameValue, unvanName, unvanNameValue ;
-    input = document.getElementById("myInput");
-    filter = input.value.toUpperCase();
-    myTableBody = document.getElementById("myTableBody");
-    tr = myTableBody.getElementsByTagName("tr");
-    for (i = 0; i < tr.length; i++) {
-        firstName = tr[i].getElementsByTagName("td")[1];
-        lastName = tr[i].getElementsByTagName("td")[2];
-        departmantName = tr[i].getElementsByTagName("td")[3];
-        unvanName = tr[i].getElementsByTagName("td")[4];
+    function myFunction() {
+        var input, filter, myTableBody, tr, firstName, lastName, i, firstNameValue, lastNameValue, departmantName, departmantNameValue, unvanName, unvanNameValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        myTableBody = document.getElementById("myTableBody");
+        tr = myTableBody.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            firstName = tr[i].getElementsByTagName("td")[1];
+            lastName = tr[i].getElementsByTagName("td")[2];
+            departmantName = tr[i].getElementsByTagName("td")[3];
+            unvanName = tr[i].getElementsByTagName("td")[4];
 
-        firstNameValue = firstName.textContent || firstName.innerText;
-        lastNameValue = lastName.textContent || lastName.innerText;
-        departmantNameValue = departmantName.textContent || departmantName.innerText;
-        unvanNameValue = unvanName.textContent || unvanName.innerText;
+            firstNameValue = firstName.textContent || firstName.innerText;
+            lastNameValue = lastName.textContent || lastName.innerText;
+            departmantNameValue = departmantName.textContent || departmantName.innerText;
+            unvanNameValue = unvanName.textContent || unvanName.innerText;
 
-        if (firstNameValue.toUpperCase().indexOf(filter) > -1 || lastNameValue.toUpperCase().indexOf(filter) > -1
-            || departmantNameValue.toUpperCase().indexOf(filter) > -1 || unvanNameValue.toUpperCase().indexOf(filter) > -1) {
-            tr[i].style.display = "";
-        } else {
-            tr[i].style.display = "none";
+            if (firstNameValue.toUpperCase().indexOf(filter) > -1 || lastNameValue.toUpperCase().indexOf(filter) > -1
+                || departmantNameValue.toUpperCase().indexOf(filter) > -1 || unvanNameValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+
         }
-
     }
-}
 </script>
 
 
@@ -82,8 +82,8 @@ function myFunction() {
                             {
                                 string renk = string.Empty;
                                 @*renk = "background: linear-gradient(to right,rgb(255, 0, 0) 0%, rgb(0, 255, 0) 100%);";*@
-                            
-                                
+
+
                                 if (item.Department.DepartmentName == "Yönetim")
                                 {
                                     renk = "badge-gradient-success";
@@ -143,16 +143,19 @@ function myFunction() {
                                     </td>
                                     <td>
                                         @item.FirstName
-                                        @*@if (@item.SecondName != null)
-                                        {@item.FirstName +" " + @item.SecondName }
-                                    else
-                                    {@item.FirstName}; //SOOOORRR*@   
+                                     @*   @if (item.SecondName != null)
+                                        {
+                                            item.FirstName + " " + item.SecondName }
+                                        else
+                                        {
+                                            @item.FirstName
+                                        }; //SOOOORRR*@
                                     </td>
                                     <td>
                                         @item.LastName
                                     </td>
                                     <td>
-                                        <label class="badge @renk"  > @item.Department.DepartmentName</label>
+                                        <label class="badge @renk"> @item.Department.DepartmentName</label>
                                     </td>
                                     <td> @item.Title </td>
                                     <td> <a href="/User/UserDetails/@item.Id" class="btn btn-gradient-info">Detaylar</a> </td>
