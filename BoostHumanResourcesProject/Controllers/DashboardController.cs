@@ -28,6 +28,7 @@ namespace BoostHumanResourcesProject.Controllers
             appUserDetailsandEmployeesVM.appUserDetailsVM = await appUserService.GetById(id);
 
             appUserDetailsandEmployeesVM.employeeList = await appUserService.GetAllBirthDayEmployees();
+            
 
 
             ViewBag.v1 = appDbContext.AppUsers.Count().ToString();

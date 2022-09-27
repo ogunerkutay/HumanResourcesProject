@@ -93,7 +93,7 @@
         <div class="col-md-6 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Project Status</h4>
+                    <h4 class="card-title">Yaklaşan Doğum Günleri</h4>
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
@@ -112,7 +112,7 @@
                                             <img src="~/images/@item.ImagePath" class="mr-2" alt="image">
                                         </td>
                                         <td>@(item.FirstName + " " + item.LastName)</td>
-                                        <td> @item.BirthDate </td>
+                                        <td> @(((DateTime)item.BirthDate).ToString("MM/dd/yyyy")) </td>
                                         
                                     </tr>
                                 }

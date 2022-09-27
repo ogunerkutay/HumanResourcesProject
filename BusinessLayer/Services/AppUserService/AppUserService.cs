@@ -5,6 +5,7 @@ using BusinessLayer.Models.VMs;
 using DataAccessLayer.IRepositories;
 using EntityLayer.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.EntityFrameworkCore.Query;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace BusinessLayer.Services.AppUserService
 {
@@ -46,10 +48,6 @@ namespace BusinessLayer.Services.AppUserService
             throw new NotImplementedException();
         }
 
-        public Task<List<AppUserUpdateDTO>> GetAllWhere(Expression<Func<AppUserUpdateDTO, bool>> expression)
-        {
-            throw new NotImplementedException();
-        }
         public async Task<List<AppUserVM>> GetAllBirthDayEmployees()
         {
             var users = await appUserRepository.GetFilteredList(
@@ -67,9 +65,8 @@ namespace BusinessLayer.Services.AppUserService
                     Status = x.Status
 
                 },
-                expression: x => x.BirthDate != null && x.Status == true,
-                orderBy: x => x.OrderBy(x => x.BirthDate)
-                //includes: x => x.Include(x => x.Department)
+                expression: x => x.BirthDate != null && x.Status == true && x.BirthDate.Month == DateTime.Now.Month && x.BirthDate.Day >= DateTime.Now.Day,
+                orderBy: x => x.OrderBy(x => x.BirthDate.Day)
                 );
 
             return users;
@@ -95,6 +92,11 @@ namespace BusinessLayer.Services.AppUserService
                 );
 
             return users;
+        }
+
+        public Task<List<AppUserUpdateDTO>> GetAllWhere(Expression<Func<AppUserUpdateDTO, bool>> expression)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<AppUserDetailsVM> GetById(int id)
