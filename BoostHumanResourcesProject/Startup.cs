@@ -89,6 +89,7 @@ namespace BoostHumanResourcesProject
             });
             services.AddScoped<IValidator<AppUserandDepartments>, AppUserandDepartmentsValidators>();
             services.AddScoped<IValidator<AppUserUpdateDTO>, AppUserUpdateDTOValidator>();
+            services.AddScoped<IValidator<LoginDTO>, LoginValidator>();
             //fluent validation kullandýðýmýz için eklendi
 
             //Repositories
