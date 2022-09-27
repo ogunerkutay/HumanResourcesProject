@@ -16,6 +16,7 @@ using BusinessLayer.Models.VMs;
 using BusinessLayer.Validation;
 using FluentValidation;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BoostHumanResourcesProject.Controllers
 {
@@ -34,6 +35,7 @@ namespace BoostHumanResourcesProject.Controllers
             this.departmentService = departmentService;
         }
 
+        [Authorize]
         public async Task<IActionResult> PersonList()
         {
 
@@ -67,7 +69,11 @@ namespace BoostHumanResourcesProject.Controllers
             {
 
                 user.appUserUpdateDTO.FirstName = user.appUserUpdateDTO.FirstName.Trim();
-                user.appUserUpdateDTO.SecondName = user.appUserUpdateDTO.SecondName.Trim();
+                if (user.appUserUpdateDTO.SecondName !=null)
+                {
+                    user.appUserUpdateDTO.SecondName = user.appUserUpdateDTO.SecondName.Trim();
+                }
+                
                 user.appUserUpdateDTO.LastName = user.appUserUpdateDTO.LastName.Trim();
 
                 if (user.appUserUpdateDTO.file != null)

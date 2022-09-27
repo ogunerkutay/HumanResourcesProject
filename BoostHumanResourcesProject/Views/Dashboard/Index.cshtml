@@ -1,5 +1,5 @@
 ﻿@using BusinessLayer.Models.VMs
-@model AppUserDetailsVM
+@model AppUserDetailsandEmployeesVM
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_ManagerLayout.cshtml";
@@ -51,7 +51,7 @@
                     <h4 class="font-weight-normal mb-3">
                         Yıllık İzin Gün Sayısı <i class="mdi mdi-diamond mdi-24px float-right"></i>
                     </h4>
-                    <h2 class="mb-5"> @Model.AnnualLeave</h2>
+                    <h2 class="mb-5"> @Model.appUserDetailsVM.AnnualLeave</h2>
 
                 </div>
             </div>
@@ -61,18 +61,18 @@
         <div class="col-md-6 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title"> @(Model.FirstName + " " + Model.LastName + " " + "Hoşgeldiniz")</h4>
+                    <h4 class="card-title"> @(Model.appUserDetailsVM.FirstName + " " + Model.appUserDetailsVM.LastName + " " + "Hoşgeldiniz")</h4>
                     <div class="row">
                         <div class="col-md-6">
                             <img src="~/writer/assets/images/faces/face10.jpg" alt="profile">
-                            <p class="font-weight-bold mb-2">@Model.Title</p>
+                            <p class="font-weight-bold mb-2">@Model.appUserDetailsVM.Title</p>
                         </div>
                         <div class="col-md-6">
                             <address>
                                 <p class="font-weight-bold">Telefon:</p>
-                                <p class="mb-2">@Model.PhoneNumber</p>
+                                <p class="mb-2">@Model.appUserDetailsVM.PhoneNumber</p>
                                 <p class="font-weight-bold">Adres:</p>
-                                <p class="mb-2">@Model.Address</p>
+                                <p class="mb-2">@Model.appUserDetailsVM.Address</p>
                             </address>
                         </div>
 
@@ -81,17 +81,50 @@
                     <div class="row">
                         <div class="col-12">
                             <address class="text-primary">
-                                <p class="font-weight-bold mb-2">@("Email: " + @Model.Email)</p>
+                                <p class="font-weight-bold mb-2">@("Email: " + @Model.appUserDetailsVM.Email)</p>
                                 <p class="font-weight-bold mb-2">@("Şirket: BoostHR")</p>
                             </address>
                         </div>
                     </div>
-                    <a href="/User/UserDetails/@Model.Id" class="btn btn-gradient-info col-12">Detaylar</a>
+                    <a href="/User/UserDetails/@Model.appUserDetailsVM.Id" class="btn btn-gradient-info col-12">Detaylar</a>
                 </div>
             </div>
         </div>
-        <div class="col-md-6 container">
-           
+        <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Project Status</h4>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th> Fotoğraf </th>
+                                    <th> İsim Soyisim </th>
+                                    <th> Doğum Tarihi </th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.employeeList)
+                                {
+                                    <tr>
+                                        <td>
+                                            <img src="~/images/@item.ImagePath" class="mr-2" alt="image">
+                                        </td>
+                                        <td>@(item.FirstName + " " + item.LastName)</td>
+                                        <td> @item.BirthDate </td>
+                                        
+                                    </tr>
+                                }
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
     </div>
 

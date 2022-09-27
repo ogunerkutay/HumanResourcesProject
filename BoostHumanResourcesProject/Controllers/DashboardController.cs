@@ -23,13 +23,18 @@ namespace BoostHumanResourcesProject.Controllers
         [HttpGet]
         public async Task<IActionResult> Index(int id)
         {
-            AppUserDetailsVM appUserDetailsVM = await appUserService.GetById(id);
+            AppUserDetailsandEmployeesVM appUserDetailsandEmployeesVM = new AppUserDetailsandEmployeesVM();
+
+            appUserDetailsandEmployeesVM.appUserDetailsVM = await appUserService.GetById(id);
+
+            appUserDetailsandEmployeesVM.employeeList = await appUserService.GetAllBirthDayEmployees();
+
 
             ViewBag.v1 = appDbContext.AppUsers.Count().ToString();
             ViewBag.v2 = appDbContext.Departments.Count().ToString();
 
 
-            return View(appUserDetailsVM);
+            return View(appUserDetailsandEmployeesVM);
         }
     }
 }

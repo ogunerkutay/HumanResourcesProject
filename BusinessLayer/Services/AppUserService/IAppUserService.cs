@@ -15,6 +15,7 @@ namespace BusinessLayer.Abstract
     {
   
         Task<AppUserDetailsVM> GetById(int id);
+        Task<List<AppUserVM>> GetAllBirthDayEmployees();
         Task<AppUserUpdateDTO> GetByIdDTO(int id);
         Task<List<AppUserVM>> GetAllUsers();
         void StatusChange(AppUserUpdateDTO appUser);

@@ -36,9 +36,9 @@ namespace BusinessLayer.Services.AppUserService
         {
             var createUser = mapper.Map<AppUser>(user);
             createUser.Status = true;
-            
+
             await appUserRepository.Create(createUser);
-           
+
         }
 
         public Task Delete(AppUserUpdateDTO entity)
@@ -50,6 +50,30 @@ namespace BusinessLayer.Services.AppUserService
         {
             throw new NotImplementedException();
         }
+        public async Task<List<AppUserVM>> GetAllBirthDayEmployees()
+        {
+            var users = await appUserRepository.GetFilteredList(
+                selector: x => new AppUserVM
+                {
+                    Id = x.Id,
+                    FirstName = x.FirstName,
+                    SecondName = x.SecondName,
+                    LastName = x.LastName,
+                    ImagePath = x.ImagePath,
+                    Gender = x.Gender,
+                    Title = x.Title,
+                    Department = x.Department,
+                    BirthDate = x.BirthDate,
+                    Status = x.Status
+
+                },
+                expression: x => x.BirthDate != null && x.Status == true,
+                orderBy: x => x.OrderBy(x => x.BirthDate)
+                //includes: x => x.Include(x => x.Department)
+                );
+
+            return users;
+        }
         public async Task<List<AppUserVM>> GetAllUsers()
         {
             var users = await appUserRepository.GetFilteredList(
@@ -60,7 +84,7 @@ namespace BusinessLayer.Services.AppUserService
                     SecondName = x.SecondName,
                     LastName = x.LastName,
                     ImagePath = x.ImagePath,
-                    Gender =x.Gender,
+                    Gender = x.Gender,
                     Title = x.Title,
                     Department = x.Department
 
@@ -69,7 +93,7 @@ namespace BusinessLayer.Services.AppUserService
                 orderBy: x => x.OrderBy(x => x.FirstName),
                 includes: x => x.Include(x => x.Department)
                 );
-               
+
             return users;
         }
 
@@ -86,14 +110,14 @@ namespace BusinessLayer.Services.AppUserService
                     TCNO = x.TCNO,
                     Gender = x.Gender,
                     BirthDate = x.BirthDate,
-                    EmploymentDate =x.EmploymentDate,
+                    EmploymentDate = x.EmploymentDate,
                     AnnualLeave = x.AnnualLeave,
                     Address = x.Address,
                     Title = x.Title,
-                    ImagePath= x.ImagePath,
+                    ImagePath = x.ImagePath,
                     PhoneNumber = x.PhoneNumber
-                    
-                    
+
+
                 },
                 expression: x => x.Id == id && x.Status == true);
             return user;

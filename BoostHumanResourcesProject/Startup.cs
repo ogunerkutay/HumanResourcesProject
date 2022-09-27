@@ -43,19 +43,42 @@ namespace BoostHumanResourcesProject
         {
             services.AddControllersWithViews(); //burasý yorum satýrý
 
-            
+
             //DbContext
             services.AddDbContext<AppDbContext>(options =>
                options.UseSqlServer(Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING")));
 
             //Identity
-            services.AddIdentity<AppUser, AppRole>(x =>
-            {
-                x.Password.RequireUppercase = false;// büyük harf zorunluluðu false
-                x.Password.RequireNonAlphanumeric = false;
-            }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+            services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
-            //services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+            services.Configure<IdentityOptions>(options =>
+            {
+                //password
+                options.Password.RequireDigit = true; //sayýsal deðer
+                options.Password.RequireLowercase = true; //küçük harf
+                options.Password.RequireUppercase = true; //büyük harf
+                options.Password.RequiredLength = 6; //min 6 karakter
+                options.Password.RequireNonAlphanumeric = true; // karakter iþareti
+
+                //lockput
+                options.Lockout.MaxFailedAccessAttempts = 5; // 5 kere yanlýþ parola
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5); // 5 dk sonra tekrar deneyebilir
+                options.Lockout.AllowedForNewUsers = true; //lockout aktif olmasý için
+
+                options.User.RequireUniqueEmail = true; // email uniq olur
+                options.SignIn.RequireConfirmedEmail = false; //onay maili için gerekli 
+
+                options.SignIn.RequireConfirmedPhoneNumber = false; //verdiði tel no için onay 
+            });
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/account/login"; //cookie süresi bittiðinde yönlendir
+                options.LogoutPath = "/account/logout"; //kullanýcý çýkýþ yapýnca tarayýcýdan silinir
+                options.SlidingExpiration = true; // varsayýlan cookie süresi 20 dk her istek attýðýnda sýfýrlanýr ve tekrar 20 dk verir
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+            });
+
+
             services.AddMvc();
             //services.AddFluentValidationAutoValidation();
             //services.AddFluentValidationClientsideAdapters();
@@ -101,11 +124,12 @@ namespace BoostHumanResourcesProject
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
+
             app.UseStaticFiles();
 
-            app.UseRouting();
-
             app.UseAuthentication();
+
+            app.UseRouting();
 
             app.UseAuthorization();
 

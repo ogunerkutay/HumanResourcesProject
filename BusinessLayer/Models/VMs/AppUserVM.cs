@@ -17,6 +17,8 @@ namespace BusinessLayer.Models.VMs
         public Gender Gender { get; set; }
         public string ImagePath { get; set; }
         public string Title { get; set; }
+        public bool Status { get; set; }
+        public DateTime BirthDate { get; set; }
         public Department Department { get; set; }
         
        
