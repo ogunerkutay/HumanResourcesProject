@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220926130245_init")]
-    partial class init
+    [Migration("20220927134721_init1")]
+    partial class init1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -48,6 +48,20 @@ namespace DataAccessLayer.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ConcurrencyStamp = "56f40559-3da9-40ce-b8b7-ed5aad1fb0d6",
+                            Name = "Yönetici"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ConcurrencyStamp = "69d426e6-32ea-44d6-86a7-08e717688e31",
+                            Name = "Personel"
+                        });
                 });
 
             modelBuilder.Entity("EntityLayer.Entities.AppUser", b =>
@@ -164,6 +178,260 @@ namespace DataAccessLayer.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AccessFailedCount = 0,
+                            Address = "Atatürk, Fatih Sultan Mehmet Cd. No:63, 34764 Ümraniye/İstanbul",
+                            AnnualLeave = 0,
+                            BirthDate = new DateTime(1978, 9, 27, 16, 47, 21, 300, DateTimeKind.Local).AddTicks(4053),
+                            ConcurrencyStamp = "95158615-7de4-4edb-90b0-68dc54def998",
+                            DepartmentID = 1,
+                            Email = "jane.doe@sirketadi.com",
+                            EmailConfirmed = false,
+                            EmploymentDate = new DateTime(2017, 9, 27, 16, 47, 21, 301, DateTimeKind.Local).AddTicks(2101),
+                            FirstName = "Jane",
+                            Gender = 1,
+                            GrossSalary = 10000.0,
+                            ImagePath = "face10.jpg",
+                            LastName = "Doe",
+                            LockoutEnabled = false,
+                            PasswordHash = "c873586a09e16d54ef49b9ae978cd98db8edc49aaebdb4dcf460d83514321c38",
+                            PhoneNumber = "5325212112",
+                            PhoneNumberConfirmed = true,
+                            SecondName = "Doe",
+                            Status = true,
+                            TCNO = "12345678912",
+                            Title = "Yönetici",
+                            TwoFactorEnabled = false,
+                            remainingDayOff = 0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AccessFailedCount = 0,
+                            Address = "Atatürk, Fatih Sultan Mehmet Cd. No:63, 34764 Ümraniye/İstanbul",
+                            AnnualLeave = 0,
+                            BirthDate = new DateTime(1996, 9, 27, 16, 47, 21, 301, DateTimeKind.Local).AddTicks(3586),
+                            ConcurrencyStamp = "f9b0ca6d-895a-416a-96d9-a2515e802b53",
+                            DepartmentID = 2,
+                            Email = "ogun.erkutay@sirketadi.com",
+                            EmailConfirmed = false,
+                            EmploymentDate = new DateTime(2017, 9, 27, 16, 47, 21, 301, DateTimeKind.Local).AddTicks(3592),
+                            FirstName = "Ogün",
+                            Gender = 2,
+                            GrossSalary = 10000.0,
+                            ImagePath = "pic-1.jpg",
+                            LastName = "Erkutay",
+                            LockoutEnabled = false,
+                            PasswordHash = "c873586a09e16d54ef49b9ae978cd98db8edc49aaebdb4dcf460d83514321c38",
+                            PhoneNumber = "5325212112",
+                            PhoneNumberConfirmed = true,
+                            SecondName = "Erkutay",
+                            Status = true,
+                            TCNO = "12345678912",
+                            Title = "Memur",
+                            TwoFactorEnabled = false,
+                            remainingDayOff = 0
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AccessFailedCount = 0,
+                            Address = "Atatürk, Fatih Sultan Mehmet Cd. No:63, 34764 Ümraniye/İstanbul",
+                            AnnualLeave = 0,
+                            BirthDate = new DateTime(1995, 9, 27, 16, 47, 21, 301, DateTimeKind.Local).AddTicks(3597),
+                            ConcurrencyStamp = "d6561aa0-cedb-4934-9289-a2e424d54f20",
+                            DepartmentID = 3,
+                            Email = "esraezgi.erdogan@sirketadi.com",
+                            EmailConfirmed = false,
+                            EmploymentDate = new DateTime(2017, 9, 27, 16, 47, 21, 301, DateTimeKind.Local).AddTicks(3599),
+                            FirstName = "Esra",
+                            Gender = 1,
+                            GrossSalary = 10000.0,
+                            ImagePath = "pic-2.jpg",
+                            LastName = "Erdoğan",
+                            LockoutEnabled = false,
+                            PasswordHash = "c873586a09e16d54ef49b9ae978cd98db8edc49aaebdb4dcf460d83514321c38",
+                            PhoneNumber = "5325212112",
+                            PhoneNumberConfirmed = true,
+                            SecondName = "Ezgi",
+                            Status = true,
+                            TCNO = "12345678912",
+                            Title = "Aşçı",
+                            TwoFactorEnabled = false,
+                            remainingDayOff = 0
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AccessFailedCount = 0,
+                            Address = "Atatürk, Fatih Sultan Mehmet Cd. No:63, 34764 Ümraniye/İstanbul",
+                            AnnualLeave = 0,
+                            BirthDate = new DateTime(1994, 9, 27, 16, 47, 21, 301, DateTimeKind.Local).AddTicks(3603),
+                            ConcurrencyStamp = "e1292951-693c-4c9f-a875-c7b2c7947cf2",
+                            DepartmentID = 4,
+                            Email = "sinem.pamik@sirketadi.com",
+                            EmailConfirmed = false,
+                            EmploymentDate = new DateTime(2017, 9, 27, 16, 47, 21, 301, DateTimeKind.Local).AddTicks(3605),
+                            FirstName = "Sinem",
+                            Gender = 1,
+                            GrossSalary = 10000.0,
+                            ImagePath = "pic-2.jpg",
+                            LastName = "Pamık",
+                            LockoutEnabled = false,
+                            PasswordHash = "c873586a09e16d54ef49b9ae978cd98db8edc49aaebdb4dcf460d83514321c38",
+                            PhoneNumber = "5325212112",
+                            PhoneNumberConfirmed = true,
+                            SecondName = "",
+                            Status = true,
+                            TCNO = "12345678912",
+                            Title = "Çayçı",
+                            TwoFactorEnabled = false,
+                            remainingDayOff = 0
+                        },
+                        new
+                        {
+                            Id = 5,
+                            AccessFailedCount = 0,
+                            Address = "Atatürk, Fatih Sultan Mehmet Cd. No:63, 34764 Ümraniye/İstanbul",
+                            AnnualLeave = 0,
+                            BirthDate = new DateTime(1993, 9, 27, 16, 47, 21, 301, DateTimeKind.Local).AddTicks(3609),
+                            ConcurrencyStamp = "457787e8-1e10-4495-ba67-03d999c25438",
+                            DepartmentID = 5,
+                            Email = "cerennur.genlikkara@sirketadi.com",
+                            EmailConfirmed = false,
+                            EmploymentDate = new DateTime(2017, 9, 27, 16, 47, 21, 301, DateTimeKind.Local).AddTicks(3610),
+                            FirstName = "Ceren",
+                            Gender = 1,
+                            GrossSalary = 10000.0,
+                            ImagePath = "pic-2.jpg",
+                            LastName = "Genlik Kara",
+                            LockoutEnabled = false,
+                            PasswordHash = "c873586a09e16d54ef49b9ae978cd98db8edc49aaebdb4dcf460d83514321c38",
+                            PhoneNumber = "5325212112",
+                            PhoneNumberConfirmed = true,
+                            SecondName = "Nur",
+                            Status = true,
+                            TCNO = "12345678912",
+                            Title = "Reklamcı",
+                            TwoFactorEnabled = false,
+                            remainingDayOff = 0
+                        },
+                        new
+                        {
+                            Id = 6,
+                            AccessFailedCount = 0,
+                            Address = "Atatürk, Fatih Sultan Mehmet Cd. No:63, 34764 Ümraniye/İstanbul",
+                            AnnualLeave = 0,
+                            BirthDate = new DateTime(1992, 9, 27, 16, 47, 21, 301, DateTimeKind.Local).AddTicks(3622),
+                            ConcurrencyStamp = "c0ec3ec6-74b2-4520-882e-2f665ba842cf",
+                            DepartmentID = 6,
+                            Email = "berkayfettah.hacioglu@sirketadi.com",
+                            EmailConfirmed = false,
+                            EmploymentDate = new DateTime(2017, 9, 27, 16, 47, 21, 301, DateTimeKind.Local).AddTicks(3624),
+                            FirstName = "Berkay",
+                            Gender = 2,
+                            GrossSalary = 10000.0,
+                            ImagePath = "pic-1.jpg",
+                            LastName = "Hacıoğlu",
+                            LockoutEnabled = false,
+                            PasswordHash = "c873586a09e16d54ef49b9ae978cd98db8edc49aaebdb4dcf460d83514321c38",
+                            PhoneNumber = "5325212112",
+                            PhoneNumberConfirmed = true,
+                            SecondName = "Fettah",
+                            Status = true,
+                            TCNO = "12345678912",
+                            Title = "Pazarlamacı",
+                            TwoFactorEnabled = false,
+                            remainingDayOff = 0
+                        },
+                        new
+                        {
+                            Id = 7,
+                            AccessFailedCount = 0,
+                            Address = "Atatürk, Fatih Sultan Mehmet Cd. No:63, 34764 Ümraniye/İstanbul",
+                            AnnualLeave = 0,
+                            BirthDate = new DateTime(1991, 9, 27, 16, 47, 21, 301, DateTimeKind.Local).AddTicks(3628),
+                            ConcurrencyStamp = "41034e7b-9cb1-47df-a456-0f6e92c30881",
+                            DepartmentID = 7,
+                            Email = "mahmutmustafa.zekeriyaoglu@sirketadi.com",
+                            EmailConfirmed = false,
+                            EmploymentDate = new DateTime(2017, 9, 27, 16, 47, 21, 301, DateTimeKind.Local).AddTicks(3629),
+                            FirstName = "Mahmut",
+                            Gender = 2,
+                            GrossSalary = 10000.0,
+                            ImagePath = "pic-1.jpg",
+                            LastName = "Zekeriyaoğlu",
+                            LockoutEnabled = false,
+                            PasswordHash = "c873586a09e16d54ef49b9ae978cd98db8edc49aaebdb4dcf460d83514321c38",
+                            PhoneNumber = "5325212112",
+                            PhoneNumberConfirmed = true,
+                            SecondName = "Mustafa",
+                            Status = true,
+                            TCNO = "12345678912",
+                            Title = "Satışcı",
+                            TwoFactorEnabled = false,
+                            remainingDayOff = 0
+                        },
+                        new
+                        {
+                            Id = 8,
+                            AccessFailedCount = 0,
+                            Address = "Atatürk, Fatih Sultan Mehmet Cd. No:63, 34764 Ümraniye/İstanbul",
+                            AnnualLeave = 0,
+                            BirthDate = new DateTime(1990, 9, 27, 16, 47, 21, 301, DateTimeKind.Local).AddTicks(3633),
+                            ConcurrencyStamp = "75816e14-eeec-442f-9cb4-478bec6a0828",
+                            DepartmentID = 8,
+                            Email = "ismaelabraham.mcdoe@sirketadi.com",
+                            EmailConfirmed = false,
+                            EmploymentDate = new DateTime(2017, 9, 27, 16, 47, 21, 301, DateTimeKind.Local).AddTicks(3634),
+                            FirstName = "Ismael",
+                            Gender = 2,
+                            GrossSalary = 10000.0,
+                            ImagePath = "pic-1.jpg",
+                            LastName = "McDoe",
+                            LockoutEnabled = false,
+                            PasswordHash = "c873586a09e16d54ef49b9ae978cd98db8edc49aaebdb4dcf460d83514321c38",
+                            PhoneNumber = "5325212112",
+                            PhoneNumberConfirmed = true,
+                            SecondName = "Abraham",
+                            Status = true,
+                            TCNO = "12345678912",
+                            Title = "Gezici",
+                            TwoFactorEnabled = false,
+                            remainingDayOff = 0
+                        },
+                        new
+                        {
+                            Id = 9,
+                            AccessFailedCount = 0,
+                            Address = "Atatürk, Fatih Sultan Mehmet Cd. No:63, 34764 Ümraniye/İstanbul",
+                            AnnualLeave = 0,
+                            BirthDate = new DateTime(1989, 9, 27, 16, 47, 21, 301, DateTimeKind.Local).AddTicks(3638),
+                            ConcurrencyStamp = "6ae60bde-89b5-473c-a255-4d336babb47c",
+                            DepartmentID = 9,
+                            Email = "azazelchristian.mcdonald@sirketadi.com",
+                            EmailConfirmed = false,
+                            EmploymentDate = new DateTime(2017, 9, 27, 16, 47, 21, 301, DateTimeKind.Local).AddTicks(3640),
+                            FirstName = "Azazel",
+                            Gender = 2,
+                            GrossSalary = 10000.0,
+                            ImagePath = "pic-1.jpg",
+                            LastName = "MCDonald",
+                            LockoutEnabled = false,
+                            PasswordHash = "c873586a09e16d54ef49b9ae978cd98db8edc49aaebdb4dcf460d83514321c38",
+                            PhoneNumber = "5325212112",
+                            PhoneNumberConfirmed = true,
+                            SecondName = "Christian",
+                            Status = false,
+                            TCNO = "12345678912",
+                            Title = "Yiyici",
+                            TwoFactorEnabled = false,
+                            remainingDayOff = 0
+                        });
                 });
 
             modelBuilder.Entity("EntityLayer.Entities.AppUserAndWorkShift", b =>
@@ -258,6 +526,58 @@ namespace DataAccessLayer.Migrations
                     b.HasKey("DepartmentID");
 
                     b.ToTable("Departments");
+
+                    b.HasData(
+                        new
+                        {
+                            DepartmentID = 1,
+                            DepartmentName = "Yönetim"
+                        },
+                        new
+                        {
+                            DepartmentID = 2,
+                            DepartmentName = "Üretim"
+                        },
+                        new
+                        {
+                            DepartmentID = 3,
+                            DepartmentName = "IT"
+                        },
+                        new
+                        {
+                            DepartmentID = 4,
+                            DepartmentName = "İnsan Kaynakları"
+                        },
+                        new
+                        {
+                            DepartmentID = 5,
+                            DepartmentName = "Muhasebe"
+                        },
+                        new
+                        {
+                            DepartmentID = 6,
+                            DepartmentName = "Pazarlama"
+                        },
+                        new
+                        {
+                            DepartmentID = 7,
+                            DepartmentName = "Satın Alma"
+                        },
+                        new
+                        {
+                            DepartmentID = 8,
+                            DepartmentName = "Lojistik"
+                        },
+                        new
+                        {
+                            DepartmentID = 9,
+                            DepartmentName = "Güvenlik"
+                        },
+                        new
+                        {
+                            DepartmentID = 10,
+                            DepartmentName = "Mühendislik"
+                        });
                 });
 
             modelBuilder.Entity("EntityLayer.Entities.DepartmentAndWorkShift", b =>

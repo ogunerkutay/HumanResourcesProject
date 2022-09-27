@@ -36,8 +36,10 @@ namespace DataAccessLayer
         .HasComputedColumnSql("IIF((DATEDIFF(year, [EmploymentDate], GETDATE())) > 15, 26, IIF((DATEDIFF(year, [EmploymentDate], GETDATE())) > 5, 20, 14))");
 
             base.OnModelCreating(modelBuilder); ///
-            
 
+            modelBuilder.Seed();
         }
+
+        
     }
 }

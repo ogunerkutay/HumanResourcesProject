@@ -36,6 +36,6 @@ namespace EntityLayer.Entities
         public List<WorkHour> WorkHours { get; set; }
         public List<EmploymentDetails> EmploymentDetails { get; set; }
         public List<Debit> Debits { get; set; }
-        
+
     }
 }

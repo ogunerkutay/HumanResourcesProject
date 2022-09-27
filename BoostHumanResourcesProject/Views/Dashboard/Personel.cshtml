@@ -1,0 +1,58 @@
+﻿@using BusinessLayer.Models.VMs
+@model AppUserDetailsVM
+{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+
+    <div class="page-header">
+        <h3 class="page-title">
+            <span class="page-title-icon bg-gradient-primary text-white mr-2">
+                <i class="mdi mdi-home"></i>
+            </span> Personel Paneli
+        </h3>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title"> @(Model.FirstName + " " + Model.LastName + " " + "Hoşgeldiniz")</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img src="~/writer/assets/images/faces/face10.jpg" alt="profile">
+                            <p class="font-weight-bold mb-2">@Model.Title</p>
+                        </div>
+                        <div class="col-md-6">
+                            <address>
+                                <p class="font-weight-bold">Telefon:</p>
+                                <p class="mb-2">@Model.PhoneNumber</p>
+                                <p class="font-weight-bold">Adres:</p>
+                                <p class="mb-2">@Model.Address</p>
+                            </address>
+                        </div>
+
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-12">
+                            <address class="text-primary">
+                                <p class="font-weight-bold mb-2">@("Email: " + @Model.Email)</p>
+                                <p class="font-weight-bold mb-2">@("Şirket: BoostHR")</p>
+                            </address>
+                        </div>
+                    </div>
+                    <a href="/User/UserDetails/@Model.Id" class="btn btn-gradient-info col-12">Detaylar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+

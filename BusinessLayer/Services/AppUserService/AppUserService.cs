@@ -65,7 +65,7 @@ namespace BusinessLayer.Services.AppUserService
                     Status = x.Status
 
                 },
-                expression: x => x.BirthDate != null && x.Status == true && x.BirthDate.Month == DateTime.Now.Month && x.BirthDate.Day >= DateTime.Now.Day,
+                expression: x => x.Status == true && x.BirthDate.Month == DateTime.Now.Month && x.BirthDate.Day >= DateTime.Now.Day,
                 orderBy: x => x.OrderBy(x => x.BirthDate.Day)
                 );
 

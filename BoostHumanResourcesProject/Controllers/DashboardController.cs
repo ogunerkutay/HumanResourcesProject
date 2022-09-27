@@ -20,8 +20,18 @@ namespace BoostHumanResourcesProject.Controllers
             //table = _appDbContext.Set<T>();
         }
 
+
         [HttpGet]
-        public async Task<IActionResult> Index(int id)
+        public async Task<IActionResult> Personel(int id)
+        {
+            AppUserDetailsVM personel = new AppUserDetailsVM();
+            personel = await appUserService.GetById(id);
+
+            return View(personel);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Manager(int id)
         {
             AppUserDetailsandEmployeesVM appUserDetailsandEmployeesVM = new AppUserDetailsandEmployeesVM();
 
@@ -29,7 +39,6 @@ namespace BoostHumanResourcesProject.Controllers
 
             appUserDetailsandEmployeesVM.employeeList = await appUserService.GetAllBirthDayEmployees();
             
-
 
             ViewBag.v1 = appDbContext.AppUsers.Count().ToString();
             ViewBag.v2 = appDbContext.Departments.Count().ToString();

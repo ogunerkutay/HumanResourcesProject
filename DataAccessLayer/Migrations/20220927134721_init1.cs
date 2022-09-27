@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DataAccessLayer.Migrations
 {
-    public partial class init : Migration
+    public partial class init1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -392,6 +392,48 @@ namespace DataAccessLayer.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { 1, "56f40559-3da9-40ce-b8b7-ed5aad1fb0d6", "Yönetici", null },
+                    { 2, "69d426e6-32ea-44d6-86a7-08e717688e31", "Personel", null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Departments",
+                columns: new[] { "DepartmentID", "DepartmentDescription", "DepartmentName" },
+                values: new object[,]
+                {
+                    { 1, null, "Yönetim" },
+                    { 2, null, "Üretim" },
+                    { 3, null, "IT" },
+                    { 4, null, "İnsan Kaynakları" },
+                    { 5, null, "Muhasebe" },
+                    { 6, null, "Pazarlama" },
+                    { 7, null, "Satın Alma" },
+                    { 8, null, "Lojistik" },
+                    { 9, null, "Güvenlik" },
+                    { 10, null, "Mühendislik" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "Address", "BirthDate", "ConcurrencyStamp", "DepartmentID", "Email", "EmailConfirmed", "EmploymentDate", "FirstName", "Gender", "GrossSalary", "ImagePath", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecondName", "SecurityStamp", "Status", "TCNO", "Title", "TwoFactorEnabled", "UserName", "remainingDayOff" },
+                values: new object[,]
+                {
+                    { 1, 0, "Atatürk, Fatih Sultan Mehmet Cd. No:63, 34764 Ümraniye/İstanbul", new DateTime(1978, 9, 27, 16, 47, 21, 300, DateTimeKind.Local).AddTicks(4053), "95158615-7de4-4edb-90b0-68dc54def998", 1, "jane.doe@sirketadi.com", false, new DateTime(2017, 9, 27, 16, 47, 21, 301, DateTimeKind.Local).AddTicks(2101), "Jane", 1, 10000.0, "face10.jpg", "Doe", false, null, null, null, "c873586a09e16d54ef49b9ae978cd98db8edc49aaebdb4dcf460d83514321c38", "5325212112", true, "Doe", null, true, "12345678912", "Yönetici", false, null, 0 },
+                    { 2, 0, "Atatürk, Fatih Sultan Mehmet Cd. No:63, 34764 Ümraniye/İstanbul", new DateTime(1996, 9, 27, 16, 47, 21, 301, DateTimeKind.Local).AddTicks(3586), "f9b0ca6d-895a-416a-96d9-a2515e802b53", 2, "ogun.erkutay@sirketadi.com", false, new DateTime(2017, 9, 27, 16, 47, 21, 301, DateTimeKind.Local).AddTicks(3592), "Ogün", 2, 10000.0, "pic-1.jpg", "Erkutay", false, null, null, null, "c873586a09e16d54ef49b9ae978cd98db8edc49aaebdb4dcf460d83514321c38", "5325212112", true, "Erkutay", null, true, "12345678912", "Memur", false, null, 0 },
+                    { 3, 0, "Atatürk, Fatih Sultan Mehmet Cd. No:63, 34764 Ümraniye/İstanbul", new DateTime(1995, 9, 27, 16, 47, 21, 301, DateTimeKind.Local).AddTicks(3597), "d6561aa0-cedb-4934-9289-a2e424d54f20", 3, "esraezgi.erdogan@sirketadi.com", false, new DateTime(2017, 9, 27, 16, 47, 21, 301, DateTimeKind.Local).AddTicks(3599), "Esra", 1, 10000.0, "pic-2.jpg", "Erdoğan", false, null, null, null, "c873586a09e16d54ef49b9ae978cd98db8edc49aaebdb4dcf460d83514321c38", "5325212112", true, "Ezgi", null, true, "12345678912", "Aşçı", false, null, 0 },
+                    { 4, 0, "Atatürk, Fatih Sultan Mehmet Cd. No:63, 34764 Ümraniye/İstanbul", new DateTime(1994, 9, 27, 16, 47, 21, 301, DateTimeKind.Local).AddTicks(3603), "e1292951-693c-4c9f-a875-c7b2c7947cf2", 4, "sinem.pamik@sirketadi.com", false, new DateTime(2017, 9, 27, 16, 47, 21, 301, DateTimeKind.Local).AddTicks(3605), "Sinem", 1, 10000.0, "pic-2.jpg", "Pamık", false, null, null, null, "c873586a09e16d54ef49b9ae978cd98db8edc49aaebdb4dcf460d83514321c38", "5325212112", true, "", null, true, "12345678912", "Çayçı", false, null, 0 },
+                    { 5, 0, "Atatürk, Fatih Sultan Mehmet Cd. No:63, 34764 Ümraniye/İstanbul", new DateTime(1993, 9, 27, 16, 47, 21, 301, DateTimeKind.Local).AddTicks(3609), "457787e8-1e10-4495-ba67-03d999c25438", 5, "cerennur.genlikkara@sirketadi.com", false, new DateTime(2017, 9, 27, 16, 47, 21, 301, DateTimeKind.Local).AddTicks(3610), "Ceren", 1, 10000.0, "pic-2.jpg", "Genlik Kara", false, null, null, null, "c873586a09e16d54ef49b9ae978cd98db8edc49aaebdb4dcf460d83514321c38", "5325212112", true, "Nur", null, true, "12345678912", "Reklamcı", false, null, 0 },
+                    { 6, 0, "Atatürk, Fatih Sultan Mehmet Cd. No:63, 34764 Ümraniye/İstanbul", new DateTime(1992, 9, 27, 16, 47, 21, 301, DateTimeKind.Local).AddTicks(3622), "c0ec3ec6-74b2-4520-882e-2f665ba842cf", 6, "berkayfettah.hacioglu@sirketadi.com", false, new DateTime(2017, 9, 27, 16, 47, 21, 301, DateTimeKind.Local).AddTicks(3624), "Berkay", 2, 10000.0, "pic-1.jpg", "Hacıoğlu", false, null, null, null, "c873586a09e16d54ef49b9ae978cd98db8edc49aaebdb4dcf460d83514321c38", "5325212112", true, "Fettah", null, true, "12345678912", "Pazarlamacı", false, null, 0 },
+                    { 7, 0, "Atatürk, Fatih Sultan Mehmet Cd. No:63, 34764 Ümraniye/İstanbul", new DateTime(1991, 9, 27, 16, 47, 21, 301, DateTimeKind.Local).AddTicks(3628), "41034e7b-9cb1-47df-a456-0f6e92c30881", 7, "mahmutmustafa.zekeriyaoglu@sirketadi.com", false, new DateTime(2017, 9, 27, 16, 47, 21, 301, DateTimeKind.Local).AddTicks(3629), "Mahmut", 2, 10000.0, "pic-1.jpg", "Zekeriyaoğlu", false, null, null, null, "c873586a09e16d54ef49b9ae978cd98db8edc49aaebdb4dcf460d83514321c38", "5325212112", true, "Mustafa", null, true, "12345678912", "Satışcı", false, null, 0 },
+                    { 8, 0, "Atatürk, Fatih Sultan Mehmet Cd. No:63, 34764 Ümraniye/İstanbul", new DateTime(1990, 9, 27, 16, 47, 21, 301, DateTimeKind.Local).AddTicks(3633), "75816e14-eeec-442f-9cb4-478bec6a0828", 8, "ismaelabraham.mcdoe@sirketadi.com", false, new DateTime(2017, 9, 27, 16, 47, 21, 301, DateTimeKind.Local).AddTicks(3634), "Ismael", 2, 10000.0, "pic-1.jpg", "McDoe", false, null, null, null, "c873586a09e16d54ef49b9ae978cd98db8edc49aaebdb4dcf460d83514321c38", "5325212112", true, "Abraham", null, true, "12345678912", "Gezici", false, null, 0 },
+                    { 9, 0, "Atatürk, Fatih Sultan Mehmet Cd. No:63, 34764 Ümraniye/İstanbul", new DateTime(1989, 9, 27, 16, 47, 21, 301, DateTimeKind.Local).AddTicks(3638), "6ae60bde-89b5-473c-a255-4d336babb47c", 9, "azazelchristian.mcdonald@sirketadi.com", false, new DateTime(2017, 9, 27, 16, 47, 21, 301, DateTimeKind.Local).AddTicks(3640), "Azazel", 2, 10000.0, "pic-1.jpg", "MCDonald", false, null, null, null, "c873586a09e16d54ef49b9ae978cd98db8edc49aaebdb4dcf460d83514321c38", "5325212112", true, "Christian", null, false, "12345678912", "Yiyici", false, null, 0 }
                 });
 
             migrationBuilder.CreateIndex(
