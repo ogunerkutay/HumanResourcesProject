@@ -69,7 +69,7 @@ namespace BoostHumanResourcesProject.Controllers
             {
 
                 user.appUserUpdateDTO.FirstName = user.appUserUpdateDTO.FirstName.Trim();
-                if (user.appUserUpdateDTO.SecondName !=null)
+                if (user.appUserUpdateDTO.SecondName !=null) 
                 {
                     user.appUserUpdateDTO.SecondName = user.appUserUpdateDTO.SecondName.Trim();
                 }
