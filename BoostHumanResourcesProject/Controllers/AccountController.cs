@@ -29,14 +29,17 @@ namespace BoostHumanResourcesProject.Controllers
             {
                 if (await appUserService.CheckRole(User.Identity.Name, "Yönetici"))
                 {
-                   return RedirectToAction("Manager", "Dashboard", new { @id = User.Identity.Name });
+                   return RedirectToAction("Manager", "Dashboard", new { @name = User.Identity.Name });
                     
                 }
                 else
                 {
-                    return RedirectToAction("Personel", "Dashboard", new { @id = User.Identity.Name });
+                    return RedirectToAction("Personel", "Dashboard", new { @name = User.Identity.Name });
                 }
             }
+
+            //await appUserService.SifreOlustur();
+
             return View();
         }
 

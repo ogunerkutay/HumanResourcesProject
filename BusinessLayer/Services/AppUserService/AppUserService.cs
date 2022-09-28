@@ -40,19 +40,86 @@ namespace BusinessLayer.Services.AppUserService
             this.appUserRepository = appUserRepository;
         }
 
+        public async Task SifreOlustur()
+        {
+            List<AppUser> userList = new List<AppUser>();
+            userList = await GetAllUsersAppUser();
+
+            //List<AppUser> appUserList = new List<AppUser>();
+            //appUserList = mapper.Map<List<AppUserVM>, List<AppUser>>(userList);
+
+
+            foreach (AppUser user in userList)
+            {
+                string password = user.FirstName + "123Aa!";
+                user.PasswordHash = userManager.PasswordHasher.HashPassword(user, password);
+                IdentityResult result = await userManager.UpdateAsync(user);
+
+            }
+                        
+        }
+
+        public async Task<List<AppUser>> GetAllUsersAppUser()
+        {
+            var users = await appUserRepository.GetFilteredList(
+                selector: x => new AppUser
+                {
+                    Id = x.Id,
+                    FirstName = x.FirstName,
+                    SecondName = x.SecondName,
+                    LastName = x.LastName,
+                    TCNO = x.TCNO,
+                    ImagePath = x.ImagePath,
+                    Gender = x.Gender,
+                    BirthDate = x.BirthDate,
+                    Address = x.Address,
+                    Status = x.Status,
+                    Title = x.Title,
+                    EmploymentDate = x.EmploymentDate,
+                    AnnualLeave = x.AnnualLeave,
+                    GrossSalary = x.GrossSalary,
+                    DepartmentID = x.DepartmentID,
+                    UserName = x.UserName,
+                    NormalizedUserName = x.NormalizedUserName,
+                    Email = x.Email,
+                    NormalizedEmail = x.NormalizedEmail,
+                    EmailConfirmed = x.EmailConfirmed,
+                    PasswordHash = x.PasswordHash,
+                    SecurityStamp = x.SecurityStamp,
+                    ConcurrencyStamp = x.ConcurrencyStamp,
+                    PhoneNumber = x.PhoneNumber,
+                    PhoneNumberConfirmed = x.PhoneNumberConfirmed,
+                    TwoFactorEnabled = x.TwoFactorEnabled,
+                    LockoutEnd = x.LockoutEnd,
+                    LockoutEnabled = x.LockoutEnabled,
+                    AccessFailedCount = x.AccessFailedCount
+
+                },
+                expression: x => x.FirstName != null,
+                orderBy: x => x.OrderBy(x => x.FirstName),
+                includes: x => x.Include(x => x.Department)
+                );
+
+            return users;
+        }
+
+
+
         public async Task<SignInResult> LogIn(LoginDTO model)
         {
-            var result = await userManager.CreateAsync(user, model.Password);
-
-            var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
+            
+            AppUser user = await userManager.FindByEmailAsync(model.Email);
+            
+            var result = await signInManager.PasswordSignInAsync(user.UserName, model.Password, false, false);
+            
             return result;
         }
 
 
 
-        public async Task<bool> CheckRole(string email, string role)
+        public async Task<bool> CheckRole(string name, string role)
         {
-            var user = await userManager.FindByEmailAsync(email);
+            var user = await userManager.FindByNameAsync(name);
 
             if (await userManager.IsInRoleAsync(user, role))
             {
@@ -134,6 +201,10 @@ namespace BusinessLayer.Services.AppUserService
             return users;
         }
 
+
+
+
+
         public Task<List<AppUserUpdateDTO>> GetAllWhere(Expression<Func<AppUserUpdateDTO, bool>> expression)
         {
             throw new NotImplementedException();
@@ -165,6 +236,34 @@ namespace BusinessLayer.Services.AppUserService
             return user;
             //
         }
+
+        public async Task<AppUserDetailsVM> GetByName(string userName)
+        {
+            var user = await appUserRepository.GetFilteredFirstOrDefault(
+                selector: x => new AppUserDetailsVM
+                {
+                    Id = x.Id,
+                    FirstName = x.FirstName,
+                    SecondName = x.SecondName,
+                    LastName = x.LastName,
+                    Department = x.Department,
+                    TCNO = x.TCNO,
+                    Gender = x.Gender,
+                    BirthDate = x.BirthDate,
+                    EmploymentDate = x.EmploymentDate,
+                    AnnualLeave = x.AnnualLeave,
+                    Address = x.Address,
+                    Title = x.Title,
+                    ImagePath = x.ImagePath,
+                    PhoneNumber = x.PhoneNumber
+
+
+                },
+                expression: x => x.UserName == userName && x.Status == true);
+            return user;
+            //
+        }
+
         public async Task<AppUserUpdateDTO> GetByIdDTO(int id)
         {
             var user = await appUserRepository.GetFilteredFirstOrDefault(

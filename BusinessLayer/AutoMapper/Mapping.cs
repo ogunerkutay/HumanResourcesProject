@@ -1,5 +1,6 @@
-﻿using AutoMapper;
+﻿    using AutoMapper;
 using BusinessLayer.Models.DTOs;
+using BusinessLayer.Models.VMs;
 using EntityLayer.Entities;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace BusinessLayer.AutoMapper
         public Mapping()
         {
             CreateMap<AppUser, AppUserUpdateDTO>().ReverseMap().ForAllMembers(x => x.UseDestinationValue());
+            CreateMap<AppUser, AppUserVM>().ReverseMap().ForAllMembers(x => x.UseDestinationValue());
         }
     }
 }

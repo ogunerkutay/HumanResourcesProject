@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace BoostHumanResourcesProject.Controllers
 {
@@ -22,20 +23,20 @@ namespace BoostHumanResourcesProject.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> Personel(int id)
+        public async Task<IActionResult> Personel(string name)
         {
             AppUserDetailsVM personel = new AppUserDetailsVM();
-            personel = await appUserService.GetById(id);
+            personel = await appUserService.GetByName(name);
 
             return View(personel);
         }
 
         [HttpGet]
-        public async Task<IActionResult> Manager(int id)
+        public async Task<IActionResult> Manager(string name)
         {
             AppUserDetailsandEmployeesVM appUserDetailsandEmployeesVM = new AppUserDetailsandEmployeesVM();
 
-            appUserDetailsandEmployeesVM.appUserDetailsVM = await appUserService.GetById(id);
+            appUserDetailsandEmployeesVM.appUserDetailsVM = await appUserService.GetByName(name);
 
             appUserDetailsandEmployeesVM.employeeList = await appUserService.GetAllBirthDayEmployees();
             

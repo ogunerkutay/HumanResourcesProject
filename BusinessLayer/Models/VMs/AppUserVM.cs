@@ -20,7 +20,6 @@ namespace BusinessLayer.Models.VMs
         public bool Status { get; set; }
         public DateTime BirthDate { get; set; }
         public Department Department { get; set; }
-        
        
     }
 }
