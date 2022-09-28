@@ -3,7 +3,9 @@ using BusinessLayer.Abstract;
 using BusinessLayer.Models.DTOs;
 using BusinessLayer.Models.VMs;
 using DataAccessLayer.IRepositories;
+using DataAccessLayer.Repositories;
 using EntityLayer.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.EntityFrameworkCore.Query;
@@ -19,14 +21,52 @@ namespace BusinessLayer.Services.AppUserService
 {
     public class AppUserService : IAppUserService
     {
-        private readonly IAppUserRepository appUserRepository;
-        private readonly IMapper mapper;
+       
 
-        public AppUserService(IAppUserRepository _appUserRepository, IMapper mapper)
+        private readonly UserManager<AppUser> userManager;
+        private readonly SignInManager<AppUser> signInManager;//cookie olayları yöneticek
+        private readonly RoleManager<AppRole> roleManager;
+        private readonly IMapper mapper;
+        private readonly IAppUserRepository appUserRepository;
+
+        public AppUserService(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<AppRole> roleManager, IMapper mapper, IAppUserRepository appUserRepository)
         {
-            this.appUserRepository = _appUserRepository;
-            this.mapper = mapper;
+            
             //
+            this.userManager = userManager;
+            this.signInManager = signInManager;
+            this.roleManager = roleManager;
+            this.mapper = mapper;
+            this.appUserRepository = appUserRepository;
+        }
+
+        public async Task<SignInResult> LogIn(LoginDTO model)
+        {
+            var result = await userManager.CreateAsync(user, model.Password);
+
+            var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
+            return result;
+        }
+
+
+
+        public async Task<bool> CheckRole(string email, string role)
+        {
+            var user = await userManager.FindByEmailAsync(email);
+
+            if (await userManager.IsInRoleAsync(user, role))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public async Task LogOut()
+        {
+            await signInManager.SignOutAsync();
         }
 
         public Task<bool> Any(Expression<Func<AppUserUpdateDTO, bool>> expression)

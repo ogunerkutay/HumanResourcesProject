@@ -13,7 +13,9 @@ namespace BusinessLayer.Abstract
 {
     public interface IAppUserService : IGenericService<AppUserUpdateDTO>
     {
-  
+        Task<bool> CheckRole(string email, string role);
+        Task<SignInResult> LogIn(LoginDTO model);
+        Task LogOut();
         Task<AppUserDetailsVM> GetById(int id);
         Task<List<AppUserVM>> GetAllBirthDayEmployees();
         Task<AppUserUpdateDTO> GetByIdDTO(int id);
