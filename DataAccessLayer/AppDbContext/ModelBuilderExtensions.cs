@@ -16,8 +16,8 @@ namespace DataAccessLayer
         {
             modelBuilder.Entity<AppRole>()
                 .HasData(
-                new AppRole { Id = 1, Name = "Yönetici" },
-                new AppRole { Id = 2, Name = "Personel" }
+                new AppRole { Id = 1, Name = "Yonetici", NormalizedName = "YONETICI" },
+                new AppRole { Id = 2, Name = "Personel", NormalizedName = "PERSONEL" }
             );
 
             modelBuilder.Entity<Department>()

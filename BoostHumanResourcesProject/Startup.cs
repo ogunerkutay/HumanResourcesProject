@@ -39,9 +39,11 @@ namespace BoostHumanResourcesProject
 
         public IConfiguration Configuration { get; }
 
+
+
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews(); //burasý yorum satýrý
+            services.AddMvc();
 
 
             //DbContext
@@ -51,7 +53,7 @@ namespace BoostHumanResourcesProject
             //Identity
             services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
             //Role
-            //services.AddScoped<IUserClaimsPrincipalFactory<AppUser>, UserClaimsPrincipalFactory<AppUser, AppRole>>();
+            services.AddScoped<IUserClaimsPrincipalFactory<AppUser>, UserClaimsPrincipalFactory<AppUser, AppRole>>();
 
 
             //services.Configure<IdentityOptions>(options =>

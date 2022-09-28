@@ -2,6 +2,7 @@
 
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 
 namespace DataAccessLayer
@@ -11,7 +12,7 @@ namespace DataAccessLayer
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
-
+            
         }
 
         public DbSet<AppUser> AppUsers { get; set; }
@@ -26,6 +27,7 @@ namespace DataAccessLayer
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            
 
             modelBuilder.Entity<AppUserAndWorkShift>().HasKey(c => new { c.WorkShiftID, c.AppUserID });
             modelBuilder.Entity<DepartmentAndWorkShift>().HasKey(c => new { c.WorkShiftID, c.DepartmentID });
@@ -35,7 +37,7 @@ namespace DataAccessLayer
         // here is the computed query definition
         .HasComputedColumnSql("IIF((DATEDIFF(year, [EmploymentDate], GETDATE())) > 15, 26, IIF((DATEDIFF(year, [EmploymentDate], GETDATE())) > 5, 20, 14))");
 
-            base.OnModelCreating(modelBuilder); ///
+          base.OnModelCreating(modelBuilder); ///
 
             modelBuilder.Seed();
         }
