@@ -107,16 +107,11 @@ namespace BusinessLayer.Services.AppUserService
         public async Task<SignInResult> LogIn(LoginDTO model)
         {
 
-            var result = await signInManager.PasswordSignInAsync("jane.doe", model.Password, false, false);
+            AppUser user = await userManager.FindByEmailAsync(model.Email);
+
+            var result = await signInManager.PasswordSignInAsync(user.UserName, model.Password, false, false);
+
             return result;
-
-
-
-            //AppUser user = await userManager.FindByEmailAsync(model.Email);
-
-            //var result = await signInManager.PasswordSignInAsync(user.UserName, model.Password, false, false);
-
-            //return result;
         }
 
 

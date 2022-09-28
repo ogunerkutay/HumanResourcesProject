@@ -45,6 +45,7 @@ namespace BoostHumanResourcesProject.Controllers
                 {
                     return RedirectToAction("Personel", "Dashboard", new { @name = User.Identity.Name });
                 }
+
             }
 
             //await appUserService.SifreOlustur();
