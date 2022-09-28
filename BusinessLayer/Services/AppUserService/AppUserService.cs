@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.EntityFrameworkCore.Query;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -119,9 +120,14 @@ namespace BusinessLayer.Services.AppUserService
 
         public async Task<bool> CheckRole(string name, string role)
         {
-            var user = await userManager.FindByNameAsync(name);
+            AppUser user = await userManager.FindByNameAsync(name);
 
-            if (await userManager.IsInRoleAsync(user, role))
+            List<AppRole> allRoles = roleManager.Roles.ToList();
+            List<string> userRoles = await userManager.GetRolesAsync(user) as List<string>;
+            
+            //var searchedRole = roleManager.FindByNameAsync(role).Result;
+            bool userIsInRole = await userManager.IsInRoleAsync(user, role);
+            if ( userIsInRole == true)
             {
                 return true;
             }
