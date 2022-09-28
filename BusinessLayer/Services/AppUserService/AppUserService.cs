@@ -32,8 +32,6 @@ namespace BusinessLayer.Services.AppUserService
 
         public AppUserService(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<AppRole> roleManager, IMapper mapper, IAppUserRepository appUserRepository)
         {
-            
-            //
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.roleManager = roleManager;
@@ -108,12 +106,17 @@ namespace BusinessLayer.Services.AppUserService
 
         public async Task<SignInResult> LogIn(LoginDTO model)
         {
-            
-            AppUser user = await userManager.FindByEmailAsync(model.Email);
-            
-            var result = await signInManager.PasswordSignInAsync(user.UserName, model.Password, false, false);
-            
+
+            var result = await signInManager.PasswordSignInAsync("jane.doe", model.Password, false, false);
             return result;
+
+
+
+            //AppUser user = await userManager.FindByEmailAsync(model.Email);
+
+            //var result = await signInManager.PasswordSignInAsync(user.UserName, model.Password, false, false);
+
+            //return result;
         }
 
 
