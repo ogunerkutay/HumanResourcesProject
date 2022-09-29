@@ -7,6 +7,7 @@ using DataAccessLayer.IRepositories;
 using DataAccessLayer.Repositories;
 using EntityLayer.Entities;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -104,140 +105,140 @@ namespace BusinessLayer.Services.AppUserService
 
 
 
-        public async Task<SignInResult> LogIn(LoginDTO model)
+        public async Task<AppUser> LogIn(LoginDTO model)
         {
 
             AppUser user = await userManager.FindByEmailAsync(model.Email);
-            if(user != null && user.Status == true)
+            if (user != null && user.Status == true)
             {
-                    SignInResult result = await signInManager.PasswordSignInAsync(user.UserName, model.Password, false, false);
-                    return result;                
-            }
-            else
-            {
-                return SignInResult.Failed;
-            }
-            
-            
-        }
+                SignInResult result = await signInManager.PasswordSignInAsync(user.UserName, model.Password, false, false);
 
-
-
-        public async Task<bool> CheckRole(string name, string role)
-        {
-            AppUser user = await userManager.FindByNameAsync(name);
-
-            //List<AppRole> allRoles = roleManager.Roles.ToList();
-            //List<string> userRoles = await userManager.GetRolesAsync(user) as List<string>;
-
-            //var searchedRole = roleManager.FindByNameAsync(role).Result;
-            bool userIsInRole = await userManager.IsInRoleAsync(user, role);
-            if (userIsInRole == true)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        public async Task LogOut()
-        {
-            await signInManager.SignOutAsync();
-        }
-
-        public Task<bool> Any(Expression<Func<AppUserUpdateDTO, bool>> expression)
-        {
-            throw new NotImplementedException();
-        }
-        /// <summary>
-        /// bu method bool döner
-        /// </summary>
-        /// <param name="user"></param>
-        /// <returns></returns>
-        public async Task<object> Create(AppUserUpdateDTO user)
-        {
-            user.FirstName = user.FirstName.Trim();
-            if (user.SecondName != null)
-            {
-                user.SecondName = user.SecondName.Trim();
-            }
-
-            user.LastName = user.LastName.Trim();
-
-            if (user.file != null)
-            {
-                var extension = Path.GetExtension(user.file.FileName);
-                var newImageName = Guid.NewGuid() + extension;
-                string projectRootPath = hostingEnvironment.WebRootPath;
-                string uploadsFolder = Path.Combine(projectRootPath, "images");
-                string location = Path.Combine(uploadsFolder, newImageName);
-                using (var fileStream = new FileStream(location, FileMode.Create))
-                {
-                    user.file.CopyTo(fileStream);
+                    return user;
                 }
-                user.ImagePath = newImageName;
-            }
             else
-            {
-                if (user.Gender == EntityLayer.Enums.Gender.Kadın)
                 {
-                    user.ImagePath = "pic-2.png";
+                    return user;
+                }
+
+            }
+
+
+
+            public async Task<bool> CheckRole(string name, string role)
+            {
+                AppUser user = await userManager.FindByNameAsync(name);
+
+                //List<AppRole> allRoles = roleManager.Roles.ToList();
+                //List<string> userRoles = await userManager.GetRolesAsync(user) as List<string>;
+
+                //var searchedRole = roleManager.FindByNameAsync(role).Result;
+                bool userIsInRole = await userManager.IsInRoleAsync(user, role);
+                if (userIsInRole == true)
+                {
+                    return true;
                 }
                 else
                 {
-                    user.ImagePath = "pic-1.png";
+                    return false;
                 }
             }
-            user.EmploymentDate = DateTime.Parse(DateTime.Now.ToString("dd-MM-yyyy"));
 
-
-
-
-            var createUser = mapper.Map<AppUser>(user);
-            createUser.Status = true;
-            createUser.UserName = createUser.FirstName.ToLower() + createUser.SecondName.ToLower() + "." + createUser.LastName.ToLower();
-    
-            createUser.Email = createUser.FirstName.ToLower() + createUser.SecondName.ToLower() + "." + createUser.LastName.ToLower() + "@gmail.com";
-            createUser.EmailConfirmed = true;
-
-            var userWithPassword = SifreOlustur(createUser);
-            IdentityResult result = await userManager.CreateAsync(userWithPassword);
-            if (result.Succeeded)
+            public async Task LogOut()
             {
-                
-                if (sendEmail(createUser))
+                await signInManager.SignOutAsync();
+            }
+
+            public Task<bool> Any(Expression<Func<AppUserUpdateDTO, bool>> expression)
+            {
+                throw new NotImplementedException();
+            }
+            /// <summary>
+            /// bu method bool döner
+            /// </summary>
+            /// <param name="user"></param>
+            /// <returns></returns>
+            public async Task<object> Create(AppUserUpdateDTO user)
+            {
+                user.FirstName = user.FirstName.Trim();
+                if (user.SecondName != null)
                 {
-                    myObject messageObject1 = new myObject();
-                    messageObject1.Message = "kullanıcı oluşturuldu ve email gönderildi";
-                    messageObject1.SendMailConfirm = true;
-                    return messageObject1;
+                    user.SecondName = user.SecondName.Trim();
                 }
-                myObject messageObject2 = new myObject();
-                messageObject2.Message = "kullanıcı oluşturuldu ama email başarısız oldu.";
-                messageObject2.SendMailConfirm = false;
-                return messageObject2;
 
+                user.LastName = user.LastName.Trim();
+
+                if (user.file != null)
+                {
+                    var extension = Path.GetExtension(user.file.FileName);
+                    var newImageName = Guid.NewGuid() + extension;
+                    string projectRootPath = hostingEnvironment.WebRootPath;
+                    string uploadsFolder = Path.Combine(projectRootPath, "images");
+                    string location = Path.Combine(uploadsFolder, newImageName);
+                    using (var fileStream = new FileStream(location, FileMode.Create))
+                    {
+                        user.file.CopyTo(fileStream);
+                    }
+                    user.ImagePath = newImageName;
+                }
+                else
+                {
+                    if (user.Gender == EntityLayer.Enums.Gender.Kadın)
+                    {
+                        user.ImagePath = "pic-2.png";
+                    }
+                    else
+                    {
+                        user.ImagePath = "pic-1.png";
+                    }
+                }
+                user.EmploymentDate = DateTime.Parse(DateTime.Now.ToString("dd-MM-yyyy"));
+
+
+
+
+                var createUser = mapper.Map<AppUser>(user);
+                createUser.Status = true;
+                createUser.UserName = createUser.FirstName.ToLower() + createUser.SecondName.ToLower() + "." + createUser.LastName.ToLower();
+
+                createUser.Email = createUser.FirstName.ToLower() + createUser.SecondName.ToLower() + "." + createUser.LastName.ToLower() + "@gmail.com";
+                createUser.EmailConfirmed = true;
+
+                var userWithPassword = SifreOlustur(createUser);
+                IdentityResult result = await userManager.CreateAsync(userWithPassword);
+                if (result.Succeeded)
+                {
+
+                    if (sendEmail(createUser))
+                    {
+                        myObject messageObject1 = new myObject();
+                        messageObject1.Message = "kullanıcı oluşturuldu ve email gönderildi";
+                        messageObject1.SendMailConfirm = true;
+                        return messageObject1;
+                    }
+                    myObject messageObject2 = new myObject();
+                    messageObject2.Message = "kullanıcı oluşturuldu ama email başarısız oldu.";
+                    messageObject2.SendMailConfirm = false;
+                    return messageObject2;
+
+                }
+                else
+                {
+                    myObject messageObject3 = new myObject();
+                    messageObject3.Message = "kullanıcı oluşturulamadı";
+                    messageObject3.SendMailConfirm = false;
+                    return messageObject3;
+                }
+
+                //return await appUserRepository.Create(createUser);
             }
-            else
+
+            private bool sendEmail(AppUser user)
             {
-                myObject messageObject3 = new myObject();
-                messageObject3.Message = "kullanıcı oluşturulamadı";
-                messageObject3.SendMailConfirm = false;
-                return messageObject3;
+                EmailHelper emailHelper = new EmailHelper();
+                string message = $"Şifreniz: {user.FirstName}123Aa! Lütfen unutmayın, değiştirmeyi de ihmal etmeyin!!!";
+                bool emailResponse = emailHelper.SendEmail(user.Email, message);
+                return emailResponse;
             }
-
-           //return await appUserRepository.Create(createUser);
-        }
-
-        private bool sendEmail(AppUser user)
-        {
-            EmailHelper emailHelper = new EmailHelper();
-            string message = $"Şifreniz: {user.FirstName}123Aa! Lütfen unutmayın, değiştirmeyi de ihmal etmeyin!!!";
-            bool emailResponse = emailHelper.SendEmail(user.Email, message);
-            return emailResponse;
-        }
 
 
 
@@ -344,6 +345,7 @@ namespace BusinessLayer.Services.AppUserService
 
         public async Task<AppUserDetailsVM> GetByName(string userName)
         {
+
             var user = await appUserRepository.GetFilteredFirstOrDefault(
                 selector: x => new AppUserDetailsVM
                 {

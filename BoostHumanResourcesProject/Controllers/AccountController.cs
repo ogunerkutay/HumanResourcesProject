@@ -1,11 +1,13 @@
 ﻿using AutoMapper;
 using BusinessLayer.Abstract;
 using BusinessLayer.Models.DTOs;
+using BusinessLayer.Models.VMs;
 using BusinessLayer.Services.AppUserService;
 using DataAccessLayer.IRepositories;
 using DataAccessLayer.Repositories;
 using EntityLayer.Entities;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -46,9 +48,13 @@ namespace BoostHumanResourcesProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await appUserService.LogIn(model);
+                var user = await appUserService.LogIn(model);
 
-                if (result.Succeeded) return RedirectToAction("Login", "Account");
+                HttpContext.Session.SetString("Name", user.FirstName + " " + user.LastName);
+                HttpContext.Session.SetString("Image", user.ImagePath);
+
+
+                if (user != null) return RedirectToAction("Login", "Account");
             }
             return View(model);
         }

@@ -16,7 +16,7 @@ namespace BusinessLayer.Abstract
         AppUser SifreOlustur(AppUser user);
         Task<List<AppUser>> GetAllUsersAppUser();
         Task<bool> CheckRole(string email, string role);
-        Task<SignInResult> LogIn(LoginDTO model);
+        Task<AppUser> LogIn(LoginDTO model);
         Task LogOut();
         Task<AppUserDetailsVM> GetById(int id);
         Task<AppUserDetailsVM> GetByName(string userName);

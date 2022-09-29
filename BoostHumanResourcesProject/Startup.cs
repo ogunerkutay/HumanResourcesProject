@@ -43,6 +43,7 @@ namespace BoostHumanResourcesProject
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSession(s => s.IdleTimeout = TimeSpan.FromMinutes(30));
             services.AddMvc();
 
 
@@ -129,6 +130,8 @@ namespace BoostHumanResourcesProject
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            
+
             app.UseHttpsRedirection();
 
             app.UseStaticFiles();
@@ -139,18 +142,17 @@ namespace BoostHumanResourcesProject
 
             app.UseAuthorization();
 
+            app.UseSession();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Account}/{action=Login}");
                 //pattern: "{controller=Dashboard}/{action=Index}/{id=4}");
-                endpoints.MapControllerRoute(
-                 name: "UserDetails",
-                 pattern: "{controller=User}/{action=UserDetails}/{id?}"
-                );
             });
-        
+
+
         }
     }
 }

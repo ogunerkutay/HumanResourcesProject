@@ -1,9 +1,15 @@
-﻿@using BusinessLayer.Models.VMs
+﻿@using System.Security.Claims
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    string image = @HttpContextAccessor.HttpContext.Session.GetString("Image");
+    string name = @HttpContextAccessor.HttpContext.Session.GetString("Name");
+}
+@using BusinessLayer.Models.VMs
 @model AppUserDetailsVM
 @{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-
+    ViewData["Title"] = "Personel";
+    Layout = "~/Views/Shared/_PersonelLayout.cshtml";
 }
 
 <!DOCTYPE html>
@@ -26,7 +32,7 @@
                     <h4 class="card-title"> @(Model.FirstName + " " + Model.LastName + " " + "Hoşgeldiniz")</h4>
                     <div class="row">
                         <div class="col-md-6">
-                            <img src="~/writer/assets/images/faces/face10.jpg" alt="profile">
+                            <img src="~/images/@image" class="mr-2" alt="image">
                             <p class="font-weight-bold mb-2">@Model.Title</p>
                         </div>
                         <div class="col-md-6">

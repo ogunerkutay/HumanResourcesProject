@@ -1,19 +1,27 @@
-﻿
+﻿@using System.Security.Claims
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    string image = @HttpContextAccessor.HttpContext.Session.GetString("Image");
+    string name = @HttpContextAccessor.HttpContext.Session.GetString("Name");
+}
+
+
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <ul class="nav">
         <li class="nav-item nav-profile">
-            <a href="/Dashboard/Manager/@User.Identity.Name" class="nav-link">
+            <a href="/Dashboard/Personel/@User.Identity.Name" class="nav-link">
                 <div class="nav-profile-image">
     
-                @*    <img src="~/images/@Model.appUserDetailsVM.ImagePath" class="mr-2" alt="image">*@
-                     <img src="~/writer/assets/images/faces/face10.jpg" alt="profile">
+                    <img src="~/images/@image" class="mr-2" alt="image">
+                    @* <img src="~/writer/assets/images/faces/face10.jpg" alt="profile">*@
                     <span class="login-status online"></span>
                     <!--change to offline or busy as needed-->
                 </div>
                 <div class="nav-profile-text d-flex flex-column">
 
-                    <span class="font-weight-bold mb-2"> Jane DOE</span>
-                    <span class="text-secondary text-small">Şirket Yöneticisi</span>
+                    <span class="font-weight-bold mb-2"> @name</span>
+                    <span class="text-secondary text-small">Personel</span>
                 </div>
                 <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
             </a>
@@ -22,24 +30,24 @@
             <!--change to offline or busy as needed-->
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/Dashboard/Manager/@User.Identity.Name">
+            <a class="nav-link" href="/Dashboard/Personel/@User.Identity.Name">
                 <span class="menu-title">Ana Sayfa</span>
                 <i class="mdi mdi-home menu-icon"></i>
             </a>
         </li>
-
+@*
         <li class="nav-item">
             <a class="nav-link" href="/User/AddUser">
                 <span class="menu-title">Yeni Personel</span>
                 <i class="mdi mdi-contacts menu-icon"></i>
             </a>
-        </li>
-        <li class="nav-item">
+        </li>*@
+@*        <li class="nav-item">
             <a class="nav-link" href="/User/PersonList">
                 <span class="menu-title">Personel Listesi</span>
                 <i class="mdi mdi-format-list-bulleted menu-icon"></i>
             </a>
-        </li>
+        </li>*@
         <li class="nav-item">
             <a class="nav-link" href="/Account/LogOut">
                 <span class="menu-title">Çıkış Yap</span>

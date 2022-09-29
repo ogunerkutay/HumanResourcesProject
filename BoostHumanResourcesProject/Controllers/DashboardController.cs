@@ -23,6 +23,7 @@ namespace BoostHumanResourcesProject.Controllers
 
 
         [HttpGet]
+        [Route("Dashboard/Personel/{name?}")]
         public async Task<IActionResult> Personel(string name)
         {
             AppUserDetailsVM personel = new AppUserDetailsVM();
@@ -32,6 +33,7 @@ namespace BoostHumanResourcesProject.Controllers
         }
 
         [HttpGet]
+        [Route("Dashboard/Manager/{name?}")]
         public async Task<IActionResult> Manager(string name)
         {
             AppUserDetailsandEmployeesVM appUserDetailsandEmployeesVM = new AppUserDetailsandEmployeesVM();
