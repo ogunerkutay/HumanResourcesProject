@@ -145,7 +145,7 @@ namespace BoostHumanResourcesProject.Controllers
             appUserandDepartments.departmentsList = departmentValue;
             return View(appUserandDepartments);
         }
-
+        
         public async Task<IActionResult> UserDetails(int id)
         {
 
