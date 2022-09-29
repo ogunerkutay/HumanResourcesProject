@@ -17,7 +17,7 @@ namespace BusinessLayer.Services.GenericService
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        Task<bool> Create(T entity);
+        Task<object> Create(T entity);
         Task Delete(T entity);
         Task<List<T>> GetAllWhere(Expression<Func<T, bool>> expression);
         Task<TResult> GetFilteredFirstOrDefault<TResult>(Expression<Func<T, TResult>> selector, Expression<Func<T, bool>> expression, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, Func<IQueryable<T>, IIncludableQueryable<T, object>> includes = null);

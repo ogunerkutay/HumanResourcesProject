@@ -1,4 +1,5 @@
 ﻿using BusinessLayer.Models.VMs;
+using BusinessLayer.Services.GenericService;
 using DataAccessLayer.IRepositories;
 using EntityLayer.Entities;
 using Microsoft.EntityFrameworkCore.Query;
@@ -69,6 +70,11 @@ namespace BusinessLayer.Services.DepartmentService
         }
 
         public void Update(Department entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<object> IGenericService<Department>.Create(Department entity)
         {
             throw new NotImplementedException();
         }

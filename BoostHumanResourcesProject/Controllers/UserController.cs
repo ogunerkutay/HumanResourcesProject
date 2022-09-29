@@ -18,6 +18,7 @@ using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
 
+
 namespace BoostHumanResourcesProject.Controllers
 {
     public class UserController : Controller
@@ -98,22 +99,32 @@ namespace BoostHumanResourcesProject.Controllers
                 //}
                 //user.appUserUpdateDTO.EmploymentDate = DateTime.Parse(DateTime.Now.ToString("dd-MM-yyyy"));
 
-                bool isCreated =  await appUserService.Create(user.appUserUpdateDTO);
-                if (isCreated == true )
+                BusinessLayer.Services.AppUserService.AppUserService.myObject isCreated = (BusinessLayer.Services.AppUserService.AppUserService.myObject)await appUserService.Create(user.appUserUpdateDTO);
+                 
+                
+                if (isCreated.SendMailConfirm == true )
                 {
-                TempData["message"] = $"{user.appUserUpdateDTO.FirstName} {user.appUserUpdateDTO.LastName} isimli kullanıcı eklendi"; 
+                TempData["message"] = $"{user.appUserUpdateDTO.FirstName} {user.appUserUpdateDTO.LastName} {isCreated.Message}"; 
                 return RedirectToAction("PersonList", "User");
+                }
+                else if(isCreated.CreateUserConfirm == true)
+                {
+                    TempData["message"] = $"{user.appUserUpdateDTO.FirstName} {user.appUserUpdateDTO.LastName} {isCreated.Message}";
+                    return RedirectToAction("PersonList", "User");
+
+                    //eğer kullanıcı oluşturuldu ama mail gönderimi başarısız olduysa,
+                    //yöneticiyi buna müdahale edip tekrardan mail gönderilmesini sağlayacak bir sayfaya yönlendirilebilir
                 }
                 else
                 {
-                TempData["message"] = $"{user.appUserUpdateDTO.FirstName} {user.appUserUpdateDTO.LastName} isimli kullanıcı eklenemedi";
-                    
+                    TempData["message"] = $"{user.appUserUpdateDTO.FirstName} {user.appUserUpdateDTO.LastName} {isCreated.Message}";
+
                     List<GetDepartmentsVM> departmentValue2 = (from x in await departmentService.GetAllDepartments()
-                                                              select new GetDepartmentsVM
-                                                              {
-                                                                  DepartmentName = x.DepartmentName,
-                                                                  DepartmentID = x.DepartmentID
-                                                              }).ToList();
+                                                               select new GetDepartmentsVM
+                                                               {
+                                                                   DepartmentName = x.DepartmentName,
+                                                                   DepartmentID = x.DepartmentID
+                                                               }).ToList();
                     AppUserandDepartments appUserandDepartments2 = new AppUserandDepartments();
 
                     appUserandDepartments2.appUserUpdateDTO = user.appUserUpdateDTO;

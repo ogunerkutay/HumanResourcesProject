@@ -32,7 +32,6 @@ namespace BoostHumanResourcesProject.Controllers
                 if (await appUserService.CheckRole(User.Identity.Name, "Yonetici"))
                 {
                     return RedirectToAction("Manager", "Dashboard", new { @name = User.Identity.Name });
-
                 }
                 else
                 {

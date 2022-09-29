@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BusinessLayer.Abstract;
+using BusinessLayer.Email;
 using BusinessLayer.Models.DTOs;
 using BusinessLayer.Models.VMs;
 using DataAccessLayer.IRepositories;
@@ -107,10 +108,17 @@ namespace BusinessLayer.Services.AppUserService
         {
 
             AppUser user = await userManager.FindByEmailAsync(model.Email);
-
-            var result = await signInManager.PasswordSignInAsync(user.UserName, model.Password, false, false);
-
-            return result;
+            if(user != null && user.Status == true)
+            {
+                    SignInResult result = await signInManager.PasswordSignInAsync(user.UserName, model.Password, false, false);
+                    return result;                
+            }
+            else
+            {
+                return SignInResult.Failed;
+            }
+            
+            
         }
 
 
@@ -148,7 +156,7 @@ namespace BusinessLayer.Services.AppUserService
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public async Task<bool> Create(AppUserUpdateDTO user)
+        public async Task<object> Create(AppUserUpdateDTO user)
         {
             user.FirstName = user.FirstName.Trim();
             if (user.SecondName != null)
@@ -189,29 +197,63 @@ namespace BusinessLayer.Services.AppUserService
 
             var createUser = mapper.Map<AppUser>(user);
             createUser.Status = true;
-            createUser.UserName = createUser.FirstName + createUser.SecondName + "." + createUser.LastName;
-            createUser.Email = createUser.FirstName + createUser.SecondName + "." + createUser.LastName + "@gmail.com";
+            createUser.UserName = createUser.FirstName.ToLower() + createUser.SecondName.ToLower() + "." + createUser.LastName.ToLower();
+    
+            createUser.Email = createUser.FirstName.ToLower() + createUser.SecondName.ToLower() + "." + createUser.LastName.ToLower() + "@gmail.com";
             createUser.EmailConfirmed = true;
 
             var userWithPassword = SifreOlustur(createUser);
             IdentityResult result = await userManager.CreateAsync(userWithPassword);
             if (result.Succeeded)
             {
-                sendEmail(user);
-                return true;
+                
+                if (sendEmail(createUser))
+                {
+                    myObject messageObject1 = new myObject();
+                    messageObject1.Message = "kullanıcı oluşturuldu ve email gönderildi";
+                    messageObject1.SendMailConfirm = true;
+                    return messageObject1;
+                }
+                myObject messageObject2 = new myObject();
+                messageObject2.Message = "kullanıcı oluşturuldu ama email başarısız oldu.";
+                messageObject2.SendMailConfirm = false;
+                return messageObject2;
+
             }
             else
             {
-               return false;
+                myObject messageObject3 = new myObject();
+                messageObject3.Message = "kullanıcı oluşturulamadı";
+                messageObject3.SendMailConfirm = false;
+                return messageObject3;
             }
 
            //return await appUserRepository.Create(createUser);
         }
 
-        private void sendEmail(AppUserUpdateDTO user)
+        private bool sendEmail(AppUser user)
         {
-            
+            EmailHelper emailHelper = new EmailHelper();
+            string message = $"Şifreniz: {user.FirstName}123Aa! Lütfen unutmayın, değiştirmeyi de ihmal etmeyin!!!";
+            bool emailResponse = emailHelper.SendEmail(user.Email, message);
+            return emailResponse;
         }
+
+
+
+        public class myObject
+        {
+            // Private data member
+            private string message;
+            private bool createUserConfirm;
+            private bool sendMailConfirm;
+
+            public string Message { get => message; set => message = value; }
+            public bool CreateUserConfirm { get => createUserConfirm; set => createUserConfirm = value; }
+            public bool SendMailConfirm { get => sendMailConfirm; set => sendMailConfirm = value; }
+
+        }
+
 
         public Task Delete(AppUserUpdateDTO entity)
         {

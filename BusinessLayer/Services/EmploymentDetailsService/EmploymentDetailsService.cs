@@ -1,4 +1,5 @@
-﻿using DataAccessLayer.IRepositories;
+﻿using BusinessLayer.Services.GenericService;
+using DataAccessLayer.IRepositories;
 using EntityLayer.Entities;
 using Microsoft.EntityFrameworkCore.Query;
 using System;
@@ -55,6 +56,11 @@ namespace BusinessLayer.Services.EmploymentDetailsService
         }
 
         public void Update(EmploymentDetails entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<object> IGenericService<EmploymentDetails>.Create(EmploymentDetails entity)
         {
             throw new NotImplementedException();
         }
