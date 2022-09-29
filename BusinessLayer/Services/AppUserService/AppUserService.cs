@@ -5,13 +5,16 @@ using BusinessLayer.Models.VMs;
 using DataAccessLayer.IRepositories;
 using DataAccessLayer.Repositories;
 using EntityLayer.Entities;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.EntityFrameworkCore.Query;
+using Microsoft.Extensions.Hosting.Internal;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -22,40 +25,36 @@ namespace BusinessLayer.Services.AppUserService
 {
     public class AppUserService : IAppUserService
     {
-       
+
 
         private readonly UserManager<AppUser> userManager;
         private readonly SignInManager<AppUser> signInManager;//cookie olayları yöneticek
         private readonly RoleManager<AppRole> roleManager;
         private readonly IMapper mapper;
         private readonly IAppUserRepository appUserRepository;
+        private readonly IWebHostEnvironment hostingEnvironment;
 
-        public AppUserService(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<AppRole> roleManager, IMapper mapper, IAppUserRepository appUserRepository)
+        public AppUserService(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<AppRole> roleManager, IMapper mapper, IAppUserRepository appUserRepository, IWebHostEnvironment hostingEnvironment)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.roleManager = roleManager;
             this.mapper = mapper;
             this.appUserRepository = appUserRepository;
+            this.hostingEnvironment = hostingEnvironment;
         }
 
-        public async Task SifreOlustur()
+        public AppUser SifreOlustur(AppUser user)
         {
-            List<AppUser> userList = new List<AppUser>();
-            userList = await GetAllUsersAppUser();
+            //List<AppUser> userList = new List<AppUser>();
+            //userList = await GetAllUsersAppUser();
 
             //List<AppUser> appUserList = new List<AppUser>();
             //appUserList = mapper.Map<List<AppUserVM>, List<AppUser>>(userList);
 
-
-            foreach (AppUser user in userList)
-            {
-                string password = user.FirstName + "123Aa!";
-                user.PasswordHash = userManager.PasswordHasher.HashPassword(user, password);
-                IdentityResult result = await userManager.UpdateAsync(user);
-
-            }
-                        
+            string password = user.FirstName + "123Aa!";
+            user.PasswordHash = userManager.PasswordHasher.HashPassword(user, password);
+            return user;
         }
 
         public async Task<List<AppUser>> GetAllUsersAppUser()
@@ -120,12 +119,12 @@ namespace BusinessLayer.Services.AppUserService
         {
             AppUser user = await userManager.FindByNameAsync(name);
 
-            List<AppRole> allRoles = roleManager.Roles.ToList();
-            List<string> userRoles = await userManager.GetRolesAsync(user) as List<string>;
-            
+            //List<AppRole> allRoles = roleManager.Roles.ToList();
+            //List<string> userRoles = await userManager.GetRolesAsync(user) as List<string>;
+
             //var searchedRole = roleManager.FindByNameAsync(role).Result;
             bool userIsInRole = await userManager.IsInRoleAsync(user, role);
-            if ( userIsInRole == true)
+            if (userIsInRole == true)
             {
                 return true;
             }
@@ -144,14 +143,74 @@ namespace BusinessLayer.Services.AppUserService
         {
             throw new NotImplementedException();
         }
-
-        public async Task Create(AppUserUpdateDTO user)
+        /// <summary>
+        /// bu method bool döner
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        public async Task<bool> Create(AppUserUpdateDTO user)
         {
+            user.FirstName = user.FirstName.Trim();
+            if (user.SecondName != null)
+            {
+                user.SecondName = user.SecondName.Trim();
+            }
+
+            user.LastName = user.LastName.Trim();
+
+            if (user.file != null)
+            {
+                var extension = Path.GetExtension(user.file.FileName);
+                var newImageName = Guid.NewGuid() + extension;
+                string projectRootPath = hostingEnvironment.WebRootPath;
+                string uploadsFolder = Path.Combine(projectRootPath, "images");
+                string location = Path.Combine(uploadsFolder, newImageName);
+                using (var fileStream = new FileStream(location, FileMode.Create))
+                {
+                    user.file.CopyTo(fileStream);
+                }
+                user.ImagePath = newImageName;
+            }
+            else
+            {
+                if (user.Gender == EntityLayer.Enums.Gender.Kadın)
+                {
+                    user.ImagePath = "pic-2.png";
+                }
+                else
+                {
+                    user.ImagePath = "pic-1.png";
+                }
+            }
+            user.EmploymentDate = DateTime.Parse(DateTime.Now.ToString("dd-MM-yyyy"));
+
+
+
+
             var createUser = mapper.Map<AppUser>(user);
             createUser.Status = true;
+            createUser.UserName = createUser.FirstName + createUser.SecondName + "." + createUser.LastName;
+            createUser.Email = createUser.FirstName + createUser.SecondName + "." + createUser.LastName + "@gmail.com";
+            createUser.EmailConfirmed = true;
 
-            await appUserRepository.Create(createUser);
+            var userWithPassword = SifreOlustur(createUser);
+            IdentityResult result = await userManager.CreateAsync(userWithPassword);
+            if (result.Succeeded)
+            {
+                sendEmail(user);
+                return true;
+            }
+            else
+            {
+               return false;
+            }
 
+           //return await appUserRepository.Create(createUser);
+        }
+
+        private void sendEmail(AppUserUpdateDTO user)
+        {
+            
         }
 
         public Task Delete(AppUserUpdateDTO entity)

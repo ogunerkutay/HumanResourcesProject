@@ -61,60 +61,67 @@ namespace BoostHumanResourcesProject.Controllers
         [HttpPost]
         public async Task<IActionResult> AddUser(AppUserandDepartments user)
         {
-            //AppUserUpdateDTO appUserUpdateDTO = new AppUserUpdateDTO();
-            //appUserUpdateDTO = user.appUserUpdateDTO;
-            //AppUserUpdateDTOValidator validationRules = new AppUserUpdateDTOValidator();
-            //ValidationResult validationResult = validationRules.Validate(appUserUpdateDTO);
             if (ModelState.IsValid)
             {
 
-                user.appUserUpdateDTO.FirstName = user.appUserUpdateDTO.FirstName.Trim();
-                if (user.appUserUpdateDTO.SecondName !=null) 
-                {
-                    user.appUserUpdateDTO.SecondName = user.appUserUpdateDTO.SecondName.Trim();
-                }
-                
-                user.appUserUpdateDTO.LastName = user.appUserUpdateDTO.LastName.Trim();
+                //user.appUserUpdateDTO.FirstName = user.appUserUpdateDTO.FirstName.Trim();
+                //if (user.appUserUpdateDTO.SecondName !=null) 
+                //{
+                //    user.appUserUpdateDTO.SecondName = user.appUserUpdateDTO.SecondName.Trim();
+                //}
 
-                if (user.appUserUpdateDTO.file != null)
+                //user.appUserUpdateDTO.LastName = user.appUserUpdateDTO.LastName.Trim();
+
+                //if (user.appUserUpdateDTO.file != null)
+                //{
+                //    var extension = Path.GetExtension(user.appUserUpdateDTO.file.FileName);
+                //    var newImageName = Guid.NewGuid() + extension;
+                //    string projectRootPath = hostingEnvironment.WebRootPath;
+                //    string uploadsFolder = Path.Combine(projectRootPath, "images");
+                //    string location = Path.Combine(uploadsFolder, newImageName);
+                //    using (var fileStream = new FileStream(location, FileMode.Create))
+                //    {
+                //        user.appUserUpdateDTO.file.CopyTo(fileStream);
+                //    }
+                //    user.appUserUpdateDTO.ImagePath = newImageName;
+                //      }
+                //else
+                //{
+                //    if (user.appUserUpdateDTO.Gender == EntityLayer.Enums.Gender.Kadın)
+                //    {
+                //        user.appUserUpdateDTO.ImagePath = "pic-2.png";
+                //    }
+                //    else
+                //    {
+                //        user.appUserUpdateDTO.ImagePath = "pic-1.png";
+                //    }
+                //}
+                //user.appUserUpdateDTO.EmploymentDate = DateTime.Parse(DateTime.Now.ToString("dd-MM-yyyy"));
+
+                bool isCreated =  await appUserService.Create(user.appUserUpdateDTO);
+                if (isCreated == true )
                 {
-                    var extension = Path.GetExtension(user.appUserUpdateDTO.file.FileName);
-                    var newImageName = Guid.NewGuid() + extension;
-                    string projectRootPath = hostingEnvironment.WebRootPath;
-                    string uploadsFolder = Path.Combine(projectRootPath, "images");
-                    string location = Path.Combine(uploadsFolder, newImageName);
-                    using (var fileStream = new FileStream(location, FileMode.Create))
-                    {
-                        user.appUserUpdateDTO.file.CopyTo(fileStream);
-                    }
-                    user.appUserUpdateDTO.ImagePath = newImageName;
+                TempData["message"] = $"{user.appUserUpdateDTO.FirstName} {user.appUserUpdateDTO.LastName} isimli kullanıcı eklendi"; 
+                return RedirectToAction("PersonList", "User");
                 }
                 else
                 {
-                    if (user.appUserUpdateDTO.Gender == EntityLayer.Enums.Gender.Kadın)
-                    {
-                        user.appUserUpdateDTO.ImagePath = "pic-2.png";
-                    }
-                    else
-                    {
-                        user.appUserUpdateDTO.ImagePath = "pic-1.png";
-                    }
+                TempData["message"] = $"{user.appUserUpdateDTO.FirstName} {user.appUserUpdateDTO.LastName} isimli kullanıcı eklenemedi";
+                    
+                    List<GetDepartmentsVM> departmentValue2 = (from x in await departmentService.GetAllDepartments()
+                                                              select new GetDepartmentsVM
+                                                              {
+                                                                  DepartmentName = x.DepartmentName,
+                                                                  DepartmentID = x.DepartmentID
+                                                              }).ToList();
+                    AppUserandDepartments appUserandDepartments2 = new AppUserandDepartments();
+
+                    appUserandDepartments2.appUserUpdateDTO = user.appUserUpdateDTO;
+                    appUserandDepartments2.departmentsList = departmentValue2;
+                    return View(appUserandDepartments2);
                 }
-   
-                user.appUserUpdateDTO.EmploymentDate = DateTime.Parse(DateTime.Now.ToString("dd-MM-yyyy"));
-                await appUserService.Create(user.appUserUpdateDTO);
-                TempData["message"] = $"{user.appUserUpdateDTO.FirstName} {user.appUserUpdateDTO.LastName} isimli kullanıcı eklendi";
-                return RedirectToAction("PersonList", "User");
             }
             
-
-            //else
-            //{
-            //    foreach (var item in ModelState.Errors)
-            //    {
-            //        ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
-            //    }
-            //}
             List<GetDepartmentsVM> departmentValue = (from x in await departmentService.GetAllDepartments()
                                                       select new GetDepartmentsVM
                                                       {

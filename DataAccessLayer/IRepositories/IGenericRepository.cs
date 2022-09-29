@@ -10,7 +10,12 @@ namespace DataAccessLayer.IRepositories
 {
     public interface IGenericRepository<T> where T : class
     {
-        Task Create(T entity);
+        /// <summary>
+        /// bu method bool döner
+        /// </summary>
+        /// <param name="entity">Oluşturulacak kişiyi alır.</param>
+        /// <returns></returns>
+        Task<bool> Create(T entity);
         void Update(T entity);
         void Delete(T entity);
 

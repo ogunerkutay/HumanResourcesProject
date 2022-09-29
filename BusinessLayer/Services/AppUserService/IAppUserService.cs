@@ -13,7 +13,7 @@ namespace BusinessLayer.Abstract
 {
     public interface IAppUserService : IGenericService<AppUserUpdateDTO>
     {
-        Task SifreOlustur();
+        AppUser SifreOlustur(AppUser user);
         Task<List<AppUser>> GetAllUsersAppUser();
         Task<bool> CheckRole(string email, string role);
         Task<SignInResult> LogIn(LoginDTO model);

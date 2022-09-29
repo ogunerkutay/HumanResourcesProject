@@ -24,11 +24,30 @@ namespace DataAccessLayer.Repositories
         {
             return await table.AnyAsync(expression);
         }
-
-        public async Task Create(T entity)
+        /// <summary>
+        /// bu method bool döner
+        /// </summary>
+        /// <param name="entity">Oluşturulacak kişiyi alır.</param>
+        /// <returns></returns>
+        public async Task<bool> Create(T entity)
         {
+            if(entity != null)
+            {
             table.Add(entity);
-            await appDbContext.SaveChangesAsync();
+            int isChanged =  await appDbContext.SaveChangesAsync();
+                if (isChanged > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public void Delete(T entity)

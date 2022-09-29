@@ -29,14 +29,6 @@ namespace BoostHumanResourcesProject.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                //if (User.IsInRole("a"))
-                //{
-                //    return RedirectToAction("Manager", "Dashboard", new { @name = User.Identity.Name });
-                //}
-                //else
-                //{
-                //    return RedirectToAction("Personel", "Dashboard", new { @name = User.Identity.Name });
-                //}
                 if (await appUserService.CheckRole(User.Identity.Name, "Yonetici"))
                 {
                     return RedirectToAction("Manager", "Dashboard", new { @name = User.Identity.Name });
@@ -46,11 +38,7 @@ namespace BoostHumanResourcesProject.Controllers
                 {
                     return RedirectToAction("Personel", "Dashboard", new { @name = User.Identity.Name });
                 }
-
             }
-
-            //await appUserService.SifreOlustur();
-
             return View();
         }
 
