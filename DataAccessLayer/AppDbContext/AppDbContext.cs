@@ -37,7 +37,7 @@ namespace DataAccessLayer
 
             base.OnModelCreating(modelBuilder); ///
 
-            modelBuilder.Seed();
+            
         }
 
         

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace EntityLayer.Entities
 {
-    public class AppUser: IdentityUser<int>
+    public class AppUser : IdentityUser<int>
     {
         public string FirstName { get; set; }
         public string SecondName { get; set; }

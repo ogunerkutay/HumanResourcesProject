@@ -35,7 +35,7 @@ namespace BoostHumanResourcesProject.Controllers
             this.departmentService = departmentService;
         }
 
-        [Authorize]
+        
         public async Task<IActionResult> PersonList()
         {
 

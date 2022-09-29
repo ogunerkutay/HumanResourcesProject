@@ -27,6 +27,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DataAccessLayer.Repositories;
+using Microsoft.AspNetCore.Http;
 
 namespace BoostHumanResourcesProject
 {
@@ -76,6 +77,13 @@ namespace BoostHumanResourcesProject
                 options.LogoutPath = "/account/logout"; //kullanýcý çýkýþ yapýnca tarayýcýdan silinir
                 options.SlidingExpiration = true; // varsayýlan cookie süresi 20 dk her istek attýðýnda sýfýrlanýr ve tekrar 20 dk verir
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+
+                options.Cookie = new CookieBuilder
+                {
+                    HttpOnly = true, // cookie sadece http talebi ile elde edebiliriz
+                    Name = ".BoostHuman.Cookie",
+                    SameSite = SameSiteMode.Strict
+                };
             });
 
 
@@ -138,8 +146,11 @@ namespace BoostHumanResourcesProject
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Account}/{action=Login}");
-                //pattern: "{controller=Dashboard}/{action=Index}/{id=4}");
+                    pattern: "{controller=User}/{action=PersonList}/{id?}"
+                );
+                //pattern: "{controller=Dashboard}/{action=Index}/{id?}");
+                //pattern: "{controller=Account}/{action=Login}");
+
             });
         }
     }
