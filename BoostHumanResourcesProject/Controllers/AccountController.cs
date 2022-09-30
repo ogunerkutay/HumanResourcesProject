@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
-namespace BoostHumanResourcesProject.Controllers
+namespace BoostHumanResourcesProject.Areas.Personel.Controllers
 {
     //[Authorize(Roles = "Personel")]
     public class AccountController : Controller
@@ -33,11 +33,13 @@ namespace BoostHumanResourcesProject.Controllers
             {
                 if (await appUserService.CheckRole(User.Identity.Name, "Yonetici"))
                 {
-                    return RedirectToAction("Manager", "Dashboard", new { @name = User.Identity.Name });
+                    //return RedirectToAction("Index", nameof(Areas.Manager.Controllers.DashboardController), new { @name = User.Identity.Name });
+
+                    return RedirectToAction("Index", "Dashboard", new { area = "Manager", @name = User.Identity.Name });
                 }
                 else
                 {
-                    return RedirectToAction("Personel", "Dashboard", new { @name = User.Identity.Name });
+                    return RedirectToAction("Index", "Dashboard", new { @name = User.Identity.Name });
                 }
             }
             return View();
@@ -74,7 +76,7 @@ namespace BoostHumanResourcesProject.Controllers
         //            if (result.Succeeded)
         //            {
 
-                       
+
         //            }
         //            else
         //            {

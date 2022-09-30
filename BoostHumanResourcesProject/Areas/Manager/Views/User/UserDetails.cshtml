@@ -1,0 +1,144 @@
+﻿@using BusinessLayer.Models.VMs
+@model AppUserDetailsVM
+@{
+    ViewData["Title"] = "UserDetails";
+    Layout = "./_ManagerLayout.cshtml";
+}
+
+
+<div class="page-header">
+    <h3 class="page-title">
+        <span class="page-title-icon bg-gradient-primary text-white mr-2">
+            <i class="mdi mdi-contacts"></i>
+        </span> Personel Detayları
+    </h3>
+</div>
+
+
+<div class="col-12">
+    <div class="card">
+        <div class="card-body">
+            <form class="form-sample">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <img src="~/images/@Model.ImagePath" class="mr-2" alt="image">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">İsim</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" value="@Model.FirstName" style="background-color: transparent" disabled="disabled" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">Soyisim</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" value="@Model.LastName" style="background-color: transparent" disabled="disabled" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">Cinsiyet</label>
+                            <div class="col-sm-7">
+                                <input class="form-control" value="@Model.Gender" style="background-color: transparent" disabled="disabled" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">Doğum Tarihi</label>
+                            <div class="col-sm-7">
+                                <input class="form-control" value="@(((DateTime)Model.BirthDate).ToString("MM/dd/yyyy"))" style="background-color: transparent" disabled="disabled" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">TC Kimlik No</label>
+                            <div class="col-sm-7">
+                                <input class="form-control" value="@Model.TCNO" style="background-color: transparent" disabled="disabled" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">Telefon No</label>
+                            <div class="col-sm-7">
+                                <input class="form-control" value="@Model.PhoneNumber" style="background-color: transparent" disabled="disabled" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">Departman</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" value="@Model.Department.DepartmentName" style="background-color: transparent" disabled="disabled" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">Ünvan</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" value="@Model.Title" style="background-color: transparent" disabled="disabled" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">İşe Başlama Tarihi</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" value="@(((DateTime)Model.EmploymentDate).ToString("MM/dd/yyyy"))" style="background-color: transparent" disabled="disabled" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">İzin Hakkı</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" value="@Model.AnnualLeave" style="background-color: transparent" disabled="disabled" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">Adres</label>
+                            <div class="col-sm-7">
+                                @*<input type="text" class="form-control" value="@Model.Address" style="background-color: transparent" disabled="disabled" />*@
+
+                                <textarea class="form-control" rows="5" style="background-color: transparent" disabled="disabled">@Model.Address</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">Mail Adresi</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" value="@Model.Email" style="background-color: transparent" disabled="disabled" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

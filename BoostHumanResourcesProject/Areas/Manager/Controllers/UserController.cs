@@ -21,6 +21,8 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace BoostHumanResourcesProject.Controllers
 {
+    [Area("Manager")]
+    [Authorize(Roles = "Yonetici")]
     public class UserController : Controller
     {
         private readonly ILogger<UserController> _logger;
@@ -58,7 +60,7 @@ namespace BoostHumanResourcesProject.Controllers
             appUserandDepartments.departmentsList = departmentValue;
             return View(appUserandDepartments);
         }
-     
+
         [HttpPost]
         public async Task<IActionResult> AddUser(AppUserandDepartments user)
         {
@@ -100,14 +102,14 @@ namespace BoostHumanResourcesProject.Controllers
                 //user.appUserUpdateDTO.EmploymentDate = DateTime.Parse(DateTime.Now.ToString("dd-MM-yyyy"));
 
                 BusinessLayer.Services.AppUserService.AppUserService.myObject isCreated = (BusinessLayer.Services.AppUserService.AppUserService.myObject)await appUserService.Create(user.appUserUpdateDTO);
-                 
-                
-                if (isCreated.SendMailConfirm == true )
+
+
+                if (isCreated.SendMailConfirm == true)
                 {
-                TempData["message"] = $"{user.appUserUpdateDTO.FirstName} {user.appUserUpdateDTO.LastName} {isCreated.Message}"; 
-                return RedirectToAction("PersonList", "User");
+                    TempData["message"] = $"{user.appUserUpdateDTO.FirstName} {user.appUserUpdateDTO.LastName} {isCreated.Message}";
+                    return RedirectToAction("PersonList", "User");
                 }
-                else if(isCreated.CreateUserConfirm == true)
+                else if (isCreated.CreateUserConfirm == true)
                 {
                     TempData["message"] = $"{user.appUserUpdateDTO.FirstName} {user.appUserUpdateDTO.LastName} {isCreated.Message}";
                     return RedirectToAction("PersonList", "User");
@@ -132,7 +134,7 @@ namespace BoostHumanResourcesProject.Controllers
                     return View(appUserandDepartments2);
                 }
             }
-            
+
             List<GetDepartmentsVM> departmentValue = (from x in await departmentService.GetAllDepartments()
                                                       select new GetDepartmentsVM
                                                       {
@@ -140,7 +142,7 @@ namespace BoostHumanResourcesProject.Controllers
                                                           DepartmentID = x.DepartmentID
                                                       }).ToList();
             AppUserandDepartments appUserandDepartments = new AppUserandDepartments();
-            
+
             appUserandDepartments.appUserUpdateDTO = user.appUserUpdateDTO;
             appUserandDepartments.departmentsList = departmentValue;
             return View(appUserandDepartments);
@@ -182,7 +184,7 @@ namespace BoostHumanResourcesProject.Controllers
 
 
 
-                    string newImageName = String.Empty;  //to contain the filename
+                    string newImageName = string.Empty;  //to contain the filename
                     if (appUserUpdateDTO.file != null)  //handle iformfile
                     {
 

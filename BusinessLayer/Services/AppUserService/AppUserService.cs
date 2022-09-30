@@ -198,9 +198,10 @@ namespace BusinessLayer.Services.AppUserService
 
                 var createUser = mapper.Map<AppUser>(user);
                 createUser.Status = true;
-                createUser.UserName = createUser.FirstName.ToLower() + createUser.SecondName.ToLower() + "." + createUser.LastName.ToLower();
 
-                createUser.Email = createUser.FirstName.ToLower() + createUser.SecondName.ToLower() + "." + createUser.LastName.ToLower() + "@gmail.com";
+                createUser.UserName = createUser.FirstName.ToLower() + (createUser.SecondName != null ? createUser.SecondName.ToLower() : "") + "." + createUser.LastName.ToLower();
+
+                createUser.Email = createUser.FirstName.ToLower() + (createUser.SecondName != null ? createUser.SecondName.ToLower() : "") + "." + createUser.LastName.ToLower() + "@gmail.com";
                 createUser.EmailConfirmed = true;
 
                 var userWithPassword = SifreOlustur(createUser);
