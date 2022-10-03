@@ -1,7 +1,7 @@
 ﻿@model BusinessLayer.Models.VMs.AppUserandDepartments
 @{
     ViewData["Title"] = "AddUser";
-    Layout = "./_ManagerLayout.cshtml";
+    Layout = "../Shared/_ManagerLayout.cshtml";
 }
 
 
@@ -60,7 +60,7 @@
     @Html.ValidationMessageFor(x => x.appUserUpdateDTO.TCNO, "", new { @class = "text-danger" })
     <br />
     @Html.Label("Departman")
-    <select asp-for="appUserUpdateDTO.DepartmentID" class="form-control">
+    <select name="appUserUpdateDTO.DepartmentID" class="form-control">
 
         <option value="">
             Lütfen bir departman seçiniz
@@ -96,7 +96,7 @@
     @Html.ValidationMessageFor(x => x.appUserUpdateDTO.Address, "", new { @class = "text-danger" })
     <br />
     @Html.Label("Ünvan")
-    <select asp-for="appUserUpdateDTO.Title" class="form-control">
+    <select name="appUserUpdateDTO.Title" class="form-control">
         <option value="Programcı">
             Programcı
         </option>

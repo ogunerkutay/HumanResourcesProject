@@ -151,6 +151,11 @@ namespace BoostHumanResourcesProject
                     pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{name?}");
 
                 endpoints.MapControllerRoute(
+                   name: "areaRoute",
+                   pattern: "{area:exists}/{controller}/{action}"
+                 );
+
+                endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Account}/{action=Login}");
                 //pattern: "{controller=Dashboard}/{action=Index}/{id=4}");

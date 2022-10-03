@@ -2,7 +2,7 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <ul class="nav">
         <li class="nav-item nav-profile">
-            <a href="/Dashboard/Manager/@User.Identity.Name" class="nav-link">
+            <a href="/Manager/Dashboard/Index/@User.Identity.Name" class="nav-link">
                 <div class="nav-profile-image">
     
                 @*    <img src="~/images/@Model.appUserDetailsVM.ImagePath" class="mr-2" alt="image">*@
@@ -22,20 +22,20 @@
             <!--change to offline or busy as needed-->
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/Dashboard/Manager/@User.Identity.Name">
+            <a class="nav-link" href="/Manager/Dashboard/Index/@User.Identity.Name">
                 <span class="menu-title">Ana Sayfa</span>
                 <i class="mdi mdi-home menu-icon"></i>
             </a>
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" href="/User/AddUser">
+            <a class="nav-link" href="/Manager/User/AddUser">
                 <span class="menu-title">Yeni Personel</span>
                 <i class="mdi mdi-contacts menu-icon"></i>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/User/PersonList">
+            <a class="nav-link" href="/Manager/User/PersonList">
                 <span class="menu-title">Personel Listesi</span>
                 <i class="mdi mdi-format-list-bulleted menu-icon"></i>
             </a>
