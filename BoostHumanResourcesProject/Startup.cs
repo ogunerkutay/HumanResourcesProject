@@ -162,6 +162,12 @@ namespace BoostHumanResourcesProject
                     name: "areas",
                     pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{name?}");
 
+                
+                //endpoints.MapControllerRoute(
+                //    name: "areas",
+                //    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"); // bu kýsým area eklendikten sonra aldýk
+
+
                 endpoints.MapControllerRoute(
                    name: "areaRoute",
                    pattern: "{area:exists}/{controller}/{action}"

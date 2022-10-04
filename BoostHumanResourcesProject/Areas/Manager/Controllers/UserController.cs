@@ -19,7 +19,7 @@ using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
 
 
-namespace BoostHumanResourcesProject.Controllers
+namespace BoostHumanResourcesProject.Areas.Manager.Controllers
 {
     [Area("Manager")]
     [Authorize(Roles = "Yonetici")]

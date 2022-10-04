@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace BoostHumanResourcesProject.Controllers
+namespace BoostHumanResourcesProject.Areas.Personel.Controllers
 {
     [Area("Personel")]
     [Authorize(Roles = "Personel")]
@@ -25,7 +25,7 @@ namespace BoostHumanResourcesProject.Controllers
         }
         
         [HttpGet]
-        [Route("Personel/Dashboard/Index/{name?}")]
+        //[Route("Personel/Dashboard/Index/{name?}")]
         public async Task<IActionResult> Index(string name)
         {
             AppUserDetailsVM personel = new AppUserDetailsVM();
