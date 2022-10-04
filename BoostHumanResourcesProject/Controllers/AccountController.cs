@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BusinessLayer.Abstract;
 using BusinessLayer.Email;
+using BusinessLayer.EmailServices;
 using BusinessLayer.Models.DTOs;
 using BusinessLayer.Models.VMs;
 using BusinessLayer.Services.AppUserService;
@@ -16,16 +17,19 @@ using System.Threading.Tasks;
 namespace BoostHumanResourcesProject.Areas.Personel.Controllers
 {
     //[Authorize(Roles = "Personel")]
+    
     public class AccountController : Controller
     {
         private readonly IAppUserService appUserService;
+        private readonly IEmailSender emailSender;
         private readonly UserManager<AppUser> userManager;
 
 
-        public AccountController(IAppUserService appUserService, UserManager<AppUser> userManager)
+        public AccountController(IAppUserService appUserService, UserManager<AppUser> userManager, IEmailSender emailSender)
         {
             this.appUserService = appUserService;
             this.userManager = userManager;
+            this.emailSender = emailSender;
         }
         //
 
@@ -71,24 +75,70 @@ namespace BoostHumanResourcesProject.Areas.Personel.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> ForgotPassword(string email)
+        public async Task<IActionResult> ForgotPassword(string Email)
         {
-            if (string.IsNullOrEmpty(email))
+            if (string.IsNullOrEmpty(Email))
             {
                 return View();
             }
-            var user = await userManager.FindByEmailAsync(email);
+            var user = await userManager.FindByEmailAsync(Email);
             if (user != null)
             {
                 var code = await userManager.GeneratePasswordResetTokenAsync(user);
-                var urlForForgotPassword = Url.Action("ResetPassword", "Account", new {
-                userId = user.Id, token=code});
-                EmailHelper emailHelper = new EmailHelper();
-                string message = $"Şifreniz: {user.FirstName}123Aa! Lütfen unutmayın, değiştirmeyi de ihmal etmeyin!!!";
-                bool emailResponse = emailHelper.SendEmail(user.Email, message);
-                return emailResponse;
+                var urlForForgotPassword = Url.Action("ResetPassword", "Account", new
+                {
+                    id = user.Id,
+                    token = code
+                }) ;
+
+                await emailSender.SendEmailAsync(Email, "Şifremi Yenile", $"Parolanızı yenilemek için lütfen linke <a href='https://localhost:44315{urlForForgotPassword}'> tıklayınız.</a > ");
+                return View();
+
+                
             }
             return View();
+        }
+        [HttpGet]
+        public IActionResult ResetPassword(string token)
+        {
+            if (token == null)
+            {
+                return RedirectToAction("LogIn");
+            }
+
+
+            var model = new LoginDTO
+            {
+                Token = token
+            };
+
+
+            return View();
+        }
+
+        //[Route("Account/{ResetPassword}/{id?}")]
+        [HttpPost]
+        public async Task<IActionResult> ResetPassword(LoginDTO model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+
+            }
+            var user = await userManager.FindByEmailAsync(model.Email);
+            if (user == null)
+            {
+                return RedirectToAction("ForgotPassword");
+
+            }
+            var result = await userManager.ResetPasswordAsync(user, model.Token, model.Password);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("LogIn");
+            }
+
+            return View(model);
+
         }
 
 

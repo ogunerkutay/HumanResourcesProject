@@ -27,14 +27,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DataAccessLayer.Repositories;
+using BusinessLayer.EmailServices;
 
 namespace BoostHumanResourcesProject
 {
     public class Startup
     {
+        private IConfiguration _configuration;
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            _configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
@@ -49,7 +51,7 @@ namespace BoostHumanResourcesProject
 
             //DbContext
             services.AddDbContext<AppDbContext>(options =>
-               options.UseSqlServer(Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING")));
+               options.UseSqlServer(_configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING")));
 
             //Identity
             services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
@@ -112,6 +114,16 @@ namespace BoostHumanResourcesProject
             services.AddScoped<IDayOffService, DayOffService>();
             services.AddScoped<IDepartmentService, DepartmentService>();
 
+            //ctor da yazdýklarýmýzý buraya parametre olarak verdik.AppSetting Json tarafýndaki bilgileri de alýp EmailSender_ tarfýna mail port setting bilgilerini paslar.
+            services.AddScoped<IEmailSender, EmailSender_>(x=> new EmailSender_ (
+                _configuration["EmailSender:Host"],
+                _configuration.GetValue<int>("EmailSender:Port"),
+                _configuration.GetValue<bool>("EmailSender:EnableSSL"),
+                _configuration["EmailSender:UserName"],
+                _configuration["EmailSender:Password"]
+
+                ));
+
 
             //AutoMapper
             services.AddAutoMapper(typeof(Mapping));
@@ -155,10 +167,20 @@ namespace BoostHumanResourcesProject
                    pattern: "{area:exists}/{controller}/{action}"
                  );
 
+                //endpoints.MapControllerRoute(
+                //    name: "resetpassword",
+                //    pattern: "account/resetpassword/{id?}",
+                //    defaults: new {controller = "Account", action= "ResetPassword"}
+                //    );
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Account}/{action=Login}");
                 //pattern: "{controller=Dashboard}/{action=Index}/{id=4}");
+                //endpoints.MapControllerRoute(
+                //    name: "password",
+                //    pattern: "{controller=Account}/{action=ResetPassword}/{id?}");
+
             });
 
 
