@@ -73,7 +73,7 @@ namespace BoostHumanResourcesProject.Areas.Personel.Controllers
         {
             return View();
         }
-
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> ForgotPassword(string Email)
         {

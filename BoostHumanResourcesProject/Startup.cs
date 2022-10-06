@@ -28,6 +28,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using DataAccessLayer.Repositories;
 using BusinessLayer.EmailServices;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace BoostHumanResourcesProject
 {
@@ -86,8 +88,12 @@ namespace BoostHumanResourcesProject
             //    options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
             //});
 
-
-            //services.AddMvc();
+            //services.AddMvc(config =>
+            //{
+            //    var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+            //    config.Filters.Add(new AuthorizeFilter(policy)); // proje genelinde authorize iþlemi için zorunlu kýlar
+            //});
+            services.AddMvc();
             //services.AddFluentValidationAutoValidation();
             //services.AddFluentValidationClientsideAdapters();
             //services.AddValidatorsFromAssemblyContaining<Startup>();
@@ -158,15 +164,20 @@ namespace BoostHumanResourcesProject
 
             app.UseEndpoints(endpoints =>
             {
+
                 endpoints.MapControllerRoute(
                     name: "areas",
                     pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{name?}");
 
-                
+
+
                 //endpoints.MapControllerRoute(
                 //    name: "areas",
                 //    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"); // bu kýsým area eklendikten sonra aldýk
 
+                endpoints.MapControllerRoute(
+                   name: "areas",
+                   pattern: "Personel/{controller=Dashboard}/{action=Index}/{name?}");
 
                 endpoints.MapControllerRoute(
                    name: "areaRoute",
@@ -182,10 +193,16 @@ namespace BoostHumanResourcesProject
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Account}/{action=Login}");
+
                 //pattern: "{controller=Dashboard}/{action=Index}/{id=4}");
+
                 //endpoints.MapControllerRoute(
                 //    name: "password",
                 //    pattern: "{controller=Account}/{action=ResetPassword}/{id?}");
+
+                //endpoints.MapControllerRoute(
+                //    name: "default",
+                //    pattern: "{controller=Home}/{action=Index}/{id?}");
 
             });
 

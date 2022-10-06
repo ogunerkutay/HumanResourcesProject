@@ -147,8 +147,8 @@ namespace BoostHumanResourcesProject.Areas.Manager.Controllers
             appUserandDepartments.departmentsList = departmentValue;
             return View(appUserandDepartments);
         }
-        [Route("User/UserDetails/{id?}")]
-        public async Task<IActionResult> UserDetails(int id)
+        
+        public async Task<IActionResult> UserDetailsManager(int id)
         {
 
             AppUserDetailsVM appUserDetailsVM = await appUserService.GetById(id);
