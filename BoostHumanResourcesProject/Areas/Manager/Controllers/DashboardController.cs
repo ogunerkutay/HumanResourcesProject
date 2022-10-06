@@ -16,17 +16,14 @@ namespace BoostHumanResourcesProject.Areas.Manager.Controllers
     {
         private readonly AppDbContext appDbContext;
         private readonly IAppUserService appUserService;
-        //protected DbSet<T> table;
         public DashboardController(AppDbContext appDbContext, IAppUserService appUserService)
         {
             this.appDbContext = appDbContext;
             this.appUserService = appUserService;
-            //table = _appDbContext.Set<T>();
         }
 
 
         [HttpGet]
-        //[Route("Manager/Dashboard/Index/{name?}")]
         [Authorize(Roles = "Yonetici")]
         public async Task<IActionResult> Index(string name)
         {

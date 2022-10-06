@@ -64,29 +64,42 @@
                     <h4 class="card-title"> @(Model.appUserDetailsVM.FirstName + " " + Model.appUserDetailsVM.LastName + " " + "Hoşgeldiniz")</h4>
                     <div class="row">
                         <div class="col-md-6">
+                            <div class="nav-profile-image">
                             <img src="~/writer/assets/images/faces/face10.jpg" alt="profile">
+                            </div>
                             <p class="font-weight-bold mb-2">@Model.appUserDetailsVM.Title</p>
                         </div>
-                        <div class="col-md-6">
-                            <address>
-                                <p class="font-weight-bold">Telefon:</p>
-                                <p class="mb-2">@Model.appUserDetailsVM.PhoneNumber</p>
-                                <p class="font-weight-bold">Adres:</p>
-                                <p class="mb-2">@Model.appUserDetailsVM.Address</p>
-                            </address>
-                        </div>
+                        
 
                     </div>
                     <hr />
                     <div class="row">
                         <div class="col-12">
-                            <address class="text-primary">
-                                <p class="font-weight-bold mb-2">@("Email: " + @Model.appUserDetailsVM.Email)</p>
-                                <p class="font-weight-bold mb-2">@("Şirket: BoostHR")</p>
-                            </address>
+                            <div class="col-md-6">
+                                <address>
+                                    <p class="font-weight-bold">Telefon:</p>
+                                    <p class="mb-2">@Model.appUserDetailsVM.PhoneNumber</p>
+                                    <p class="font-weight-bold">Adres:</p>
+                                    <p class="mb-2">@Model.appUserDetailsVM.Address</p>
+                                </address>
+                                <address class="text-primary">
+                                    <p class="font-weight-bold mb-2">Email: jane.doe@sirketadi.com</p>
+                                    <p class="font-weight-bold mb-2">@("Şirket: BoostHR")</p>
+                                </address>
+                            </div>
                         </div>
                     </div>
-                    <a href="/Manager/User/UserDetailsManager/@Model.appUserDetailsVM.Id" class="btn btn-gradient-info col-12">Detaylar</a>
+                    <a href="/Manager/User/UserDetailsManager/@Model.appUserDetailsVM.Id" method="post" class="btn btn-gradient-info col-12">Detaylar</a>
+
+                    @*@using (Html.BeginForm("UserDetailsManager", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        <button class="btn btn-gradient-info col-12" value=@Model.appUserDetailsVM.Id type="submit">Detaylar</button>
+                    }*@
+
+@*                    <input formmethod="post" type="button" value="Detail" onclick="location.href='@Url.Action("UserDetailsManager", "User")?id=' + @Model.appUserDetailsVM.Id" />*@
+                  @*<form asp-controller="User" action="UserDetailsManager" method="post">
+                        <button type="submit" value="@Model.appUserDetailsVM.Id" class="btn btn-gradient-info col-12">Detaylar</button>
+                    </form>*@
                 </div>
             </div>
         </div>
@@ -111,7 +124,7 @@
                                             <img src="~/images/@item.ImagePath" class="mr-2" alt="image">
                                         </td>
                                         <td>@(item.FirstName + " " + item.LastName)</td>
-                                        <td> @(((DateTime)item.BirthDate).ToString("MM/dd/yyyy")) </td>
+                                        <td> @(((DateTime)item.BirthDate).ToString("dd/MM/yyyy")) </td>
                                     </tr>
                                 }
                             </tbody>

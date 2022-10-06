@@ -38,13 +38,14 @@ namespace BoostHumanResourcesProject.Areas.Manager.Controllers
             this.departmentService = departmentService;
         }
 
-        [Authorize]
+        [HttpGet]
         public async Task<IActionResult> PersonList()
         {
 
             List<AppUserVM> appUserVMs = await appUserService.GetAllUsers();
             return View(appUserVMs);
         }
+
         [HttpGet]
         public async Task<IActionResult> AddUser()
         {
@@ -66,40 +67,6 @@ namespace BoostHumanResourcesProject.Areas.Manager.Controllers
         {
             if (ModelState.IsValid)
             {
-
-                //user.appUserUpdateDTO.FirstName = user.appUserUpdateDTO.FirstName.Trim();
-                //if (user.appUserUpdateDTO.SecondName !=null) 
-                //{
-                //    user.appUserUpdateDTO.SecondName = user.appUserUpdateDTO.SecondName.Trim();
-                //}
-
-                //user.appUserUpdateDTO.LastName = user.appUserUpdateDTO.LastName.Trim();
-
-                //if (user.appUserUpdateDTO.file != null)
-                //{
-                //    var extension = Path.GetExtension(user.appUserUpdateDTO.file.FileName);
-                //    var newImageName = Guid.NewGuid() + extension;
-                //    string projectRootPath = hostingEnvironment.WebRootPath;
-                //    string uploadsFolder = Path.Combine(projectRootPath, "images");
-                //    string location = Path.Combine(uploadsFolder, newImageName);
-                //    using (var fileStream = new FileStream(location, FileMode.Create))
-                //    {
-                //        user.appUserUpdateDTO.file.CopyTo(fileStream);
-                //    }
-                //    user.appUserUpdateDTO.ImagePath = newImageName;
-                //      }
-                //else
-                //{
-                //    if (user.appUserUpdateDTO.Gender == EntityLayer.Enums.Gender.Kadın)
-                //    {
-                //        user.appUserUpdateDTO.ImagePath = "pic-2.png";
-                //    }
-                //    else
-                //    {
-                //        user.appUserUpdateDTO.ImagePath = "pic-1.png";
-                //    }
-                //}
-                //user.appUserUpdateDTO.EmploymentDate = DateTime.Parse(DateTime.Now.ToString("dd-MM-yyyy"));
 
                 BusinessLayer.Services.AppUserService.AppUserService.myObject isCreated = (BusinessLayer.Services.AppUserService.AppUserService.myObject)await appUserService.Create(user.appUserUpdateDTO);
 
@@ -147,18 +114,19 @@ namespace BoostHumanResourcesProject.Areas.Manager.Controllers
             appUserandDepartments.departmentsList = departmentValue;
             return View(appUserandDepartments);
         }
-        
+
+        [HttpGet]
+        public async Task<IActionResult> UserDetailsManager()
+        {
+            return View();
+        }
+
+        [HttpPost]
         public async Task<IActionResult> UserDetailsManager(int id)
         {
 
             AppUserDetailsVM appUserDetailsVM = await appUserService.GetById(id);
             return View(appUserDetailsVM);
-        }
-
-        public IActionResult StatusChange()
-        {
-
-            return View();
         }
 
         [HttpPost]
@@ -190,18 +158,12 @@ namespace BoostHumanResourcesProject.Areas.Manager.Controllers
 
                         string projectRootPath = hostingEnvironment.WebRootPath;
                         string uploadsFolder = Path.Combine(projectRootPath, "images");
-                        //string userFolder = Path.Combine(uploadsFolder, user.Id.ToString());
-                        //if (!Directory.Exists(userFolder))
-                        //{
-                        //    Directory.CreateDirectory(userFolder);
-                        //}
-                        //else
-                        //{
+
                         if (System.IO.File.Exists(Path.Combine(uploadsFolder, user.ImagePath)))
                         {
                             System.IO.File.Delete(Path.Combine(uploadsFolder, user.ImagePath));
                         }
-                        //}
+                        
                         var extension = Path.GetExtension(appUserUpdateDTO.file.FileName);
                         newImageName = Guid.NewGuid() + extension;
 
@@ -227,9 +189,6 @@ namespace BoostHumanResourcesProject.Areas.Manager.Controllers
             {
                 return View(appUserUpdateDTO);
             }
-
-
-
         }
     }
 }

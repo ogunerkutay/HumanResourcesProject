@@ -46,7 +46,7 @@ namespace BoostHumanResourcesProject.Areas.Personel.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Index", "Dashboard", new { @name = User.Identity.Name });
+                    return RedirectToAction("Index", "Dashboard", new { area = "Personel", @name = User.Identity.Name });
                 }
             }
             return View();
