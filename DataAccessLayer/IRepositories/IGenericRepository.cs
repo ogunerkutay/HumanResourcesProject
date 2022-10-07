@@ -35,7 +35,7 @@ namespace DataAccessLayer.IRepositories
             Expression<Func<T, TResult>> selector,
             Expression<Func<T, bool>> expression,
             Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
-            Func<IQueryable<T>, IIncludableQueryable<T, object>> includes = null);
+            Func<IQueryable<T>, IIncludableQueryable<T, object>> includes = null,int? take = null);
 
     }
 }

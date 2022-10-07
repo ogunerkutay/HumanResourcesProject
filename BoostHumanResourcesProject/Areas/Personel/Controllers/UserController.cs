@@ -148,17 +148,13 @@ namespace BoostHumanResourcesProject.Areas.Personel.Controllers
             return View(appUserandDepartments);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> UserDetailsPersonel()
-        {
-            return View();
-        }
-        //[Route("User/UserDetails/{id?}")]
+
+
         [HttpPost]
-        public async Task<IActionResult> UserDetailsPersonel(int id)
+        public async Task<IActionResult> UserDetailsPersonel(AppUserDetailsVM person)
         {
 
-            AppUserDetailsVM appUserDetailsVM = await appUserService.GetById(id);
+            AppUserDetailsVM appUserDetailsVM = await appUserService.GetById(person.Id);
             return View(appUserDetailsVM);
         }
 

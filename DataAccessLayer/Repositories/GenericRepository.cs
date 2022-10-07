@@ -73,16 +73,27 @@ namespace DataAccessLayer.Repositories
             else return await query.Select(selector).FirstOrDefaultAsync();
         }
 
-        public async Task<List<TResult>> GetFilteredList<TResult>(Expression<Func<T, TResult>> selector, Expression<Func<T, bool>> expression, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, Func<IQueryable<T>, IIncludableQueryable<T, object>> includes = null)
+        public async Task<List<TResult>> GetFilteredList<TResult>(Expression<Func<T, TResult>> selector, Expression<Func<T, bool>> expression, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, Func<IQueryable<T>, IIncludableQueryable<T, object>> includes = null, int? take = null)
         {
             IQueryable<T> query = table;
             if (includes != null) query = includes(query);
             if (expression != null) query = query.Where(expression);
             if (orderBy != null)
             {
+                if (take != null)
+                {
+                    return await orderBy(query).Select(selector).Take((int)take).ToListAsync();
+                }
                 return await orderBy(query).Select(selector).ToListAsync();
             }
-            else return await query.Select(selector).ToListAsync();
+            else {
+                if(take != null)
+                {
+                    return await query.Select(selector).Take((int)take).ToListAsync();
+                }
+                return await query.Select(selector).ToListAsync();
+            }
+               
         }
 
         public async Task<T> GetWhere(Expression<Func<T, bool>> expression)

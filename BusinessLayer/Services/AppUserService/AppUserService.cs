@@ -279,8 +279,9 @@ namespace BusinessLayer.Services.AppUserService
                     Status = x.Status
 
                 },
-                expression: x => x.Status == true && x.BirthDate.Month == DateTime.Now.Month && x.BirthDate.Day >= DateTime.Now.Day,
-                orderBy: x => x.OrderBy(x => x.BirthDate.Day)
+                expression: x => x.Status == true && x.BirthDate.DayOfYear >= DateTime.Now.DayOfYear,
+                orderBy: x => x.OrderBy(x => x.BirthDate.Day),
+                take: 5
                 );
 
             return users;

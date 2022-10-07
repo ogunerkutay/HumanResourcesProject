@@ -89,17 +89,13 @@
                             </div>
                         </div>
                     </div>
-                    <a href="/Manager/User/UserDetailsManager/@Model.appUserDetailsVM.Id" method="post" class="btn btn-gradient-info col-12">Detaylar</a>
 
-                    @*@using (Html.BeginForm("UserDetailsManager", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    @using (Html.BeginForm("UserDetailsManager", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
                     {
-                        <button class="btn btn-gradient-info col-12" value=@Model.appUserDetailsVM.Id type="submit">Detaylar</button>
-                    }*@
+                        @Html.TextBoxFor(x => x.appUserDetailsVM.Id,new { @Value = @Model.appUserDetailsVM.Id,@type="hidden" })
+                    <button class="btn btn-gradient-info col-12" type="submit">Detaylar</button>
+                    }
 
-@*                    <input formmethod="post" type="button" value="Detail" onclick="location.href='@Url.Action("UserDetailsManager", "User")?id=' + @Model.appUserDetailsVM.Id" />*@
-                  @*<form asp-controller="User" action="UserDetailsManager" method="post">
-                        <button type="submit" value="@Model.appUserDetailsVM.Id" class="btn btn-gradient-info col-12">Detaylar</button>
-                    </form>*@
                 </div>
             </div>
         </div>
