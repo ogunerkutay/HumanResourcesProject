@@ -59,7 +59,7 @@
                         <div class="form-group row">
                             <label class="col-sm-5 col-form-label">Doğum Tarihi</label>
                             <div class="col-sm-7">
-                                <input class="form-control" value="@(((DateTime)Model.BirthDate).ToString("MM/dd/yyyy"))" style="background-color: transparent" disabled="disabled" />
+                                <input class="form-control" value="@(((DateTime)Model.BirthDate).ToString("dd/MM/yyyy"))" style="background-color: transparent" disabled="disabled" />
                             </div>
                         </div>
                     </div>
@@ -105,7 +105,7 @@
                         <div class="form-group row">
                             <label class="col-sm-5 col-form-label">İşe Başlama Tarihi</label>
                             <div class="col-sm-7">
-                                <input type="text" class="form-control" value="@(((DateTime)Model.EmploymentDate).ToString("MM/dd/yyyy"))" style="background-color: transparent" disabled="disabled" />
+                                <input type="text" class="form-control" value="@(((DateTime)Model.EmploymentDate).ToString("dd/MM/yyyy"))" style="background-color: transparent" disabled="disabled" />
                             </div>
                         </div>
                     </div>
@@ -133,7 +133,7 @@
                         <div class="form-group row">
                             <label class="col-sm-5 col-form-label">Mail Adresi</label>
                             <div class="col-sm-7">
-                                <input type="text" class="form-control" value="@Model.Email" style="background-color: transparent" disabled="disabled" />
+                                <input type="text" class="form-control" value="jane.doe@sirketadi.com" style="background-color: transparent" disabled="disabled" />
                             </div>
                         </div>
                     </div>
